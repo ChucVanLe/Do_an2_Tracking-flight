@@ -1,0 +1,123 @@
+<!-- Copyright (c) Microsoft. All rights reserved. -->
+
+<Page
+    x:Class="SerialSample.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SerialSample"
+    xmlns:Maps="using:Windows.UI.Xaml.Controls.Maps"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:WinRTXamlToolkit.Controls"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <CollectionViewSource x:Name="DeviceListSource"/>
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" x:Name="BackgroundDisplay" Margin="0,0,-991,-100" >
+        <Maps:MapControl x:Name="myMap" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,-12,0" Height="730" Width="1363"  />
+        <Maps:MapControl x:Name="MapBackground" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,-12,0" Height="730" Width="1" AllowDrop="False" IsHitTestVisible="False" Visibility="Visible" ZoomInteractionMode="Disabled" PanInteractionMode="Disabled"/>
+
+        <!--
+        <Button x:Name="Map3D" Click="Map3D_Click" HorizontalAlignment="Left" Content="Map3D"
+                Height="40" Margin="600,-1,0,0" VerticalAlignment="Top" Width="100">
+
+        </Button>
+                -->
+        <!--Map có kích thước 1366 x 730-->
+        <!--Màn hình kích thuwos 1366 x 768-->
+        <!--Khi nhận xong không cần hiện dữ liệu nên bỏ dòng sau-->
+        <!--
+        <TextBox x:Name="tbOutputText" HorizontalAlignment="Left" Margin="700,220,-12,-18" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="70" Width="666" Foreground="{ThemeResource AppBarToggleButtonCheckedPressedBorderThemeBrush}" />
+        -->
+        <!--Hiện khoảng cách-->
+        <!--Ta hiện khoảng cách trên đường thẳng-->
+        <!--Show time-->
+        <TextBox x:Name="tb_ShowTime" HorizontalAlignment="Left" Margin="1236,0,0,0" TextWrapping="Wrap" Text="Time Now" VerticalAlignment="Top" Height="50" Width="130" Background="Aqua"/>
+
+        <Button x:Name="btZoomAll" Content="Zoom All" HorizontalAlignment="Left" Height="45" Margin="1236,60,0,0" 
+                VerticalAlignment="Top" Width="130" Click="ZoomAll_Click" Foreground="Green" Background="Orange"/>
+
+        <Button x:Name="btOneSceen" Content="One Sceen" HorizontalAlignment="Left" Margin="1236,115,0,0" VerticalAlignment="Top" Height="45" 
+                Width="130" Click="OneSceen_Click" Foreground="Red" Background="White"/>
+
+        <Button x:Name="FindFight" Click="FindFight_Click" Content="Flight's Location" HorizontalAlignment="Left" 
+                Height="45" Margin="1236,170,0,0" VerticalAlignment="Top" Width="130" Foreground="Red" Background="BlueViolet"/>
+
+        <!--Show map 3d-->
+        <Button x:Name="BtMap3D" Content="ShowMap3D" Click="Map3D_Click" HorizontalAlignment="Left" Height="45" 
+                Margin="1236,225,0,0" VerticalAlignment="Top" Width="130" Background="Blue"/>
+
+        <!--UART-->
+        <ListBox x:Name="ConnectDevices" HorizontalAlignment="Left" Height="80" Margin="1236,280,0,0" VerticalAlignment="Top" Width="130" RenderTransformOrigin="0.5,0.5"
+                  ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.HorizontalScrollBarVisibility="Visible" ItemsSource="{Binding Source={StaticResource DeviceListSource}}" Background="Pink">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Id}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Button x:Name="comPortInput" Content="Connect" Click="comPortInput_Click" HorizontalAlignment="Left" Height="45" Margin="1236,370,0,0" VerticalAlignment="Top" Width="130" Background="Blue"/>
+
+        <Button x:Name="closeDevice" Content="Disconnect" Click="closeDevice_Click" HorizontalAlignment="Left" Height="45" Margin="1236,425,0,0" VerticalAlignment="Top" Width="130" Background="Red" RenderTransformOrigin="0.478,-0.478"/>
+
+        <TextBox x:Name="tb_ZoomLevel" HorizontalAlignment="Left" Margin="1236,480,0,0" TextWrapping="Wrap" Text="ZoolLevel" VerticalAlignment="Top" Height="60" Width="130" Background="Aqua"/>
+
+        <TextBox x:Name="tbShowDis" Background="Gold" HorizontalAlignment="Left" Margin="1236,550,-12,-18" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="60" Width="130" 
+                 Foreground="{ThemeResource AppBarToggleButtonCheckedPressedBorderThemeBrush}" />
+
+        <!--Send Data
+        <TextBox x:Name="sendText" HorizontalAlignment="Left" Height="47" Margin="1000,513,0,0" TextWrapping="Wrap" Text="" Background="Blue" VerticalAlignment="Top" Width="180"/>
+        <Button x:Name="sendTextButton" Content="Write" Click="sendTextButton_Click" HorizontalAlignment="Left" Height="47" Margin="1213,513,0,0" VerticalAlignment="Top" Width="133" Background="Orange"/>
+        <TextBox x:Name="status" HorizontalAlignment="Left" IsReadOnly="True" Height="60" Margin="1000,650,0,0" TextWrapping="Wrap" Text="Status" VerticalAlignment="Top" Width="347"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" BorderBrush="White"/>
+        <TextBox x:Name="rcvdText" HorizontalAlignment="Left" Height="81" Margin="1000,565,0,0" TextWrapping="Wrap" Text="Waiting Receive Data" VerticalAlignment="Top" Width="348"/>
+-->
+        <!--
+
+        <Slider x:Name="slider" HorizontalAlignment="Left" Margin="600,54,0,0" VerticalAlignment="Top" Width="400" Minimum="00" Maximum="360"/>
+-->
+        <!--
+        <TextBox x:Name="TestText" HorizontalAlignment="Left" Height="41" Margin="750,300,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        -->
+        <!--_____________________________________________________-->
+
+
+
+
+
+        <!--
+        <canvas:CanvasControl Draw="CanvasControl_Draw" />-->
+        <!--Receive Data-->
+
+
+        <!--
+        <FlipView x:Name="flipView" HorizontalAlignment="Left" Height="138" Margin="177,370,0,0" VerticalAlignment="Top" Width="254"/>
+        <Image x:Name="image" HorizontalAlignment="Left" Height="99" Margin="529,409,0,0" VerticalAlignment="Top" Width="238"/>
+        -->
+        <!--Input string-->
+        <TextBlock x:Name="tblock_Position" HorizontalAlignment="Left" FontSize="20" Foreground="Red" Margin="80,0,0,0" TextWrapping="Wrap" Text="Position: " VerticalAlignment="Top" Height="30" Width="80"/>
+        <!--Input Position-->
+        <TextBox x:Name="tb_Position" HorizontalAlignment="Left" Margin="170,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="30" Width="280" Background="Aqua"/>
+        <!--Search button-->
+        <Button x:Name="btSearch" Content="Search" HorizontalAlignment="Left" Height="30" Margin="480,0,0,0" 
+                VerticalAlignment="Top" Width="70" Click="Search_Click" Foreground="Yellow" Background="Green"/>
+        <!--Input MapTapped-->
+        <TextBlock x:Name="tblock_MapTapped" HorizontalAlignment="Left" FontSize="20" Foreground="YellowGreen" Margin="565,0,0,0" TextWrapping="Wrap" Text="MapTapped At: " VerticalAlignment="Top" Height="30" Width="140"/>
+        <!--Input Latitude-->
+        <TextBlock x:Name="tblock_Latitude" HorizontalAlignment="Left" FontSize="20" Foreground="Red" Margin="705,0,0,0" TextWrapping="Wrap" Text="Lat: " VerticalAlignment="Top" Height="30" Width="40"/>
+
+        <!--Input Latitude-->
+        <TextBox x:Name="tb_Lat_Search" HorizontalAlignment="Left" Margin="750,0,0,0" FontSize="16" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="30" Width="120" Background="Aqua"/>
+        <!--Input Longtitude-->
+        <TextBlock x:Name="tblock_Lontitude" HorizontalAlignment="Left" FontSize="20" Foreground="Red" Margin="885,0,0,0" TextWrapping="Wrap" Text="Lon: " VerticalAlignment="Top" Height="30" Width="40"/>
+        <!--Input Lontitude-->
+        <TextBox x:Name="tb_Lon_Search" HorizontalAlignment="Left" Margin= "930,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="30" Width="120" Background="Aqua"/>
+
+        <!--Get Coordinates button-->
+        <Button x:Name="btGetCoordinate" Content="Get" HorizontalAlignment="Left" Height="30" Margin="1070,0,0,0" 
+                VerticalAlignment="Top" Width="70" Click="Get_Click" Foreground="Yellow" Background="Green"/>
+    </Grid>
+</Page>
