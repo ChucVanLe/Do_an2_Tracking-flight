@@ -3545,7 +3545,7 @@ namespace SerialSample
             {
                 //myMap.MapElements.Remove(mapPolyline);
                 myMap.MapElements.Add(mapPolyline);
-                positions.Clear();
+                //positions.Clear();
                 //positions = new List<BasicGeoposition>();
                 //for (int del = 0; del < positions.Count - 3; del++)
                 //positions.RemoveAt(del);
