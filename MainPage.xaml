@@ -16,7 +16,11 @@
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" x:Name="BackgroundDisplay" Margin="0,0,-991,-100" >
-        <Maps:MapControl x:Name="myMap" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,-12,0" Height="730" Width="1363"  />
+        <Maps:MapControl x:Name="myMap" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,-12,0" Height="730" Width="1363"  >
+
+
+
+        </Maps:MapControl>
         <Maps:MapControl x:Name="MapBackground" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,-12,0" Height="730" Width="1" AllowDrop="False" IsHitTestVisible="False" Visibility="Visible" ZoomInteractionMode="Disabled" PanInteractionMode="Disabled"/>
 
         <!--
@@ -34,23 +38,23 @@
         <!--Hiện khoảng cách-->
         <!--Ta hiện khoảng cách trên đường thẳng-->
         <!--Show time-->
-        <TextBox x:Name="tb_ShowTime" HorizontalAlignment="Left" Margin="1236,0,0,0" TextWrapping="Wrap" Text="Time Now" VerticalAlignment="Top" Height="50" Width="130" Background="Aqua"/>
+        <TextBox x:Name="tb_ShowTime" HorizontalAlignment="Left" Margin="1178,114,0,0" TextWrapping="Wrap" Text="Time Now" VerticalAlignment="Top" Height="50" Width="100" Background="Wheat" Foreground="Red"/>
 
-        <Button x:Name="btZoomAll" Content="Zoom All" HorizontalAlignment="Left" Height="45" Margin="1236,60,0,0" 
-                VerticalAlignment="Top" Width="130" Click="ZoomAll_Click" Foreground="Green" Background="Orange"/>
+        <Button x:Name="btZoomAll" Content="Zoom All" HorizontalAlignment="Left" Height="38" Margin="1180,174,0,0" 
+                VerticalAlignment="Top" Width="100" Click="ZoomAll_Click" Foreground="Green" Background="Orange"/>
 
-        <Button x:Name="btOneSceen" Content="One Sceen" HorizontalAlignment="Left" Margin="1236,115,0,0" VerticalAlignment="Top" Height="45" 
-                Width="130" Click="OneSceen_Click" Foreground="Red" Background="White"/>
+        <Button x:Name="btOneSceen" Content="One Sceen" HorizontalAlignment="Left" Margin="1180,223,0,0" VerticalAlignment="Top" Height="39" 
+                Width="100" Click="OneSceen_Click" Foreground="Red" Background="White"/>
 
         <Button x:Name="FindFight" Click="FindFight_Click" Content="Flight's Location" HorizontalAlignment="Left" 
-                Height="45" Margin="1236,170,0,0" VerticalAlignment="Top" Width="130" Foreground="Red" Background="BlueViolet"/>
+                Height="39" Margin="1180,275,0,0" VerticalAlignment="Top" Width="100" FontSize="11" Foreground="Red" Background="BlueViolet"/>
 
         <!--Show map 3d-->
-        <Button x:Name="BtMap3D" Content="ShowMap3D" Click="Map3D_Click" HorizontalAlignment="Left" Height="45" 
-                Margin="1236,225,0,0" VerticalAlignment="Top" Width="130" Background="Blue"/>
+        <Button x:Name="BtMap3D" Content="ShowMap3D" Click="Map3D_Click" FontSize="14" HorizontalAlignment="Left" Height="39" 
+                Margin="1180,328,0,0" VerticalAlignment="Top" Width="100" Background="Blue"/>
 
         <!--UART-->
-        <ListBox x:Name="ConnectDevices" HorizontalAlignment="Left" Height="80" Margin="1236,280,0,0" VerticalAlignment="Top" Width="130" RenderTransformOrigin="0.5,0.5"
+        <ListBox x:Name="ConnectDevices" HorizontalAlignment="Left" Height="64" Margin="1180,376,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.5,0.5"
                   ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.HorizontalScrollBarVisibility="Visible" ItemsSource="{Binding Source={StaticResource DeviceListSource}}" Background="Pink">
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -59,13 +63,11 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <Button x:Name="comPortInput" Content="Connect" Click="comPortInput_Click" HorizontalAlignment="Left" Height="45" Margin="1236,370,0,0" VerticalAlignment="Top" Width="130" Background="Blue"/>
+        <Button x:Name="comPortInput" Content="Connect" Click="comPortInput_Click" HorizontalAlignment="Left" Height="39" Margin="1180,450,0,0" VerticalAlignment="Top" Width="100" Background="Blue"/>
 
-        <Button x:Name="closeDevice" Content="Disconnect" Click="closeDevice_Click" HorizontalAlignment="Left" Height="45" Margin="1236,425,0,0" VerticalAlignment="Top" Width="130" Background="Red" RenderTransformOrigin="0.478,-0.478"/>
+        <TextBox x:Name="tb_ZoomLevel" HorizontalAlignment="Left" Margin="1180,500,0,0" FontSize="14" TextWrapping="Wrap" Text="ZoolLevel" VerticalAlignment="Top" Height="52" Width="100" Background="Aqua"/>
 
-        <TextBox x:Name="tb_ZoomLevel" HorizontalAlignment="Left" Margin="1236,480,0,0" TextWrapping="Wrap" Text="ZoolLevel" VerticalAlignment="Top" Height="60" Width="130" Background="Aqua"/>
-
-        <TextBox x:Name="tbShowDis" Background="Gold" HorizontalAlignment="Left" Margin="1236,550,-12,-18" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="60" Width="130" 
+        <TextBox x:Name="tbShowDis" Background="Gold" HorizontalAlignment="Left" Margin="1180,560,0,0" FontSize="14" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="50" Width="100" 
                  Foreground="{ThemeResource AppBarToggleButtonCheckedPressedBorderThemeBrush}" />
 
         <!--Send Data
@@ -75,10 +77,23 @@
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" BorderBrush="White"/>
         <TextBox x:Name="rcvdText" HorizontalAlignment="Left" Height="81" Margin="1000,565,0,0" TextWrapping="Wrap" Text="Waiting Receive Data" VerticalAlignment="Top" Width="348"/>
 -->
-        <!--
+        <!--Adjust-->
+        <Slider x:Name="sliderAdjSpeed" HorizontalAlignment="Left" Margin="540,53,0,0" VerticalAlignment="Top" Width="265" Minimum="1" ValueChanged="sliderAdjSpeed_ValueChanged" Value="10" Maximum="50"/>
+        <Slider x:Name="slider_AdjTime" HorizontalAlignment="Left" Margin="865,62,0,0" VerticalAlignment="Top" Width="410" ValueChanged="adjTime_Click" Minimum="0" Maximum="100"/>
+        <TextBlock x:Name="tblock_Adj_Speed" HorizontalAlignment="Left" FontSize="18" Margin="482,61,0,0" Foreground="Red" TextWrapping="Wrap" Text="Speed" VerticalAlignment="Top" Height="30" Width="53"/>
+        <TextBlock x:Name="tblock_Adj_Timer" HorizontalAlignment="Left" FontSize="18" Margin="820,69,0,0" Foreground="Red" TextWrapping="Wrap" Text="Time" VerticalAlignment="Top" Height="30" Width="41"/>
+        <TextBlock x:Name="tblock_Start_Timer" HorizontalAlignment="Left" FontSize="16" Margin="820,35,0,0" Foreground="Red" Text="012345.6" VerticalAlignment="Top" Height="25" Width="75"/>
+        <TextBlock x:Name="tblock_End_Timer" HorizontalAlignment="Left" FontSize="18" Margin="1200,35,0,0" Foreground="Red" Text="012345.6" VerticalAlignment="Top" Height="25" Width="75"/>
+        <TextBlock x:Name="tblock_Current_Timer" HorizontalAlignment="Left" FontSize="18" Margin="1011,35,0,0" Foreground="Red" Text="012345.6" VerticalAlignment="Top" Height="25" Width="75"/>
 
-        <Slider x:Name="slider" HorizontalAlignment="Left" Margin="600,54,0,0" VerticalAlignment="Top" Width="400" Minimum="00" Maximum="360"/>
--->
+
+        <!--Play again button, reload-->
+
+        <Image x:Name="ImReload" VerticalAlignment="Top" HorizontalAlignment="Left"  Height="35" Width="35" Margin="736,0,0,0" Tapped="imReloadClick" IsTapEnabled="False" Source="/Assets/reLoad.png" />
+        <Image x:Name="imrewind" VerticalAlignment="Top" HorizontalAlignment="Left"  Height="35" Width="35" Margin="559,0,1677,0" Tapped="imrewind_Click" IsTapEnabled="False" Source="/Assets/Rewind-48.png" />
+        <Image x:Name="imPlay" VerticalAlignment="Top" HorizontalAlignment="Left"  Height="35"  Width="35" Margin="604,0,0,0" Tapped="play_Click" IsTapEnabled="False"  Source="/Assets/Play_Beautiful.png" />
+        <Image x:Name="imFastForword" VerticalAlignment="Top" HorizontalAlignment="Left"  Height="35"  Width="35" Margin="648,0,0,0" Tapped="fastForword_Click"  IsTapEnabled="False" Source="/Assets/Fast Forward-48.png" />
+        <Image x:Name="imStop" VerticalAlignment="Top" HorizontalAlignment="Left"  Height="35" Width="35" Margin="692,0,0,0" Tapped="stop_Click"  IsTapEnabled="False" Source="/Assets/StopSquare.png" />
         <!--
         <TextBox x:Name="TestText" HorizontalAlignment="Left" Height="41" Margin="750,300,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         -->
@@ -105,19 +120,21 @@
         <Button x:Name="btSearch" Content="Search" HorizontalAlignment="Left" Height="30" Margin="480,0,0,0" 
                 VerticalAlignment="Top" Width="70" Click="Search_Click" Foreground="Yellow" Background="Green"/>
         <!--Input MapTapped-->
-        <TextBlock x:Name="tblock_MapTapped" HorizontalAlignment="Left" FontSize="20" Foreground="YellowGreen" Margin="565,0,0,0" TextWrapping="Wrap" Text="MapTapped At: " VerticalAlignment="Top" Height="30" Width="140"/>
         <!--Input Latitude-->
-        <TextBlock x:Name="tblock_Latitude" HorizontalAlignment="Left" FontSize="20" Foreground="Red" Margin="705,0,0,0" TextWrapping="Wrap" Text="Lat: " VerticalAlignment="Top" Height="30" Width="40"/>
+        <TextBlock x:Name="tblock_Latitude" HorizontalAlignment="Left" FontSize="20" Foreground="Red" Margin="779,0,0,0" TextWrapping="Wrap" Text="Lat: " VerticalAlignment="Top" Height="30" Width="40"/>
 
         <!--Input Latitude-->
-        <TextBox x:Name="tb_Lat_Search" HorizontalAlignment="Left" Margin="750,0,0,0" FontSize="16" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="30" Width="120" Background="Aqua"/>
+        <TextBox x:Name="tb_Lat_Search" HorizontalAlignment="Left" Margin="824,0,0,0" FontSize="16" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="30" Width="120" Background="White" Foreground="Red"/>
         <!--Input Longtitude-->
-        <TextBlock x:Name="tblock_Lontitude" HorizontalAlignment="Left" FontSize="20" Foreground="Red" Margin="885,0,0,0" TextWrapping="Wrap" Text="Lon: " VerticalAlignment="Top" Height="30" Width="40"/>
+        <TextBlock x:Name="tblock_Lontitude" HorizontalAlignment="Left" FontSize="20" Foreground="Red" Margin="959,0,0,0" TextWrapping="Wrap" Text="Lon: " VerticalAlignment="Top" Height="30" Width="40"/>
         <!--Input Lontitude-->
-        <TextBox x:Name="tb_Lon_Search" HorizontalAlignment="Left" Margin= "930,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="30" Width="120" Background="Aqua"/>
+        <TextBox x:Name="tb_Lon_Search" HorizontalAlignment="Left" Margin= "1004,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="30" Width="120" Background="White" Foreground="Red"/>
 
         <!--Get Coordinates button-->
-        <Button x:Name="btGetCoordinate" Content="Get" HorizontalAlignment="Left" Height="30" Margin="1070,0,0,0" 
-                VerticalAlignment="Top" Width="70" Click="Get_Click" Foreground="Yellow" Background="Green"/>
+        <Button x:Name="btGetCoordinate" Content="Get" HorizontalAlignment="Left" Height="30" Margin="1133,0,0,0" 
+                VerticalAlignment="Top" Width="45" Click="Get_Click" Foreground="Yellow" Background="Green"/>
+        <!-- Choose read com or read file button-->
+        <Button x:Name="btReadCOMorFile" Content="Read Com" FontSize="14" HorizontalAlignment="Left" Height="30" Margin="1195,0,0,0" 
+                VerticalAlignment="Top" Width="85" Click="Mode_Click" Foreground="Yellow" Background="Green"/>
     </Grid>
 </Page>
