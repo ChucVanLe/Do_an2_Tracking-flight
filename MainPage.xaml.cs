@@ -3544,7 +3544,7 @@ namespace SerialSample
             if (lat != 0.0)//Vì lúc đầu chưa có dữ liệu nên k hiện máy bay
             {
                 //myMap.MapElements.Remove(mapPolyline);
-                //myMap.Children.Add(mapPolyline);
+                myMap.MapElements.Add(mapPolyline);
                 positions.Clear();
                 //positions = new List<BasicGeoposition>();
                 //for (int del = 0; del < positions.Count - 3; del++)
