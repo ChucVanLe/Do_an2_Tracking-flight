@@ -3546,8 +3546,8 @@ namespace SerialSample
             if (lat != 0.0)//Vì lúc đầu chưa có dữ liệu nên k hiện máy bay
             {
                 //myMap.MapElements.Remove(mapPolyline);
-                //myMap.MapElements.Add(mapPolyline);
-
+                myMap.MapElements.Add(mapPolyline);
+                if(bAutoZoom)
                 SetMapPolyline(positions);
                 //positions.Clear();
 
@@ -3676,22 +3676,25 @@ namespace SerialSample
             return Math.Round(brng, 2);
         }
 
+        bool bAutoZoom = true;//zoom in trajectory of flight
+        bool bAutoZoomLocAndDen = false;//auto both locations of flight and dentination
         //*******************************************************************
         /// <summary>
-        /// Zoom map to flight's location
+        /// Zoom map to flight's location, AutoZoom
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void FindFight_Click(object sender, RoutedEventArgs e)
         {
-            myMap.Center =
-               new Geopoint(new BasicGeoposition()
-               {
-                   //Geopoint for Seattle San Bay Tan Son Nhat: dLatDentination, dLonDentination
-                   Latitude = dLatGol,
-                   Longitude = dLonGol
-               });
-            //myMap.ZoomLevel = 16;
+            if (bAutoZoom)
+            {
+                btAutoZoom.Content = "AutoZoom: Off";             
+            }
+            else
+            {
+                btAutoZoom.Content = "AutoZoom: On";
+            }
+            bAutoZoom = !bAutoZoom;
         }
 
         /// <summary>

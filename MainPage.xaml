@@ -36,23 +36,23 @@
         <!--Hiện khoảng cách-->
         <!--Ta hiện khoảng cách trên đường thẳng-->
         <!--Show time-->
-        <TextBox x:Name="tb_ShowTime" HorizontalAlignment="Left" Margin="1178,114,0,0" TextWrapping="Wrap" Text="Time Now" VerticalAlignment="Top" Height="50" Width="100" Background="Wheat" Foreground="Red"/>
+        <TextBox x:Name="tb_ShowTime" HorizontalAlignment="Left" Margin="1183,114,0,0" TextWrapping="Wrap" Text="Time Now" VerticalAlignment="Top" Height="50" Width="95" Background="Wheat" Foreground="Red"/>
 
-        <Button x:Name="btZoomAll" Content="Zoom All" HorizontalAlignment="Left" Height="38" Margin="1180,174,0,0" 
-                VerticalAlignment="Top" Width="100" Click="ZoomAll_Click" Foreground="Green" Background="Orange"/>
+        <Button x:Name="btZoomAll" Content="Zoom All" HorizontalAlignment="Left" Height="38" Margin="1185,174,0,0" 
+                VerticalAlignment="Top" Width="95" Click="ZoomAll_Click" Foreground="Green" Background="Orange"/>
 
-        <Button x:Name="btOneSceen" Content="One Sceen" HorizontalAlignment="Left" Margin="1180,223,0,0" VerticalAlignment="Top" Height="39" 
-                Width="100" Click="OneSceen_Click" Foreground="Red" Background="White"/>
+        <Button x:Name="btOneSceen" Content="One Sceen" HorizontalAlignment="Left" Margin="1185,223,0,0" VerticalAlignment="Top" Height="39" 
+                Width="95" Click="OneSceen_Click" Foreground="Red" Background="White"/>
 
-        <Button x:Name="FindFight" Click="FindFight_Click" Content="Flight's Location" HorizontalAlignment="Left" 
-                Height="39" Margin="1180,275,0,0" VerticalAlignment="Top" Width="100" FontSize="11" Foreground="Red" Background="BlueViolet"/>
+        <Button x:Name="btAutoZoom" Click="FindFight_Click" Content="AutoZoom: On" HorizontalAlignment="Left" 
+                Height="39" Margin="1185,275,0,0" VerticalAlignment="Top" Width="95" FontSize="11" Foreground="Red" Background="BlueViolet"/>
 
         <!--Show map 3d-->
-        <Button x:Name="BtMap3D" Content="ShowMap3D" Click="Map3D_Click" FontSize="14" HorizontalAlignment="Left" Height="39" 
-                Margin="1180,328,0,0" VerticalAlignment="Top" Width="100" Background="Blue"/>
+        <Button x:Name="BtMap3D" Content="ShowMap3D" Click="Map3D_Click" FontSize="13" HorizontalAlignment="Left" Height="39" 
+                Margin="1185,328,0,0" VerticalAlignment="Top" Width="95" Background="Blue"/>
 
         <!--UART-->
-        <ListBox x:Name="ConnectDevices" HorizontalAlignment="Left" Height="64" Margin="1180,376,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.5,0.5"
+        <ListBox x:Name="ConnectDevices" HorizontalAlignment="Left" Height="64" Margin="1185,376,0,0" VerticalAlignment="Top" Width="95" RenderTransformOrigin="0.5,0.5"
                   ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.HorizontalScrollBarVisibility="Visible" ItemsSource="{Binding Source={StaticResource DeviceListSource}}" Background="Pink">
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -61,11 +61,11 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <Button x:Name="comPortInput" Content="Connect" Click="comPortInput_Click" HorizontalAlignment="Left" Height="39" Margin="1180,450,0,0" VerticalAlignment="Top" Width="100" Background="Blue"/>
+        <Button x:Name="comPortInput" Content="Connect" Click="comPortInput_Click" HorizontalAlignment="Left" Height="39" Margin="1185,450,0,0" VerticalAlignment="Top" Width="95" Background="Blue"/>
 
-        <TextBox x:Name="tb_ZoomLevel" HorizontalAlignment="Left" Margin="1180,500,0,0" FontSize="14" TextWrapping="Wrap" Text="ZoolLevel" VerticalAlignment="Top" Height="52" Width="100" Background="Aqua"/>
+        <TextBox x:Name="tb_ZoomLevel" HorizontalAlignment="Left" Margin="1185,500,0,0" FontSize="14" TextWrapping="Wrap" Text="ZoolLevel" VerticalAlignment="Top" Height="52" Width="95" Background="Aqua"/>
 
-        <TextBox x:Name="tbShowDis" Background="Gold" HorizontalAlignment="Left" Margin="1180,560,0,0" FontSize="14" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="50" Width="100" 
+        <TextBox x:Name="tbShowDis" Background="Gold" HorizontalAlignment="Left" Margin="1185,560,0,0" FontSize="14" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="50" Width="95" 
                  Foreground="{ThemeResource AppBarToggleButtonCheckedPressedBorderThemeBrush}" />
 
         <!--Send Data
