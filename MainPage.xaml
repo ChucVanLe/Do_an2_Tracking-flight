@@ -16,12 +16,10 @@
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" x:Name="BackgroundDisplay" Margin="0,0,-991,-100" >
-        <Maps:MapControl x:Name="myMap" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,-12,0" Height="730" Width="1363"  >
-
-
+        <Maps:MapControl x:Name="myMap" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Height="730" Width="1280"  >
 
         </Maps:MapControl>
-        <Maps:MapControl x:Name="MapBackground" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,-12,0" Height="730" Width="1" AllowDrop="False" IsHitTestVisible="False" Visibility="Visible" ZoomInteractionMode="Disabled" PanInteractionMode="Disabled"/>
+
 
         <!--
         <Button x:Name="Map3D" Click="Map3D_Click" HorizontalAlignment="Left" Content="Map3D"

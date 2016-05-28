@@ -1774,10 +1774,12 @@ namespace SerialSample
         {
 
             //Convert to tablet 1366 x 768 --> 1280 x 800;
+            double screenWidth = Window.Current.Bounds.Width;
+
+            double screenHeight = Window.Current.Bounds.Height;
             //if (bDevTablet)
             {
-                double screenWidth = Window.Current.Bounds.Width;
-                double screenHeight = Window.Current.Bounds.Height;
+
                 dConvertToTabletX = 1366 - screenWidth;
                 dConvertToTabletY = 696 - screenHeight;
 
@@ -1813,7 +1815,7 @@ namespace SerialSample
             BackgroundDisplay.Children.Add(tblock_Latitude);
 
             //thu bản đồ lại
-            myMap.Width = 1363 - dConvertToTabletX - Width;
+            myMap.Width = 1280 - Width;
             myMap.Margin = new Windows.UI.Xaml.Thickness(Width, 0, 00, 00);
         }
         //Đã hoàn thành chỉnh 2 màn hình 09/12/2015 0h23p
@@ -3527,8 +3529,8 @@ namespace SerialSample
             //if (old_Lat != 0.0)//Vì lúc đầu chưa có dữ liệu nên k hiện máy bay
             //    positions.Add(new BasicGeoposition() { Latitude = old_Lat, Longitude = old_Lon });   //<== this
             //                                                                                         // Now add your positions:
-            //if (0 != lat)
-            //    positions.Add(new BasicGeoposition() { Latitude = lat, Longitude = lon });   //<== this
+            if (0 != lat)
+                positions.Add(new BasicGeoposition() { Latitude = lat, Longitude = lon });   
 
             //mapPolyline.Path = new Geopath(positions);
 
@@ -3544,12 +3546,12 @@ namespace SerialSample
             if (lat != 0.0)//Vì lúc đầu chưa có dữ liệu nên k hiện máy bay
             {
                 //myMap.MapElements.Remove(mapPolyline);
-                myMap.MapElements.Add(mapPolyline);
+                //myMap.MapElements.Add(mapPolyline);
+
+                SetMapPolyline(positions);
                 //positions.Clear();
-                //positions = new List<BasicGeoposition>();
-                //for (int del = 0; del < positions.Count - 3; del++)
-                //positions.RemoveAt(del);
-                //myMap.Children.Add(mapPolyline);
+
+
 
                 myMap.Children.Add(imageOfFlight);
 
@@ -3565,6 +3567,16 @@ namespace SerialSample
             //Updata giá trí mới
             old_Lat = lat;
             old_Lon = lon;
+        }
+
+        //28/5/2016 Add auto zoom to map
+        //auto zoom
+        public async void SetMapPolyline(List<BasicGeoposition> geoPositions)
+        {
+            //var polyLine = new MapPolyline { Path = new Geopath(geoPositions), StrokeThickness = 4, StrokeColor = (Color)App.Current.Resources["StravaRedColor"] };
+            //myMap.MapElements.Add(polyLine);
+
+            await myMap.TrySetViewBoundsAsync(GeoboundingBox.TryCompute(geoPositions), null, MapAnimationKind.None);
         }
 
         //*******************************************************
