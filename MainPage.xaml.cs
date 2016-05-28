@@ -75,6 +75,7 @@ using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Shapes;
 using WinRTXamlToolkit.Controls;
 
+
 namespace SerialSample
 {
 
@@ -1112,6 +1113,7 @@ namespace SerialSample
                 // Add the new MapRouteView to the Routes collection
                 // of the MapControl.
                 myMap.Routes.Add(viewOfRoute);
+
                 // Use the route to initialize a MapRouteView.
                 viewOfRoute = new MapRouteView(routeResult.Route);
                 viewOfRoute.RouteColor = Colors.Yellow;
@@ -1783,16 +1785,7 @@ namespace SerialSample
                 dConvertToTabletX = 1366 - screenWidth;
                 dConvertToTabletY = 696 - screenHeight;
 
-                //tb_ShowTime.Margin = new Windows.UI.Xaml.Thickness(1150, 00, 0, 0);
-                //btZoomAll.Margin = new Windows.UI.Xaml.Thickness(1150, 60, 0, 0);
-                //btOneSceen.Margin = new Windows.UI.Xaml.Thickness(1150, 115, 0, 0);
-                //FindFight.Margin = new Windows.UI.Xaml.Thickness(1150, 170, 0, 0);
-                //BtMap3D.Margin = new Windows.UI.Xaml.Thickness(1150, 225, 0, 0);
-                //ConnectDevices.Margin = new Windows.UI.Xaml.Thickness(1150, 280, 0, 0);
-                //comPortInput.Margin = new Windows.UI.Xaml.Thickness(1150, 370, 0, 0);
 
-                //tb_ZoomLevel.Margin = new Windows.UI.Xaml.Thickness(1150, 480, 0, 0);
-                //tbShowDis.Margin = new Windows.UI.Xaml.Thickness(1150, 550, 0, 0);
 
                 myMap.Height = 762;
                 //MapBackground.Height = 762;
@@ -3425,10 +3418,16 @@ namespace SerialSample
             //myMap.TrySetViewBoundsAsync()
             //Độ dài tương đối của hình so với vị trí mong muốn new Point(0.5, 0.5) không dời
             //Windows.UI.Xaml.Controls.Maps.MapControl.SetNormalizedAnchorPoint(img, new Point(0.5, 0.5));
-            if (old_Lat != 0.0)//Vì lúc đầu chưa có dữ liệu nên k hiện máy bay
-                myMap.Children.Add(imageOfFlight);
+            try
+            {
+                if (old_Lat != 0.0)//Vì lúc đầu chưa có dữ liệu nên k hiện máy bay
+                    myMap.Children.Add(imageOfFlight);
+            }
+            catch { }
+
 
             //Vẽ quỹ đạo
+
             //Windows.UI.Xaml.Controls.Maps.MapPolyline mapPolyline = new Windows.UI.Xaml.Controls.Maps.MapPolyline();
             mapPolyline.Path = new Geopath(new List<BasicGeoposition>() {
                 new BasicGeoposition() {Latitude = old_Lat, Longitude = old_Lon, Altitude = alt + 0.00005},
@@ -3530,31 +3529,34 @@ namespace SerialSample
             //    positions.Add(new BasicGeoposition() { Latitude = old_Lat, Longitude = old_Lon });   //<== this
             //                                                                                         // Now add your positions:
             if (0 != lat)
-                positions.Add(new BasicGeoposition() { Latitude = lat, Longitude = lon });   
+            {
+                positions.Add(new BasicGeoposition() { Latitude = lat, Longitude = lon });
 
-            //mapPolyline.Path = new Geopath(positions);
-
-
-            ////Vẽ quỹ đạo
-            ////Windows.UI.Xaml.Controls.Maps.MapPolyline mapPolyline = new Windows.UI.Xaml.Controls.Maps.MapPolyline();
-            mapPolyline.Path = new Geopath(new List<BasicGeoposition>() {
+                //Vẽ quỹ đạo
+                MapPolyline lineToRmove = new Windows.UI.Xaml.Controls.Maps.MapPolyline();
+                //Windows.UI.Xaml.Controls.Maps.MapPolyline mapPolyline = new Windows.UI.Xaml.Controls.Maps.MapPolyline();
+                lineToRmove.Path = new Geopath(new List<BasicGeoposition>() {
                 new BasicGeoposition() {Latitude = old_Lat, Longitude = old_Lon},
                 //San Bay Tan Son Nhat
                 new BasicGeoposition() {Latitude = lat, Longitude = lon}
-            });
+                });
 
-            if (lat != 0.0)//Vì lúc đầu chưa có dữ liệu nên k hiện máy bay
-            {
+                lineToRmove.StrokeColor = Colors.Red;
+                lineToRmove.StrokeThickness = 2;
+                lineToRmove.StrokeDashed = false;//nét liền
+
                 //myMap.MapElements.Remove(mapPolyline);
-                myMap.MapElements.Add(mapPolyline);
-                if(bAutoZoom)
-                SetMapPolyline(positions);
-                //positions.Clear();
+                myMap.MapElements.Add(lineToRmove);
 
+                //test remove poly line
+                polyLineToRemove.Add(lineToRmove);
+
+                //auto zoom
+                if (bAutoZoom)
+                    SetMapPolyline(positions);
 
 
                 myMap.Children.Add(imageOfFlight);
-
 
                 //Ve duong thang den dentination
                 //San bay tan son nhat:  dLatDentination, dLonDentination google map
@@ -3564,11 +3566,15 @@ namespace SerialSample
 
                 myMap.MapElements.Add(polylineHereToDentination);
             }
+
+
             //Updata giá trí mới
             old_Lat = lat;
             old_Lon = lon;
         }
 
+        //test remove polyline
+        List<Windows.UI.Xaml.Controls.Maps.MapPolyline> polyLineToRemove = new List<Windows.UI.Xaml.Controls.Maps.MapPolyline>();
         //28/5/2016 Add auto zoom to map
         //auto zoom
         public async void SetMapPolyline(List<BasicGeoposition> geoPositions)
@@ -4589,7 +4595,11 @@ namespace SerialSample
                     }
 
                 }
+                //reset index;
                 index = 0;
+                //update old_lat and old_lon because program will draw 1 line connect before point and current point
+                old_Lat = dLatGol;
+                old_Lon = dLonGol;
 
                 //lat = 0.0;
                 {
@@ -4632,6 +4642,11 @@ namespace SerialSample
             imPlay.Source = new BitmapImage(new Uri("ms-appx:///Assets/Play_Beautiful.png"));
             bPlay = false;
             myMap.MapElements.Clear();
+            foreach (MapPolyline polyLines in polyLineToRemove)
+            {
+                myMap.Children.Remove(polyLines);
+                myMap.MapElements.Remove(polyLines);
+            }
             positions.Clear();
             streamReader.BaseStream.Seek(0, SeekOrigin.Current);
 
