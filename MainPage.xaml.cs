@@ -142,6 +142,7 @@ namespace SerialSample
 
             //*************************************************************************
             //Ngày 29/02/2016 Software Artchitecture
+            //ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.FullScreen;
             Dis_Setup();
         }
 
