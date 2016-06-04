@@ -495,6 +495,7 @@ namespace SerialSample
                     ListAvailablePorts();
 
                     comPortInput.Content = "Connect";
+                    bConnectOk = false;
                 }
                 catch
                 {
@@ -933,7 +934,7 @@ namespace SerialSample
             myMap.Children.Add(Tb_ShowDistance[index]);
 
             //Show Zool Level
-            tb_ZoomLevel.Text = "Zoom Level: " + Math.Round(myMap.ZoomLevel, 3).ToString();
+            tb_ZoomLevel.Text = "Z Level: " + Math.Round(myMap.ZoomLevel, 3).ToString();
         }
         //**********************************************************************************************
         /// <summary>
@@ -971,7 +972,7 @@ namespace SerialSample
 
             myMap.Children.Add(Tb_ShowDistance[index]);
             //Show Zool Level
-            tb_ZoomLevel.Text = "Zoom Level: " + Math.Round(myMap.ZoomLevel, 3).ToString();
+            tb_ZoomLevel.Text = "Z Level: " + Math.Round(myMap.ZoomLevel, 3).ToString();
         }
         //**********************************************************************************************
 
@@ -1318,12 +1319,12 @@ namespace SerialSample
             if (Map3D)
             {
                 Map3D = false;
-                BtMap3D.Content = "ShowMap2D";
+                BtMap3D.Content = "2D_Mode";
                 Donghieng = 60;
             }
             else
             {
-                BtMap3D.Content = "ShowMap3D";
+                BtMap3D.Content = "3D_Mode";
                 Map3D = true;
                 Donghieng = 0;
                 //myMap.Style = MapStyle.Road;
@@ -1450,7 +1451,7 @@ namespace SerialSample
                         Data.Time = dTemp_Time.ToString();
                     }
                     //show now time
-                    tb_ShowTime.Text = "Now time: " + Data.Time;
+                    tb_ShowTime.Text = "Now: " + Data.Time;
                     //Ngày 17/12/2015 17h36 ok
                     //tbOutputText.Text += "Time: " + Data.Time + '\n';
                     //cut bỏ Data đến dấu phẩy đầu tiên lấy sau dấu phẩy đầu tiên
@@ -1700,7 +1701,7 @@ namespace SerialSample
                         dLonGol = DoLon + Convert.ToDouble(Data.Longtitude.Substring(Data.Longtitude.IndexOf('.') - 2, Data.Longtitude.Length -
                                         (Data.Longtitude.IndexOf('.') - 2))) / 60;
                     }
-                    if ((Data.Angle != "") && (Data.Angle != null) && (Convert.ToDouble(Data.Speed) > 2))
+                    if ((Data.Angle != "") && (Data.Angle != null) && (Convert.ToDouble(Data.Speed) > 3.6))
                     {
 
                         Draw_Trajectory_And_Flight_optimize(dLatGol, dLonGol,
@@ -1720,7 +1721,7 @@ namespace SerialSample
                     //Ta hiện khoảng cách trên đường thẳng chứ không hiện textbox nên bỏ dòng sau
                     //tbShowDis.Text = "Distance to Dentination:  " + dDistanToTaget.ToString() + "\n";
                     //Tinh goc giua 2 diem từ vị trí máy bay đến đích
-                    tbShowDis.Text = "Vector Angle:  " + temp_angle.ToString();
+                    tbShowDis.Text = "Vect Agl:  " + temp_angle.ToString();
 
                     //Ngay 21/1/2016 Show Data
                     //ShowDistance(0, temp_angle + 90, dDistanToTaget.ToString() + " Meter", 30 * myMap.ZoomLevel / 22, dLatGol, dLonGol, 1);//Purple
@@ -3429,27 +3430,30 @@ namespace SerialSample
 
             //Vẽ quỹ đạo
 
-            //Windows.UI.Xaml.Controls.Maps.MapPolyline mapPolyline = new Windows.UI.Xaml.Controls.Maps.MapPolyline();
-            mapPolyline.Path = new Geopath(new List<BasicGeoposition>() {
-                new BasicGeoposition() {Latitude = old_Lat, Longitude = old_Lon, Altitude = alt + 0.00005},
-                //San Bay Tan Son Nhat
-                new BasicGeoposition() {Latitude = lat, Longitude = lon, Altitude = alt - 0.00005},
-            });
+
 
             mapPolyline.StrokeColor = Colors.Red;
             mapPolyline.StrokeThickness = 2;
             mapPolyline.StrokeDashed = false;//nét liền
+
+            //Ve duong thang den dentination
+            //San bay tan son nhat:  dLatDentination, dLonDentination google map
+            polylineHereToDentination.StrokeColor = Colors.Blue;
+            polylineHereToDentination.StrokeThickness = 2;
+            polylineHereToDentination.StrokeDashed = false;//nét liền
+
+            Map_DrawLine_2D(lat, lon, 10.818345, 106.658897);
             if (old_Lat != 0.0)//Vì lúc đầu chưa có dữ liệu nên k hiện máy bay
             {
+                //Windows.UI.Xaml.Controls.Maps.MapPolyline mapPolyline = new Windows.UI.Xaml.Controls.Maps.MapPolyline();
+                mapPolyline.Path = new Geopath(new List<BasicGeoposition>() {
+                new BasicGeoposition() {Latitude = old_Lat, Longitude = old_Lon, Altitude = alt + 0.00005},
+                //San Bay Tan Son Nhat
+                new BasicGeoposition() {Latitude = lat, Longitude = lon, Altitude = alt - 0.00005},
+            });
                 myMap.MapElements.Add(mapPolyline);
 
-                //Ve duong thang den dentination
-                //San bay tan son nhat:  dLatDentination, dLonDentination google map
-                polylineHereToDentination.StrokeColor = Colors.Red;
-                polylineHereToDentination.StrokeThickness = 2;
-                polylineHereToDentination.StrokeDashed = false;//nét liền
 
-                Map_DrawLine_2D(lat, lon, 10.818345, 106.658897);
                 myMap.MapElements.Add(polylineHereToDentination);
             }
             //Updata giá trí mới
@@ -3529,13 +3533,13 @@ namespace SerialSample
             //if (old_Lat != 0.0)//Vì lúc đầu chưa có dữ liệu nên k hiện máy bay
             //    positions.Add(new BasicGeoposition() { Latitude = old_Lat, Longitude = old_Lon });   //<== this
             //                                                                                         // Now add your positions:
-            if (0 != lat)
+            if (0 != old_Lat)
             {
-                positions.Add(new BasicGeoposition() { Latitude = lat, Longitude = lon });
+                positions.Add(new BasicGeoposition() { Latitude = lat, Longitude = lon });//to turn on auto zoom mode
 
                 //Vẽ quỹ đạo
                 MapPolyline lineToRmove = new Windows.UI.Xaml.Controls.Maps.MapPolyline();
-                //Windows.UI.Xaml.Controls.Maps.MapPolyline mapPolyline = new Windows.UI.Xaml.Controls.Maps.MapPolyline();
+                
                 lineToRmove.Path = new Geopath(new List<BasicGeoposition>() {
                 new BasicGeoposition() {Latitude = old_Lat, Longitude = old_Lon},
                 //San Bay Tan Son Nhat
@@ -3550,6 +3554,7 @@ namespace SerialSample
                 myMap.MapElements.Add(lineToRmove);
 
                 //test remove poly line
+                if(imPlay.IsTapEnabled)//only for read file
                 polyLineToRemove.Add(lineToRmove);
 
                 //auto zoom
@@ -3626,13 +3631,14 @@ namespace SerialSample
             {
                 Background_Sensor(00, -80);
 
-                btOneSceen.Content = "Two Screen";
+                btOneSceen.Content = "2 Screen";
             }
             else
             {
                 //Background_Sensor(700, -80);
+                myMap.MapElements.Remove(polylineHereToDentination);//delete polyline old before reload
                 DisplaySensor_Setup();
-                btOneSceen.Content = "One Screen";
+                btOneSceen.Content = "1 Screen";
             }
         }
         //*********************************************************************
@@ -3693,15 +3699,16 @@ namespace SerialSample
         /// <param name="e"></param>
         private void FindFight_Click(object sender, RoutedEventArgs e)
         {
+            bAutoZoom = !bAutoZoom;
             if (bAutoZoom)
             {
-                btAutoZoom.Content = "AutoZoom: Off";             
+                btAutoZoom.Content = "AutoZ: Off";             
             }
             else
             {
-                btAutoZoom.Content = "AutoZoom: On";
+                btAutoZoom.Content = "AutoZ: On";
             }
-            bAutoZoom = !bAutoZoom;
+
         }
 
         /// <summary>
@@ -4297,23 +4304,11 @@ namespace SerialSample
         /// <param name="e"></param>
         private void ZoomAll_Click(object sender, RoutedEventArgs e)
         {
-            myMap.Center =
-               new Geopoint(new BasicGeoposition()
-               {
-                   //Geopoint for Seattle San Bay Tan Son Nhat: dLatDentination, dLonDentination
-                   Latitude = (dLatGol + dLatDentination) / 2,
-                   Longitude = (dLonGol + dLonDentination) / 2
-               });
-            //Công thức giữa khoảng cách và zoom level
-            //.ZoomLevel = 8.625 - (distance(dLatGol, dLonGol, Convert.ToDouble(Data.Altitude), dLatDentination, dLonDentination, 0) - 200000) / 50000;
-            try
-            {
-                myMap.ZoomLevel = 8.625 - (distance(dLatGol, dLonGol, Convert.ToDouble(Data.Altitude), dLatDentination, dLonDentination, 0) - 200000) / 50000;
-            }
-            catch
-            {
-
-            }
+            var posToZoomAll = new List<BasicGeoposition>();
+            //add current position and dentination
+            posToZoomAll.Add(new BasicGeoposition() { Latitude = dLatGol, Longitude = dLonGol });
+            posToZoomAll.Add(new BasicGeoposition() { Latitude = dLatDentination, Longitude = dLonDentination });
+            SetMapPolyline(posToZoomAll);
         }
 
         /// <summary>
@@ -4775,6 +4770,11 @@ namespace SerialSample
         {
             if("Read file" == btReadCOMorFile.Content.ToString())
             {
+                old_Lat = 0;//remove old positiom when change mode
+                myMap.MapElements.Clear();
+                positions.Clear();
+                dLatGol = 0;//reset to no complex when change mode
+
                 btReadCOMorFile.Content = "Read Com";
                 ReadInfOfFile();
                 imPlay.IsTapEnabled = true;
@@ -4782,15 +4782,21 @@ namespace SerialSample
                 imrewind.IsTapEnabled = true;
                 ImReload.IsTapEnabled = true;
                 imFastForword.IsTapEnabled = true;
+
             }
             else
             {
+                old_Lat = 0;//remove old positiom when change mode
+                dLatGol = 0;//remove old positiom when change mode
+                positions.Clear();
+                myMap.MapElements.Clear();
                 btReadCOMorFile.Content = "Read file";
                 imPlay.IsTapEnabled = false;
                 imStop.IsTapEnabled = false;
                 imrewind.IsTapEnabled = false;
                 ImReload.IsTapEnabled = false;
                 imFastForword.IsTapEnabled = false;
+
             }
         }
 
