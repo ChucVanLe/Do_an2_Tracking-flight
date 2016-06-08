@@ -418,7 +418,7 @@ namespace SerialSample
                 }
 
                 DeviceListSource.Source = listOfDevices;
-                comPortInput.IsEnabled = true;
+                //comPortInput.IsEnabled = true;
                 ConnectDevices.SelectedIndex = -1;
             }
             catch
@@ -476,6 +476,7 @@ namespace SerialSample
                     //sendTextButton.IsEnabled = true;
 
                     comPortInput.Content = "DisConnect";
+                    btReadCOMorFile.IsEnabled = false;
                     Listen();
                 }
                 catch
@@ -495,6 +496,7 @@ namespace SerialSample
                     ListAvailablePorts();
 
                     comPortInput.Content = "Connect";
+                    btReadCOMorFile.IsEnabled = true;
                     bConnectOk = false;
                 }
                 catch
@@ -1432,7 +1434,7 @@ namespace SerialSample
                     }
                 }
 
-                if (Data.Temp.IndexOf("GPG") != -1)
+                if (-1 != Data.Temp.IndexOf("GPG"))
                 {
 
 
@@ -1490,7 +1492,7 @@ namespace SerialSample
 
                 //speed and angle
                 //Tìm chuối bắt đầu với $GPVTG để tìm angle
-                if (Data.Temp.IndexOf("GPV") != -1)
+                if (-1 != Data.Temp.IndexOf("GPV"))
                 {
                     //Chuỗi này chứa angle
                     //Reset bộ đếm số dòng của cảm biến IMU
@@ -4782,6 +4784,7 @@ namespace SerialSample
                 imrewind.IsTapEnabled = true;
                 ImReload.IsTapEnabled = true;
                 imFastForword.IsTapEnabled = true;
+                comPortInput.IsEnabled = false;
 
             }
             else
@@ -4796,6 +4799,7 @@ namespace SerialSample
                 imrewind.IsTapEnabled = false;
                 ImReload.IsTapEnabled = false;
                 imFastForword.IsTapEnabled = false;
+                comPortInput.IsEnabled = true;
 
             }
         }
