@@ -1812,7 +1812,7 @@ namespace SerialSample
             BackgroundDisplay.Children.Add(tblock_Latitude);
 
             //thu bản đồ lại
-            myMap.Width = 1280 - Width;
+            myMap.Width = 1260 - Width;
             myMap.Margin = new Windows.UI.Xaml.Thickness(Width, 0, 00, 00);
         }
         //Đã hoàn thành chỉnh 2 màn hình 09/12/2015 0h23p
