@@ -76,22 +76,22 @@
         <TextBox x:Name="rcvdText" HorizontalAlignment="Left" Height="81" Margin="1000,565,0,0" TextWrapping="Wrap" Text="Waiting Receive Data" VerticalAlignment="Top" Width="348"/>
 -->
         <!--Adjust-->
-        <Slider x:Name="sliderAdjSpeed" HorizontalAlignment="Left" Margin="540,53,0,0" VerticalAlignment="Top" Width="265" Minimum="1" ValueChanged="sliderAdjSpeed_ValueChanged" Value="10" Maximum="50"/>
-        <Slider x:Name="slider_AdjTime" HorizontalAlignment="Left" Margin="865,62,0,0" VerticalAlignment="Top" Width="410" ValueChanged="adjTime_Click" Minimum="0" Maximum="100"/>
-        <TextBlock x:Name="tblock_Adj_Speed" HorizontalAlignment="Left" FontSize="18" Margin="482,61,0,0" Foreground="Red" TextWrapping="Wrap" Text="Speed" VerticalAlignment="Top" Height="30" Width="53"/>
-        <TextBlock x:Name="tblock_Adj_Timer" HorizontalAlignment="Left" FontSize="18" Margin="820,69,0,0" Foreground="Red" TextWrapping="Wrap" Text="Time" VerticalAlignment="Top" Height="30" Width="41"/>
-        <TextBlock x:Name="tblock_Start_Timer" HorizontalAlignment="Left" FontSize="16" Margin="820,35,0,0" Foreground="Red" Text="012345.6" VerticalAlignment="Top" Height="25" Width="75"/>
-        <TextBlock x:Name="tblock_End_Timer" HorizontalAlignment="Left" FontSize="18" Margin="1200,35,0,0" Foreground="Red" Text="012345.6" VerticalAlignment="Top" Height="25" Width="75"/>
-        <TextBlock x:Name="tblock_Current_Timer" HorizontalAlignment="Left" FontSize="18" Margin="1011,35,0,0" Foreground="Red" Text="012345.6" VerticalAlignment="Top" Height="25" Width="75"/>
+        <Slider x:Name="sliderAdjSpeed" HorizontalAlignment="Left" Margin="547,63,0,0" VerticalAlignment="Top" Width="265" Minimum="1" ValueChanged="sliderAdjSpeed_ValueChanged" Value="10" Maximum="50"/>
+        <Slider x:Name="slider_AdjTime" HorizontalAlignment="Left" Margin="865,72,0,0" VerticalAlignment="Top" Width="395" ValueChanged="adjTime_Click" Minimum="0" Maximum="100"/>
+        <TextBlock x:Name="tblock_Adj_Speed" HorizontalAlignment="Left" FontSize="18" Margin="489,71,0,0" Foreground="Red" TextWrapping="Wrap" Text="Speed" VerticalAlignment="Top" Height="30" Width="53"/>
+        <TextBlock x:Name="tblock_Adj_Timer" HorizontalAlignment="Left" FontSize="18" Margin="820,79,0,0" Foreground="Red" TextWrapping="Wrap" Text="Time" VerticalAlignment="Top" Height="30" Width="41"/>
+        <TextBlock x:Name="tblock_Start_Timer" HorizontalAlignment="Left" FontSize="16" Margin="820,45,0,0" Foreground="Red" Text="012345.6" VerticalAlignment="Top" Height="25" Width="75"/>
+        <TextBlock x:Name="tblock_End_Timer" HorizontalAlignment="Left" FontSize="18" Margin="1185,45,0,0" Foreground="Red" Text="012345.6" VerticalAlignment="Top" Height="25" Width="75"/>
+        <TextBlock x:Name="tblock_Current_Timer" HorizontalAlignment="Left" FontSize="18" Margin="1011,45,0,0" Foreground="Red" Text="012345.6" VerticalAlignment="Top" Height="25" Width="75"/>
 
 
         <!--Play again button, reload-->
 
-        <Image x:Name="ImReload" VerticalAlignment="Top" HorizontalAlignment="Left"  Height="35" Width="35" Margin="736,0,0,0" Tapped="imReloadClick" IsTapEnabled="False" Source="/Assets/reLoad.png" />
-        <Image x:Name="imrewind" VerticalAlignment="Top" HorizontalAlignment="Left"  Height="35" Width="35" Margin="559,0,1677,0" Tapped="imrewind_Click" IsTapEnabled="False" Source="/Assets/Rewind-48.png" />
-        <Image x:Name="imPlay" VerticalAlignment="Top" HorizontalAlignment="Left"  Height="35"  Width="35" Margin="604,0,0,0" Tapped="play_Click" IsTapEnabled="False"  Source="/Assets/Play_Beautiful.png" />
-        <Image x:Name="imFastForword" VerticalAlignment="Top" HorizontalAlignment="Left"  Height="35"  Width="35" Margin="648,0,0,0" Tapped="fastForword_Click"  IsTapEnabled="False" Source="/Assets/Fast Forward-48.png" />
-        <Image x:Name="imStop" VerticalAlignment="Top" HorizontalAlignment="Left"  Height="35" Width="35" Margin="692,0,0,0" Tapped="stop_Click"  IsTapEnabled="False" Source="/Assets/StopSquare.png" />
+        <Image x:Name="ImReload" VerticalAlignment="Top" HorizontalAlignment="Left"  Height="35" Width="35" Margin="736,10,0,0" Tapped="imReloadClick" IsTapEnabled="False" Source="/Assets/reLoad.png" />
+        <Image x:Name="imrewind" VerticalAlignment="Top" HorizontalAlignment="Left"  Height="35" Width="35" Margin="559,10,0,0" Tapped="imrewind_Click" IsTapEnabled="False" Source="/Assets/Rewind-48.png" />
+        <Image x:Name="imPlay" VerticalAlignment="Top" HorizontalAlignment="Left"  Height="35"  Width="35" Margin="604,10,0,0" Tapped="play_Click" IsTapEnabled="False"  Source="/Assets/Play_Beautiful.png" />
+        <Image x:Name="imFastForword" VerticalAlignment="Top" HorizontalAlignment="Left"  Height="35"  Width="35" Margin="648,10,0,0" Tapped="fastForword_Click"  IsTapEnabled="False" Source="/Assets/Fast Forward-48.png" />
+        <Image x:Name="imStop" VerticalAlignment="Top" HorizontalAlignment="Left"  Height="35" Width="35" Margin="692,10,0,0" Tapped="stop_Click"  IsTapEnabled="False" Source="/Assets/StopSquare.png" />
         <!--
         <TextBox x:Name="TestText" HorizontalAlignment="Left" Height="41" Margin="750,300,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         -->
@@ -111,28 +111,26 @@
         <Image x:Name="image" HorizontalAlignment="Left" Height="99" Margin="529,409,0,0" VerticalAlignment="Top" Width="238"/>
         -->
         <!--Input string-->
-        <TextBlock x:Name="tblock_Position" HorizontalAlignment="Left" FontSize="20" Foreground="Red" Margin="80,0,0,0" TextWrapping="Wrap" Text="Position: " VerticalAlignment="Top" Height="30" Width="80"/>
+        <TextBlock x:Name="tblock_Position" HorizontalAlignment="Left" FontSize="20" Foreground="Red" Margin="80,10,0,0" TextWrapping="Wrap" Text="Position: " VerticalAlignment="Top" Height="30" Width="80"/>
         <!--Input Position-->
-        <TextBox x:Name="tb_Position" HorizontalAlignment="Left" Margin="170,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="30" Width="280" Background="Aqua" KeyDown="tb_Position_KeyDown"/>
+        <TextBox x:Name="tb_Position" HorizontalAlignment="Left" Margin="170,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="30" Width="280" Background="Aqua" KeyDown="tb_Position_KeyDown"/>
         <!--Search button-->
-        <Button x:Name="btSearch" Content="Search" HorizontalAlignment="Left" Height="30" Margin="480,0,0,0" 
-                VerticalAlignment="Top" Width="70" Click="Search_Click" Foreground="Yellow" Background="Green"/>
         <!--Input MapTapped-->
         <!--Input Latitude-->
-        <TextBlock x:Name="tblock_Latitude" HorizontalAlignment="Left" FontSize="20" Foreground="Red" Margin="779,0,0,0" TextWrapping="Wrap" Text="Lat: " VerticalAlignment="Top" Height="30" Width="40"/>
+        <TextBlock x:Name="tblock_Latitude" HorizontalAlignment="Left" FontSize="20" Foreground="Red" Margin="779,10,0,0" TextWrapping="Wrap" Text="Lat: " VerticalAlignment="Top" Height="30" Width="40"/>
 
         <!--Input Latitude-->
-        <TextBox x:Name="tb_Lat_Search" HorizontalAlignment="Left" Margin="824,0,0,0" FontSize="16" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="30" Width="120" Background="White" Foreground="Red"/>
+        <TextBox x:Name="tb_Lat_Search" HorizontalAlignment="Left" Margin="824,10,0,0" FontSize="16" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="30" Width="120" Background="White" Foreground="Red"/>
         <!--Input Longtitude-->
-        <TextBlock x:Name="tblock_Lontitude" HorizontalAlignment="Left" FontSize="20" Foreground="Red" Margin="959,0,0,0" TextWrapping="Wrap" Text="Lon: " VerticalAlignment="Top" Height="30" Width="40"/>
+        <TextBlock x:Name="tblock_Lontitude" HorizontalAlignment="Left" FontSize="20" Foreground="Red" Margin="959,10,0,0" TextWrapping="Wrap" Text="Lon: " VerticalAlignment="Top" Height="30" Width="40"/>
         <!--Input Lontitude-->
-        <TextBox x:Name="tb_Lon_Search" HorizontalAlignment="Left" Margin= "1004,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="30" Width="120" Background="White" Foreground="Red"/>
+        <TextBox x:Name="tb_Lon_Search" HorizontalAlignment="Left" Margin= "1004,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="30" Width="120" Background="White" Foreground="Red"/>
 
         <!--Get Coordinates button-->
-        <Button x:Name="btGetCoordinate" Content="Get" HorizontalAlignment="Left" Height="30" Margin="1133,0,0,0" 
+        <Button x:Name="btGetCoordinate" Content="Get" HorizontalAlignment="Left" Height="30" Margin="1133,10,0,0" 
                 VerticalAlignment="Top" Width="45" Click="Get_Click" Foreground="Yellow" Background="Green"/>
         <!-- Choose read com or read file button-->
-        <Button x:Name="btReadCOMorFile" Content="Read Com" FontSize="14" HorizontalAlignment="Left" Height="30" Margin="1195,0,0,0" 
+        <Button x:Name="btReadCOMorFile" Content="Read Com" FontSize="14" HorizontalAlignment="Left" Height="30" Margin="1195,10,0,0" 
                 VerticalAlignment="Top" Width="85" Click="Mode_Click" Foreground="Yellow" Background="Green"/>
     </Grid>
 </Page>

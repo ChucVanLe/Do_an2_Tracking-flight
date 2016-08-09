@@ -362,8 +362,8 @@ namespace SerialSample
             Draw_Airspeed_full_optimize(0, 150 - 32 + i16EditPosition, 205);//ok500, 120
                                                                                   //Speed_Image_Setup(100, 150, 100);
                                                                                   //Da can chinh 1/3
-            PitchAndRoll_Setup(0, 0, 350 + i16EditPosition * 11 / 6, 200, 140, 50);//ok
-            PitchAndRoll_Draw(0, 0, 350 + i16EditPosition * 11 / 6, 200, 140, 50);//ok
+            PitchAndRoll_Setup(0, 0, 350 + i16EditPosition * 11 / 6, 210, 140, 50);//ok
+            PitchAndRoll_Draw(0, 0, 350 + i16EditPosition * 11 / 6, 210, 140, 50);//ok
 
 
             //Vẽ hình Altitude
@@ -385,7 +385,7 @@ namespace SerialSample
 
             ///////////////////////////////////////////////////////////////////
             //Add needle
-            AddNeedle(1270 - dConvertToTabletX, 660 - dConvertToTabletY);
+            AddNeedle(1235 - dConvertToTabletX, 650 - dConvertToTabletY);
 
         }
         //*************End Of Class inside class set up****************************************
@@ -1458,7 +1458,7 @@ namespace SerialSample
                             temp_Raw = Convert.ToDouble(Data.Yaw) / 10;
 
                             //Vẽ sự thay đổi PitchAndRoll_Draw đã tối ưu ngày 3,4 /03/2016                       
-                            PitchAndRoll_Draw(temp_Roll, temp_Pitch, 350 + i16EditPosition * 11 / 6, 200, 140, 50);
+                            PitchAndRoll_Draw(temp_Roll, temp_Pitch, 350 + i16EditPosition * 11 / 6, 210, 140, 50);
                             //optimite not user remove and add
                             Comp_Rotate_OutAndAddValue(temp_Raw);
                         }
@@ -1838,6 +1838,7 @@ namespace SerialSample
             DrawLine(new SolidColorBrush(Colors.MidnightBlue), 16, Width, 0, Width, 762);
             DrawLine(new SolidColorBrush(Colors.MidnightBlue), 16, 0, 762, 1280, 762);
             DrawLine(new SolidColorBrush(Colors.MidnightBlue), 16, 1272, 0, 1272, 762);
+            DrawLine(new SolidColorBrush(Colors.MidnightBlue), 10, 0, 5, 1280, 5);
             //create background 
             //FillRect_BackGround(new SolidColorBrush(Colors.White), 1236 - dConvertToTabletX, 0, 130,
             //768 - dConvertToTabletY, 0.7);
@@ -2045,6 +2046,7 @@ namespace SerialSample
             TestLine.X2 = x2;
             TestLine.Y2 = y2;
             TestLine.StrokeThickness = SizeOfLine;
+            
             //Xac định tọa độ
             //TestLine.Margin = new Windows.UI.Xaml.Thickness(-1500, -200, 0, 0);
             BackgroundDisplay.Children.Add(TestLine);
@@ -4164,8 +4166,8 @@ namespace SerialSample
             //sliderAdjSpeed.ValueChanged += sliderAdjSpeed_ValueChanged;
             Speed_Draw_String_setup(dAirSpeed, xCenter + 32, yCenter - 125);//ok
             //Viết chữ Speed + đơn vị km/ h
-            DrawString("Speed ", 30, new SolidColorBrush(Colors.Green), xCenter + 32 - 80, yCenter - 125 + 250 + 5, 0.8);
-            DrawString("(Km/h)", 30, new SolidColorBrush(Colors.Green), xCenter + 32 - 80, yCenter - 125 + 250 + 40, 0.8);
+            DrawString("Speed ", 30, new SolidColorBrush(Colors.Crimson), xCenter + 32 - 80, yCenter - 125 + 250 + 5, 0.8);
+            DrawString("(Km/h)", 30, new SolidColorBrush(Colors.Crimson), xCenter + 32 - 80, yCenter - 125 + 250 + 40, 0.8);
         }
         ///////////////////////////////////////////////////////////////////////////////////////
         //optimize
@@ -4468,8 +4470,8 @@ namespace SerialSample
                                 yCenter - 15 + (300 - dAirSpeed % 100) * Height / I16FullScale, 1);
 
             //Viết chữ Altitude
-            DrawString("Altitude", 30, new SolidColorBrush(Colors.Green), xCenter - 88 / 2 - 10, yCenter + Height + 5, 0.8);
-            DrawString("  (m)", 30, new SolidColorBrush(Colors.Green), xCenter - 88 / 2 - 10, yCenter + Height + 35, 0.8);
+            DrawString("Altitude", 30, new SolidColorBrush(Colors.Crimson), xCenter - 88 / 2 - 10, yCenter + Height + 5, 0.8);
+            DrawString("  (m)", 30, new SolidColorBrush(Colors.Crimson), xCenter - 88 / 2 - 10, yCenter + Height + 35, 0.8);
             //sliderAdjSpeed.ValueChanged += sliderAdjSpeed_ValueChanged;
             //test
             //Speed_Draw_String_setup(130.6, 150, 100);
