@@ -1315,6 +1315,7 @@ namespace SerialSample
         /// <param name="e"></param>
         private async void Map3D_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
+            //showStreetsideView();
             //showMap3D_Roads();
             //Route();
             int Donghieng = 0;
@@ -1357,6 +1358,40 @@ namespace SerialSample
 
 
         }
+
+        //test map3D
+        private async void showStreetsideView()
+        {
+            // Check if Streetside is supported.
+            if (myMap.IsStreetsideSupported)
+            {
+                // Find a panorama near Avenue Gustave Eiffel.
+                BasicGeoposition cityPosition = new BasicGeoposition() { Latitude = 48.858, Longitude = 2.295 };
+                Geopoint cityCenter = new Geopoint(cityPosition);
+                StreetsidePanorama panoramaNearCity = await StreetsidePanorama.FindNearbyAsync(cityCenter);
+
+                // Set the Streetside view if a panorama exists.
+                if (panoramaNearCity != null)
+                {
+                    // Create the Streetside view.
+                    StreetsideExperience ssView = new StreetsideExperience(panoramaNearCity);
+                    ssView.OverviewMapVisible = true;
+                    myMap.CustomExperience = ssView;
+                }
+            }
+            else
+            {
+                // If Streetside is not supported
+                ContentDialog viewNotSupportedDialog = new ContentDialog()
+                {
+                    Title = "Streetside is not supported",
+                    Content = "\nStreetside views are not supported on this device.",
+                    PrimaryButtonText = "OK"
+                };
+                await viewNotSupportedDialog.ShowAsync();
+            }
+        }
+
 
         //ngày 28/11/2015 sử dụng Win2D.uwp
         //Chú ý muốn nhận cổng com của cường thì phải cài driver cho nó
@@ -1778,7 +1813,7 @@ namespace SerialSample
         /// </summary>
         public void Background_Sensor(double Width, double top)
         {
-
+            
             //Convert to tablet 1366 x 768 --> 1280 x 800;
             double screenWidth = Window.Current.Bounds.Width;
 
@@ -1795,8 +1830,14 @@ namespace SerialSample
                 //MapBackground.Height = 762;
             }
             //create background left
-            FillRect_BackGround(new SolidColorBrush(Colors.LightPink), 0, -300, Width,
-            1000 - dConvertToTabletY, 0.7);
+            FillRect_BackGround(new SolidColorBrush(Colors.DimGray), 0, 00, Width,
+            762, 0.7);
+            //create border
+            //FillRect_Border(new SolidColorBrush(Colors.WhiteSmoke), 300, -300, 30,
+            //760, 0.7);
+            DrawLine(new SolidColorBrush(Colors.MidnightBlue), 16, Width, 0, Width, 762);
+            DrawLine(new SolidColorBrush(Colors.MidnightBlue), 16, 0, 762, 1280, 762);
+            DrawLine(new SolidColorBrush(Colors.MidnightBlue), 16, 1272, 0, 1272, 762);
             //create background 
             //FillRect_BackGround(new SolidColorBrush(Colors.White), 1236 - dConvertToTabletX, 0, 130,
             //768 - dConvertToTabletY, 0.7);
@@ -1815,6 +1856,29 @@ namespace SerialSample
             myMap.Width = 1260 - Width;
             myMap.Margin = new Windows.UI.Xaml.Thickness(Width, 0, 00, 00);
         }
+        //--------------------------------------------------------------------------
+        //--------------------------------------------------------------------------
+        //ngay 9/8/2016
+        //Add border
+        
+        public void FillRect_Border(SolidColorBrush Blush, double StartX, double StartY, double width, double height, double Opacity)
+        {
+            Rectangle TestRet_Border = new Rectangle();
+            TestRet_Border.Fill = Blush;
+            TestRet_Border.Height = height;
+            TestRet_Border.Width = width;
+            TestRet_Border.Opacity = Opacity;
+            //Xac định tọa độ
+            TestRet_Border.Margin = new Windows.UI.Xaml.Thickness(
+                -2358 + dConvertToTabletX + TestRet_Border.Width + StartX * 2, -798 + dConvertToTabletY + TestRet_Border.Height + StartY * 2, 0, 0);
+            //TestRetangle.Margin = new Windows.UI.Xaml.Thickness(
+            //-2358 + TestRetangle.Width + x * 2, -200, 0, 0);
+
+        }
+
+
+
+
         //Đã hoàn thành chỉnh 2 màn hình 09/12/2015 0h23p
         //Ngày 09/12/2015 Vẽ các cảm biến
         //*******************************************************************************
@@ -4801,6 +4865,28 @@ namespace SerialSample
                 imFastForword.IsTapEnabled = false;
                 comPortInput.IsEnabled = true;
 
+            }
+        }
+
+        //enter position after press enter, system auto search this position
+        private void tb_Position_KeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            if (e.Key == Windows.System.VirtualKey.Enter)
+            {
+                if (tb_Position.Text != "")
+                {
+                    Search_Offline(tb_Position.Text);
+                }
+                else
+                {//nhap dung toa do là việc của button get
+                 //if(tb_Lat_Search.Text != "" && tb_Lon_Search.Text != "")
+                 //{
+                 //    dLatDentination = Convert.ToDouble(tb_Lat_Search.Text);
+                 //    dLonDentination = Convert.ToDouble(tb_Lon_Search.Text);
+                 //    //Add My home picture
+                 //    AddImageAtLatAndLon(dLatDentination, dLonDentination);
+                 //}
+                }
             }
         }
 

@@ -113,7 +113,7 @@
         <!--Input string-->
         <TextBlock x:Name="tblock_Position" HorizontalAlignment="Left" FontSize="20" Foreground="Red" Margin="80,0,0,0" TextWrapping="Wrap" Text="Position: " VerticalAlignment="Top" Height="30" Width="80"/>
         <!--Input Position-->
-        <TextBox x:Name="tb_Position" HorizontalAlignment="Left" Margin="170,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="30" Width="280" Background="Aqua"/>
+        <TextBox x:Name="tb_Position" HorizontalAlignment="Left" Margin="170,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="30" Width="280" Background="Aqua" KeyDown="tb_Position_KeyDown"/>
         <!--Search button-->
         <Button x:Name="btSearch" Content="Search" HorizontalAlignment="Left" Height="30" Margin="480,0,0,0" 
                 VerticalAlignment="Top" Width="70" Click="Search_Click" Foreground="Yellow" Background="Green"/>
