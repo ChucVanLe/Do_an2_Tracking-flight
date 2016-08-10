@@ -125,6 +125,7 @@
   <ItemGroup>
     <Content Include="Assets\airplane-icon.png" />
     <Content Include="Assets\AltitudeFull.png" />
+    <Content Include="Assets\auto_zoom.png" />
     <Content Include="Assets\Compass_Rose_English_North.png" />
     <Content Include="Assets\Fast Forward-48.png" />
     <Content Include="Assets\horizon.bmp" />
@@ -163,6 +164,7 @@
       <Name>Microsoft Visual C++ 2013 Runtime Package for Windows Universal</Name>
     </SDKReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

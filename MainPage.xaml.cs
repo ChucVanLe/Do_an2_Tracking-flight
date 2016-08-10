@@ -5049,6 +5049,59 @@ namespace SerialSample
 
 
         }
+        //-----------------------------------------------------------------------------
+        //---thesis-------------------------------------
+        //add menu to control map
+        private void bt_menu_Click(object sender, RoutedEventArgs e)
+        {
+            Splitter.IsPaneOpen = (Splitter.IsPaneOpen == true) ? false : true;
+            StatusBorder.Visibility = Visibility.Collapsed;
+        }
+
+        private void Footer_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ScenarioControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Clear the status block when navigating scenarios.
+            NotifyUser(String.Empty, NotifyType.StatusMessage);
+
+            ListBox scenarioListBox = sender as ListBox;
+            Scenario s = scenarioListBox.SelectedItem as Scenario;
+            if (s != null)
+            {
+                ScenarioFrame.Navigate(s.ClassType);
+                if (Window.Current.Bounds.Width < 640)
+                {
+                    Splitter.IsPaneOpen = false;
+                    StatusBorder.Visibility = Visibility.Collapsed;
+                }
+            }
+        }
+        List<Scenario> scenarios = new List<Scenario>
+        {
+            new Scenario() { Title="AppBarButtons"},
+            new Scenario() { Title="Icons"},
+            new Scenario() { Title="Opening/Closing Events"},
+            new Scenario() { Title="Control the CommandBar"},
+            new Scenario() { Title="Multiple CommandBars"},
+            new Scenario() { Title="Styling"},
+            new Scenario() { Title="Custom Content"},
+            new Scenario() { Title="Command Reflow"},
+        };
+        public List<Scenario> Scenarios
+        {
+            get { return this.scenarios; }
+        }
+
+        private void IconsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+
     }
     //////////////////////////////////////////////////////////////////////////////////////////
     public enum NotifyType//for show mesage while not find when press search button
@@ -5056,4 +5109,9 @@ namespace SerialSample
         StatusMessage,
         ErrorMessage
     };
+    public class Scenario
+    {
+        public string Title { get; set; }
+        public Type ClassType { get; set; }
+    }
 }
