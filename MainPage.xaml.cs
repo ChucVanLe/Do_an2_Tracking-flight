@@ -1835,10 +1835,11 @@ namespace SerialSample
             //create border
             //FillRect_Border(new SolidColorBrush(Colors.WhiteSmoke), 300, -300, 30,
             //760, 0.7);
-            DrawLine(new SolidColorBrush(Colors.MidnightBlue), 16, Width, 0, Width, 762);
-            DrawLine(new SolidColorBrush(Colors.MidnightBlue), 16, 0, 762, 1280, 762);
-            DrawLine(new SolidColorBrush(Colors.MidnightBlue), 16, 1272, 0, 1272, 762);
-            DrawLine(new SolidColorBrush(Colors.MidnightBlue), 10, 0, 5, 1280, 5);
+            DrawLine(new SolidColorBrush(Colors.MidnightBlue), 12, 6, 0, 6, 762);//y axis: left
+            DrawLine(new SolidColorBrush(Colors.MidnightBlue), 16, Width, 0, Width, 762);//y axis mid
+            DrawLine(new SolidColorBrush(Colors.MidnightBlue), 16, 1272, 0, 1272, 762);//y axis right
+            DrawLine(new SolidColorBrush(Colors.MidnightBlue), 10, 0, 5, 1280, 5);//x axis top
+            DrawLine(new SolidColorBrush(Colors.MidnightBlue), 16, 0, 762, 1280, 762);//x axis bottom
             //create background 
             //FillRect_BackGround(new SolidColorBrush(Colors.White), 1236 - dConvertToTabletX, 0, 130,
             //768 - dConvertToTabletY, 0.7);
@@ -4196,9 +4197,9 @@ namespace SerialSample
 
                 //top = -(-1103) - dAirSpeed * 4.16;
 
-                if (dAirSpeed < 70.5)
+                if (dAirSpeed < 88)
                     top = -(-2168) - dAirSpeed * 4.16;
-                else top = -(-2168) - 70.5 * 4.16 - (dAirSpeed - 70.5) * 4.167 / 2;
+                else top = -(-2168) - 88 * 4.16 - (dAirSpeed - 88) * 4.167 / 2;
 
                 //top = -(-sliderAdjSpeed.Value) - 0 * 4.16;
 
@@ -4891,6 +4892,7 @@ namespace SerialSample
                 }
             }
         }
+
 
         /// <summary>
         /// Add my home at tappped pos on map
