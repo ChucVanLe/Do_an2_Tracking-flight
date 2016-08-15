@@ -221,31 +221,33 @@
 
                     </ListBox>
 
-                    <StackPanel x:Name="FooterPanel" Orientation="Vertical" RelativePanel.AlignBottomWithPanel="True">
-                        <Image Source="Assets/microsoft-sdk.png" AutomationProperties.Name="Microsoft Logo" Stretch="None" HorizontalAlignment="Left" Margin="10,0,0,0"/>
-                        <TextBlock x:Name="Copyright" Text="&#xA9; Microsoft Corporation. All rights reserved." 
-                                   RelativePanel.Above="LinksPanel" Margin="10,10,0,0"
-                                   TextWrapping="Wrap"/>
-                        <StackPanel x:Name="LinksPanel" Orientation="Horizontal" Margin="10,10,0,10">
-                            <HyperlinkButton Content="Trademarks" Tag="http://www.microsoft.com/About/Legal/EN/US/IntellectualProperty/Trademarks/EN-US.aspx"
-                        Click="Footer_Click" FontSize="12"  />
-                            <TextBlock Text="|"   VerticalAlignment="Center" />
-                            <HyperlinkButton x:Name="PrivacyLink" Content="Privacy" Tag="http://privacy.microsoft.com" Click="Footer_Click" FontSize="12" />
-                        </StackPanel>
-                    </StackPanel>
                 </RelativePanel>
             </SplitView.Pane>
-            <RelativePanel>
-                <Frame x:Name="ScenarioFrame" Margin="0,5,0,0" RelativePanel.AlignTopWithPanel="True" RelativePanel.Above="StatusPanel" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignLeftWithPanel="True"/>
-                <StackPanel x:Name="StatusPanel" Orientation="Vertical" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignLeftWithPanel="True">
-                    <TextBlock x:Name="StatusLabel" Margin="0,0,0,10" TextWrapping="Wrap" Text="Status:" />
-                    <Border x:Name="StatusBorder" Margin="0,0,0,0" Visibility="Collapsed" >
-                        <TextBlock x:Name="StatusBlock" FontWeight="Bold" MaxHeight="200" MinWidth="{Binding ElementName=Splitter, Path=ActualWidth}" TextTrimming="CharacterEllipsis"  Margin="20,10,10,20" TextWrapping="Wrap"/>
-                    </Border>
-                </StackPanel>
-            </RelativePanel>
         </SplitView>
 
+        <!--when press speed-->
+        <SplitView x:Name="Split_Speed" Margin="695,143,1376,558" IsPaneOpen="True">
+            <SplitView.Pane>
+                <ListBox SelectionMode="Single" 
+                         Name="ListBox_Speed" 
+                         SelectionChanged="ListBox_Speed_SelectionChanged" >
+                    <ListBoxItem Name="ListBox_Inc">
+                        <StackPanel Orientation="Horizontal">
+                            <Image x:Name="im_Inc" Stretch="None" Source="Assets/increase_36x36.png" Margin="0,0,0,0" Height="36" Width="36" />
+                            <TextBlock Text="Increase" FontSize="24" Margin="20,0,0,0" />
+                        </StackPanel>
+                    </ListBoxItem>
+
+                    <ListBoxItem Name="BoxItem_Dec">
+                        <StackPanel Orientation="Horizontal">
+                            <Image x:Name="im_Dec" Stretch="None" Source="Assets/decrease_36x36.png" Margin="0,0,0,0" Height="36" Width="36" />
+                            <TextBlock Text="Decrease" FontSize="24" Margin="20,0,0,0" />
+                        </StackPanel>
+                    </ListBoxItem>
+
+                </ListBox>
+            </SplitView.Pane>
+        </SplitView>
         <Border >
             <ToggleButton Click="bt_menu_Click" VerticalAlignment="Top" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" Margin="486,10,0,0">
                 <ToggleButton.Content>

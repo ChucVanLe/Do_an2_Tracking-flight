@@ -127,8 +127,10 @@
     <Content Include="Assets\AltitudeFull.png" />
     <Content Include="Assets\auto_zoom.png" />
     <Content Include="Assets\Compass_Rose_English_North.png" />
+    <Content Include="Assets\decrease_36x36.png" />
     <Content Include="Assets\Fast Forward-48.png" />
     <Content Include="Assets\horizon.bmp" />
+    <Content Include="Assets\increase_36x36.png" />
     <Content Include="Assets\Logo150x150.png" />
     <Content Include="Assets\Logo310x150.png" />
     <Content Include="Assets\Logo44x44.png" />
