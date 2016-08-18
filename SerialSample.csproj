@@ -125,9 +125,14 @@
   <ItemGroup>
     <Content Include="Assets\airplane-icon.png" />
     <Content Include="Assets\AltitudeFull.png" />
+    <Content Include="Assets\AutoZoom_Off.png" />
+    <Content Include="Assets\AutoZoom_On.png" />
     <Content Include="Assets\auto_zoom.png" />
+    <Content Include="Assets\Com.png" />
     <Content Include="Assets\Compass_Rose_English_North.png" />
+    <Content Include="Assets\Connect.png" />
     <Content Include="Assets\decrease_36x36.png" />
+    <Content Include="Assets\Disconnect.png" />
     <Content Include="Assets\Fast Forward-48.png" />
     <Content Include="Assets\horizon.bmp" />
     <Content Include="Assets\increase_36x36.png" />

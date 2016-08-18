@@ -9,8 +9,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:WinRTXamlToolkit.Controls"
+    
     mc:Ignorable="d">
-
+    
     <Page.Resources>
         <CollectionViewSource x:Name="DeviceListSource"/>
     </Page.Resources>
@@ -52,7 +53,7 @@
                 Margin="1200,328,0,0" VerticalAlignment="Top" Width="80" Background="Blue"/>
 
         <!--UART-->
-        <ListBox x:Name="ConnectDevices" HorizontalAlignment="Left" Height="64" Margin="1200,376,0,0" VerticalAlignment="Top" Width="80" RenderTransformOrigin="0.5,0.5"
+        <ListBox x:Name="ConnectDevices12" HorizontalAlignment="Left" Height="64" Margin="1200,376,0,0" VerticalAlignment="Top" Width="80" RenderTransformOrigin="0.5,0.5"
                   ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.HorizontalScrollBarVisibility="Visible" ItemsSource="{Binding Source={StaticResource DeviceListSource}}" Background="Pink">
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -193,7 +194,7 @@
 
                         <ListBoxItem Name="Connect_Com_ListBoxItem">
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="36" Text="&#xE71B;" />
+                                <Image x:Name="im_Com" Stretch="None" Source="Assets/Com.png" Margin="0,0,0,0" Height="36" Width="36" />
                                 <TextBlock Text="COM" FontSize="24" Margin="20,0,0,0" />
                             </StackPanel>
                         </ListBoxItem>
@@ -226,15 +227,19 @@
         </SplitView>
 
         <!--when press speed-->
-        <SplitView x:Name="Split_Speed" Margin="695,143,1376,558" IsPaneOpen="True">
+        <SplitView x:Name="Split_Speed" Margin="690,124,0,0" IsPaneOpen="False">
             <SplitView.Pane>
+                <RelativePanel Margin="0,0,0,0" >
                 <ListBox SelectionMode="Single" 
                          Name="ListBox_Speed" 
+                         Background="Green"
                          SelectionChanged="ListBox_Speed_SelectionChanged" >
+                    
                     <ListBoxItem Name="ListBox_Inc">
                         <StackPanel Orientation="Horizontal">
                             <Image x:Name="im_Inc" Stretch="None" Source="Assets/increase_36x36.png" Margin="0,0,0,0" Height="36" Width="36" />
                             <TextBlock Text="Increase" FontSize="24" Margin="20,0,0,0" />
+                            <!--<Button Content="Increase" Margin="20,0,0,0"/>-->
                         </StackPanel>
                     </ListBoxItem>
 
@@ -246,8 +251,84 @@
                     </ListBoxItem>
 
                 </ListBox>
+                </RelativePanel>
             </SplitView.Pane>
         </SplitView>
+        <!--************************************************************************-->
+        <!--when press Com-->
+        <SplitView x:Name="Split_COM" Margin="690,421,0,0" Height="auto" IsPaneOpen="False">
+            <SplitView.Pane>
+                <RelativePanel Margin="0,0,0,0" >
+                <ListBox SelectionMode="Single" 
+                         Name="ListBox_Com"
+                         Background="Green"
+                         Height="auto"
+                         SelectionChanged="ListBox_Com_SelectionChanged" >
+                    <ListBoxItem Name="ListBox_Connect">
+                        <StackPanel Orientation="Horizontal">
+                            <Image x:Name="im_Connect" Stretch="None" Source="Assets/Connect.png" Margin="0,0,0,0" Height="36" Width="36" />
+                            <TextBlock Text="Connect" FontSize="24" Margin="20,0,0,0" />
+                        </StackPanel>
+                    </ListBoxItem>
+
+                    <ListBoxItem Name="BoxItem_Disconnect">
+                        <StackPanel Orientation="Horizontal">
+                            <Image x:Name="im_Disconnect" Stretch="None" Source="Assets/Disconnect.png" Margin="0,0,0,0" Height="36" Width="36" />
+                            <TextBlock Text="Disconnect" FontSize="24" Margin="20,0,0,0" />
+                        </StackPanel>
+                    </ListBoxItem>
+
+                </ListBox>
+                </RelativePanel>
+            </SplitView.Pane>
+        </SplitView>
+        <!--************************************************************************-->
+        <!--when press Auto zoom-->
+        <SplitView x:Name="Split_AutoZoom" Margin="690,491,0,0" Height="auto" IsPaneOpen="False">
+            <SplitView.Pane>
+                <RelativePanel Margin="0,0,0,0" >
+                    <ListBox SelectionMode="Single" 
+                         Name="ListBox_AutoZoom"
+                         Background="Green"
+                         Height="auto"
+                         SelectionChanged="ListBox_Com_SelectionChanged" >
+                        <ListBoxItem Name="ListBox_AutoZoom_On">
+                            <StackPanel Orientation="Horizontal">
+                                <Image x:Name="im_On" Stretch="None" Source="Assets/AutoZoom_On.png" Margin="0,0,0,0" Height="36" Width="36" />
+                                <TextBlock Text="On" FontSize="24" Margin="20,0,0,0" />
+                            </StackPanel>
+                        </ListBoxItem>
+
+                        <ListBoxItem Name="BoxItem_AutoZoom_Off">
+                            <StackPanel Orientation="Horizontal">
+                                <Image x:Name="im_Off" Stretch="None" Source="Assets/AutoZoom_Off.png" Margin="0,0,0,0" Height="36" Width="36" />
+                                <TextBlock Text="Off" FontSize="24" Margin="20,0,0,0" />
+                            </StackPanel>
+                        </ListBoxItem>
+
+                    </ListBox>
+                </RelativePanel>
+            </SplitView.Pane>
+        </SplitView>
+
+        <!--list of com-->
+        <SplitView x:Name="Split_ListCom" Margin="690,580,0,0" Height="auto" IsPaneOpen="False">
+            <SplitView.Pane>
+                <RelativePanel Margin="0,0,0,0" >
+                    <!--UART-->
+                <ListBox x:Name="ConnectDevices" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5"
+                  ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.HorizontalScrollBarVisibility="Visible" ItemsSource="{Binding Source={StaticResource DeviceListSource}}" Background="Green" Margin="0,0,-4,0">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Id}" />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                </RelativePanel>
+            </SplitView.Pane>
+        </SplitView>
+
+        <!--*******************************************************************************-->
         <Border >
             <ToggleButton Click="bt_menu_Click" VerticalAlignment="Top" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" Margin="486,10,0,0">
                 <ToggleButton.Content>

@@ -5026,6 +5026,12 @@ namespace SerialSample
             BackgroundDisplay.Children.Add(Img_Needle);
 
         }
+
+        private void ListBox_Com_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
         //////////////////////////////////////////////////////////////////////////////
         /// <summary>
         /// dHeading: góc quay của bản đồ
@@ -5075,11 +5081,30 @@ namespace SerialSample
         /// <param name="e"></param>
         private void IconsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //Speed
             if (Speed_Change_ListBoxItem.IsSelected)
             {
                 Split_Speed.IsPaneOpen = true;
             }
             else Split_Speed.IsPaneOpen = false;
+            //Com
+            if (Connect_Com_ListBoxItem.IsSelected)
+            {
+                Split_COM.IsPaneOpen = true;
+            }
+            else Split_COM.IsPaneOpen = false;
+            //List Com
+            if (List_Com_ListBoxItem.IsSelected)
+            {
+                Split_ListCom.IsPaneOpen = true;
+            }
+            else Split_ListCom.IsPaneOpen = false;
+            //AutoZoom
+            if (Auto_Zoom_ListBoxItem.IsSelected)
+            {
+                Split_AutoZoom.IsPaneOpen = true;
+            }
+            else Split_AutoZoom.IsPaneOpen = false;
         }
 
 
