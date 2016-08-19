@@ -4758,18 +4758,18 @@ namespace SerialSample
         /// <param name="type"></param>
         public void NotifyUser(string strMessage, NotifyType type)
         {
-            switch (type)
-            {
-                case NotifyType.StatusMessage:
-                    tb_Lat_Search.Background = new SolidColorBrush(Windows.UI.Colors.Green);
-                    tb_Lon_Search.Background = new SolidColorBrush(Windows.UI.Colors.Green);
-                    break;
-                case NotifyType.ErrorMessage:
-                    tb_Lat_Search.Background = new SolidColorBrush(Windows.UI.Colors.Red);
-                    tb_Lon_Search.Background = new SolidColorBrush(Windows.UI.Colors.Red);
-                    break;
-            }
-            tb_Lat_Search.Text = strMessage;
+            //switch (type)
+            //{
+            //    case NotifyType.StatusMessage:
+            //        tb_Lat_Search.Background = new SolidColorBrush(Windows.UI.Colors.Green);
+            //        tb_Lon_Search.Background = new SolidColorBrush(Windows.UI.Colors.Green);
+            //        break;
+            //    case NotifyType.ErrorMessage:
+            //        tb_Lat_Search.Background = new SolidColorBrush(Windows.UI.Colors.Red);
+            //        tb_Lon_Search.Background = new SolidColorBrush(Windows.UI.Colors.Red);
+            //        break;
+            //}
+            //tb_Lat_Search.Text = strMessage;
 
             // Collapse the StatusBlock if it has no text to conserve real estate.
         }
@@ -5044,6 +5044,18 @@ namespace SerialSample
                 posToZoomAll.Add(new BasicGeoposition() { Latitude = dLatGol, Longitude = dLonGol });
                 posToZoomAll.Add(new BasicGeoposition() { Latitude = dLatDentination, Longitude = dLonDentination });
                 SetMapPolyline(posToZoomAll);
+            }
+            //Get Position Listbox is selected
+            if (Get_Pos_ListBoxItem.IsSelected)
+            {
+                if (tblock_LatAndLon.Text != "")
+                {
+                    //cut string in tblock_LatAndLon because it include lat and lon
+                    dLatDentination = Convert.ToDouble(tblock_LatAndLon.Text.Substring(0, tblock_LatAndLon.Text.IndexOf(',')));
+                    dLonDentination = Convert.ToDouble(tblock_LatAndLon.Text.Substring(tblock_LatAndLon.Text.IndexOf(',') + 2, tblock_LatAndLon.Text.Length - 2 - tblock_LatAndLon.Text.IndexOf(',')));
+                    //Add My home picture
+                    AddImageAtLatAndLon(dLatDentination, dLonDentination);
+                }
             }
 
         }

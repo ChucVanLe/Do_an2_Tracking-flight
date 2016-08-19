@@ -91,7 +91,7 @@
         <!--Input Latitude-->
         <TextBox x:Name="tb_Lat_Search" HorizontalAlignment="Left" Margin="824,10,0,0" FontSize="16" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="30" Width="120" Background="White" Foreground="Red"/>
         <!--Input Longtitude-->
-        <TextBlock x:Name="tblock_LatAndLon" HorizontalAlignment="Left" FontSize="16" Foreground="Red" Margin="959,10,0,0" TextWrapping="Wrap" Text="Lon: " VerticalAlignment="Top" Height="30" Width="auto"/>
+        <TextBlock x:Name="tblock_LatAndLon" HorizontalAlignment="Left" FontSize="16" Foreground="Red" Margin="959,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="30" Width="auto"/>
         <!--Input Lontitude-->
         <TextBox x:Name="tb_Lon_Search" HorizontalAlignment="Left" Margin= "1004,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="30" Width="120" Background="White" Foreground="Red"/>
 
