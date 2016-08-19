@@ -192,6 +192,7 @@ namespace SerialSample
             myMap.MapTapped += MyMap_MapTapped;
             //change heading
             myMap.HeadingChanged += MyMap_HeadingChanged;
+            myMap.ZoomLevelChanged += MyMap_ZoomLevelChanged;
 
         }
 
@@ -287,6 +288,18 @@ namespace SerialSample
             ///////////////////////////////////////////////
             Rotate_Needle(myMap.Heading);
         }
+
+        /// <summary>
+        /// when change zoom level, tblock_ZoomLevel will show zoom level
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        private void MyMap_ZoomLevelChanged(Windows.UI.Xaml.Controls.Maps.MapControl sender, object args)
+        {
+
+            tblock_ZoomLevel.Text = Math.Round(myMap.ZoomLevel, 3).ToString();
+        }
+
         //Ngày 03/12/2015 22h27 đã hoàn thành đọc UART từ serial port
         //Tách dữ liệu và lấy các thông số liên quan
         //chỉ lấy 1 dòng gia tốc trong 10 dòng gia tốc trong 100ms
@@ -385,7 +398,7 @@ namespace SerialSample
 
             ///////////////////////////////////////////////////////////////////
             //Add needle
-            AddNeedle(screenWidth - 55, screenHeight - 50);//screenWidth
+            AddNeedle(screenWidth - 35, screenHeight - 50);//screenWidth
 
         }
         //*************End Of Class inside class set up****************************************
@@ -928,7 +941,7 @@ namespace SerialSample
             myMap.Children.Add(Tb_ShowDistance[index]);
 
             //Show Zool Level
-            tb_ZoomLevel.Text = "Z Level: " + Math.Round(myMap.ZoomLevel, 3).ToString();
+            //tb_ZoomLevel.Text = "Z Level: " + Math.Round(myMap.ZoomLevel, 3).ToString();
         }
         //**********************************************************************************************
         /// <summary>
@@ -966,7 +979,7 @@ namespace SerialSample
 
             myMap.Children.Add(Tb_ShowDistance[index]);
             //Show Zool Level
-            tb_ZoomLevel.Text = "Z Level: " + Math.Round(myMap.ZoomLevel, 3).ToString();
+            //tb_ZoomLevel.Text = "Z Level: " + Math.Round(myMap.ZoomLevel, 3).ToString();
         }
         //**********************************************************************************************
 
@@ -1224,8 +1237,8 @@ namespace SerialSample
 
             MapRouteFinderResult routeResult = await MapRouteFinder.GetDrivingRouteAsync(begin.Point, end.Point, MapRouteOptimization.Distance, MapRouteRestrictions.Highways);
             //test show point
-            tb_ZoomLevel.Text = begin.Point.Position.Latitude.ToString() + "  "
-                                + begin.Point.Position.Longitude.ToString();
+            //tb_ZoomLevel.Text = begin.Point.Position.Latitude.ToString() + "  "
+            //                    + begin.Point.Position.Longitude.ToString();
             //System.Diagnostics.Debug.WriteLine(routeResult.Status); // DEBUG
 
             if (routeResult.Status == MapRouteFinderStatus.Success)
@@ -1849,9 +1862,13 @@ namespace SerialSample
             myMap.Margin = new Windows.UI.Xaml.Thickness(Width, 0, 00, 00);
             //move tblock_LatAndLon to bottom
             //show latitude and lontitude in bottom on screen
-            tblock_LatAndLon.Margin = new Windows.UI.Xaml.Thickness(screenWidth - 260, screenHeight- 38, 00, 00);
+            tblock_LatAndLon.Margin = new Windows.UI.Xaml.Thickness(screenWidth - 220, screenHeight- 38, 00, 00);
             BackgroundDisplay.Children.Remove(tblock_LatAndLon);
             BackgroundDisplay.Children.Add(tblock_LatAndLon);
+            //move zoom level to bottom on screen
+            tblock_ZoomLevel.Margin = new Windows.UI.Xaml.Thickness(screenWidth - 290, screenHeight - 38, 00, 00);
+            BackgroundDisplay.Children.Remove(tblock_ZoomLevel);
+            BackgroundDisplay.Children.Add(tblock_ZoomLevel);
 
         }
         //--------------------------------------------------------------------------
@@ -4542,8 +4559,8 @@ namespace SerialSample
                 ////show result
                 //tb_Lat_Search.Text = dentination_pos.Point.Position.Latitude.ToString();
                 //tb_Lon_Search.Text = dentination_pos.Point.Position.Longitude.ToString();
-                tblock_LatAndLon.Text = dentination_pos.Point.Position.Latitude.ToString() + ", "
-                                        + dentination_pos.Point.Position.Longitude.ToString();
+                tblock_LatAndLon.Text = Math.Round(dentination_pos.Point.Position.Latitude, 8).ToString() + ", "
+                                        + Math.Round(dentination_pos.Point.Position.Longitude, 8).ToString();
                 //Update Lat and Lon
                 dLatDentination = dentination_pos.Point.Position.Latitude;
                 dLonDentination = dentination_pos.Point.Position.Longitude;
@@ -4741,8 +4758,8 @@ namespace SerialSample
             //Image Img_Needle = new Image();
             BackgroundDisplay.Children.Remove(Img_Needle);
             //Edit size of image
-            Img_Needle.Height = 80;
-            Img_Needle.Width = 80;
+            Img_Needle.Height = 40;
+            Img_Needle.Width = 40;
 
             //Img_Needle.RenderTransform
             Img_Needle.Opacity = 1;
@@ -4824,9 +4841,9 @@ namespace SerialSample
             {
 
                 Angle = 360 - dHeading,
-                CenterX = 40,
+                CenterX = 20,
                 //CenterX = 62, //The prop name maybe mistyped 
-                CenterY = 40
+                CenterY = 20
             };
 
             BackgroundDisplay.Children.Add(Img_Needle);

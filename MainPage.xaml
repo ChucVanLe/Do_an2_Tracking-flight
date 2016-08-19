@@ -40,8 +40,6 @@
         <Button x:Name="btOneSceen" Content="1 Screen" HorizontalAlignment="Left" Margin="1200,223,0,0" VerticalAlignment="Top" Height="39" 
                 Width="80" Click="OneSceen_Click" Foreground="Red" Background="White"/>
 
-        <TextBox x:Name="tb_ZoomLevel" HorizontalAlignment="Left" Margin="1200,500,0,0" FontSize="13" TextWrapping="Wrap" Text="ZoolLevel" VerticalAlignment="Top" Height="52" Width="80" Background="Aqua"/>
-
         <TextBox x:Name="tbShowDis" Background="Gold" HorizontalAlignment="Left" Margin="1200,560,0,0" FontSize="13" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="50" Width="80" 
                  Foreground="{ThemeResource AppBarToggleButtonCheckedPressedBorderThemeBrush}" />
 
@@ -86,6 +84,7 @@
 
         <!--Input Latitude Longtitude-->
         <TextBlock x:Name="tblock_LatAndLon" HorizontalAlignment="Left" FontSize="16" Foreground="Red" Margin="959,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="30" Width="auto"/>
+        <TextBlock x:Name="tblock_ZoomLevel" HorizontalAlignment="Left" FontSize="16" Foreground="Red" Margin="900,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="30" Width="auto"/>
 
         <!--Get Coordinates button-->
         
