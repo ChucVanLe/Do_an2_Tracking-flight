@@ -691,7 +691,7 @@ namespace SerialSample
                 {
 
                     errorFrame += 1;
-                    tb_ShowTime.Text = "frame error: " + strDataFromSerialPort + "Error: " + ex.Message + "No Error: " + errorFrame.ToString();
+                    tblock_CurentTime.Text = "frame error: " + strDataFromSerialPort + "Error: " + ex.Message + "No Error: " + errorFrame.ToString();
 
                 }
                 //
@@ -1493,7 +1493,7 @@ namespace SerialSample
                         Data.Time = dTemp_Time.ToString();
                     }
                     //show now time
-                    tb_ShowTime.Text = "Now: " + Data.Time;
+                    tblock_CurentTime.Text = "Now: " + Data.Time;
                     //Ngày 17/12/2015 17h36 ok
                     //tbOutputText.Text += "Time: " + Data.Time + '\n';
                     //cut bỏ Data đến dấu phẩy đầu tiên lấy sau dấu phẩy đầu tiên
@@ -3688,29 +3688,29 @@ namespace SerialSample
         //************************************************************************
         bool bSetup = false;
         bool bOneScreen = false;
-        /// <summary>
-        /// 1 nut thuc thi 2 chuc nang: One and Two Screen
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void OneSceen_Click(object sender, RoutedEventArgs e)
-        {
-            //myMap.Margin = new Windows.UI.Xaml.Thickness(0, 0, 00, 00);
-            bOneScreen = !bOneScreen;
-            if (bOneScreen)
-            {
-                Background_Sensor(00, -80);
+        ///// <summary>
+        ///// 1 nut thuc thi 2 chuc nang: One and Two Screen
+        ///// </summary>
+        ///// <param name="sender"></param>
+        ///// <param name="e"></param>
+        //private void OneSceen_Click(object sender, RoutedEventArgs e)
+        //{
+        //    //myMap.Margin = new Windows.UI.Xaml.Thickness(0, 0, 00, 00);
+        //    bOneScreen = !bOneScreen;
+        //    if (bOneScreen)
+        //    {
+        //        Background_Sensor(00, -80);
 
-                btOneSceen.Content = "2 Screen";
-            }
-            else
-            {
-                //Background_Sensor(700, -80);
-                myMap.MapElements.Remove(polylineHereToDentination);//delete polyline old before reload
-                DisplaySensor_Setup();
-                btOneSceen.Content = "1 Screen";
-            }
-        }
+        //        btOneSceen.Content = "2 Screen";
+        //    }
+        //    else
+        //    {
+        //        //Background_Sensor(700, -80);
+        //        myMap.MapElements.Remove(polylineHereToDentination);//delete polyline old before reload
+        //        DisplaySensor_Setup();
+        //        btOneSceen.Content = "1 Screen";
+        //    }
+        //}
         //*********************************************************************
         Rectangle TestRet_BackGround = new Rectangle();
         //**********************************************************************************************
@@ -4970,6 +4970,12 @@ namespace SerialSample
                 Split_COM.IsPaneOpen = true;
             }
             else Split_COM.IsPaneOpen = false;
+            //Screen
+            if (Screen_ListBoxItem.IsSelected)
+            {
+                Split_Screen.IsPaneOpen = true;
+            }
+            else Split_Screen.IsPaneOpen = false;
             //List Com
             if (List_Com_ListBoxItem.IsSelected)
             {
@@ -5048,6 +5054,24 @@ namespace SerialSample
             }
         }
 
+        /// <summary>
+        /// Change between 1 screen and 2 screen
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ListBox_Screen_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ListBox_1_Screen.IsSelected)
+            {
+                Background_Sensor(00, -80);
+            }
+            if (ListBox_2_Screen.IsSelected)
+            {
+                myMap.MapElements.Remove(polylineHereToDentination);//delete polyline old before reload
+                DisplaySensor_Setup();
+            }
+
+        }
 
 
         //*********************************************************************************************

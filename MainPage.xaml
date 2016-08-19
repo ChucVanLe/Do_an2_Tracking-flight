@@ -34,11 +34,7 @@
         -->
         <!--Hiện khoảng cách-->
         <!--Ta hiện khoảng cách trên đường thẳng-->
-        <!--Show time-->
-        <TextBox x:Name="tb_ShowTime" HorizontalAlignment="Left" Margin="1198,114,0,0" TextWrapping="Wrap" Text="Now" VerticalAlignment="Top" Height="50" Width="80" Background="Wheat" Foreground="Red"/>
-
-        <Button x:Name="btOneSceen" Content="1 Screen" HorizontalAlignment="Left" Margin="1200,223,0,0" VerticalAlignment="Top" Height="39" 
-                Width="80" Click="OneSceen_Click" Foreground="Red" Background="White"/>
+ 
 
 
         <!--Send Data
@@ -80,9 +76,12 @@
         <!--Input Position-->
         <TextBox x:Name="tb_Position" HorizontalAlignment="Left" Margin="170,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="30" Width="280" Background="Aqua" KeyDown="tb_Position_KeyDown"/>
 
-        <!--Input Latitude Longtitude-->
+        <!--Show Latitude Longtitude-->
         <TextBlock x:Name="tblock_LatAndLon" HorizontalAlignment="Left" FontSize="16" Foreground="Red" Margin="959,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="30" Width="auto"/>
+        <!--Show Zoom level-->
         <TextBlock x:Name="tblock_ZoomLevel" HorizontalAlignment="Left" FontSize="16" Foreground="Red" Margin="900,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="30" Width="auto"/>
+        <!--Show time from GPS-->
+        <TextBlock x:Name="tblock_CurentTime" HorizontalAlignment="Left" FontSize="16" Foreground="Red" Margin="800,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="30" Width="auto"/>
 
         <!--Get Coordinates button-->
         
@@ -91,7 +90,7 @@
         <!--Add menu bar-->
 
 
-        <SplitView x:Name="Splitter" Margin="488,50,0,0" IsPaneOpen="False">
+        <SplitView x:Name="Splitter" Margin="488,50,0,0" IsPaneOpen="True">
             <SplitView.Pane>
                 <RelativePanel Margin="0,0,0,0" >
 
@@ -126,10 +125,10 @@
                             </StackPanel>
                         </ListBoxItem>
 
-                        <ListBoxItem Name="Read_Com_ListBoxItem">
+                        <ListBoxItem Name="Screen_ListBoxItem">
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="36" Text="&#xE78A;" />
-                                <TextBlock Text="Read Com" FontSize="24" Margin="20,0,0,0" />
+                                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="36" Text="&#xE786;" />
+                                <TextBlock Text="Screen" FontSize="24" Margin="20,0,0,0" />
                             </StackPanel>
                         </ListBoxItem>
 
@@ -206,6 +205,34 @@
                     </ListBoxItem>
 
                 </ListBox>
+                </RelativePanel>
+            </SplitView.Pane>
+        </SplitView>
+        <!--when press screen-->
+        <SplitView x:Name="Split_Screen" Margin="488,264,0,0" IsPaneOpen="False">
+            <SplitView.Pane>
+                <RelativePanel Margin="0,0,0,0" >
+                    <ListBox SelectionMode="Single" 
+                         Name="ListBox_Screen" 
+                         Background="Green"
+                         SelectionChanged="ListBox_Screen_SelectionChanged" >
+
+                        <ListBoxItem Name="ListBox_2_Screen" Tapped="ListBox_Inc_Tapped">
+                            <StackPanel Orientation="Horizontal">
+                                <Image x:Name="im_2_Screen" Stretch="None" Source="Assets/TwoScreen.png" Margin="0,0,0,0" Height="36" Width="36" />
+                                <TextBlock Text="Two Screen" FontSize="24" Margin="20,0,0,0" />
+                                <!--<Button Content="Increase" Margin="20,0,0,0"/>-->
+                            </StackPanel>
+                        </ListBoxItem>
+
+                        <ListBoxItem Name="ListBox_1_Screen" Tapped="BoxItem_Dec_Tapped">
+                            <StackPanel Orientation="Horizontal">
+                                <Image x:Name="im_1_Screen" Stretch="None" Source="Assets/arrows_extend_full_screen_full.png" Margin="0,0,0,0" Height="36" Width="36" />
+                                <TextBlock Text="One Screen" FontSize="24" Margin="20,0,0,0" />
+                            </StackPanel>
+                        </ListBoxItem>
+
+                    </ListBox>
                 </RelativePanel>
             </SplitView.Pane>
         </SplitView>

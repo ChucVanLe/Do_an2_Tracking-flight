@@ -125,6 +125,7 @@
   <ItemGroup>
     <Content Include="Assets\airplane-icon.png" />
     <Content Include="Assets\AltitudeFull.png" />
+    <Content Include="Assets\arrows_extend_full_screen_full.png" />
     <Content Include="Assets\AutoZoom_Off.png" />
     <Content Include="Assets\AutoZoom_On.png" />
     <Content Include="Assets\auto_zoom.png" />
@@ -147,6 +148,7 @@
     <Content Include="Assets\play.png" />
     <Content Include="Assets\Speed_full.PNG" />
     <Content Include="Assets\Speed_Full_v2.png" />
+    <Content Include="Assets\TwoScreen.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-20.png" />
   </ItemGroup>
