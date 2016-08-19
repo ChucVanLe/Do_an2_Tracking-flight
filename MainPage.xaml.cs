@@ -468,7 +468,7 @@ namespace SerialSample
                 //sendTextButton.IsEnabled = true;
 
                 //comPortInput.Content = "DisConnect";
-                btReadCOMorFile.IsEnabled = false;
+                //btReadCOMorFile.IsEnabled = false;
                 Listen();
             }
             catch
@@ -491,7 +491,7 @@ namespace SerialSample
                 ListAvailablePorts();
 
                 //comPortInput.Content = "Connect";
-                btReadCOMorFile.IsEnabled = true;
+                //btReadCOMorFile.IsEnabled = true;
                 bConnectOk = false;
             }
             catch
@@ -1843,11 +1843,6 @@ namespace SerialSample
             BackgroundDisplay.Children.Remove(tb_Position);
             BackgroundDisplay.Children.Add(tblock_Position);
             BackgroundDisplay.Children.Add(tb_Position);
-
-            BackgroundDisplay.Children.Remove(tb_Lat_Search);
-            BackgroundDisplay.Children.Remove(tblock_Latitude);
-            BackgroundDisplay.Children.Add(tb_Lat_Search);
-            BackgroundDisplay.Children.Add(tblock_Latitude);
 
             //thu bản đồ lại
             myMap.Width = screenWidth - Width;
@@ -4531,17 +4526,6 @@ namespace SerialSample
         MapLocationFinderResult result_position;
         MapLocation dentination_pos;
 
-        private void Get_Click(object sender, RoutedEventArgs e)
-        {
-            if (tb_Lat_Search.Text != "" && tb_Lon_Search.Text != "")
-            {
-                dLatDentination = Convert.ToDouble(tb_Lat_Search.Text);
-                dLonDentination = Convert.ToDouble(tb_Lon_Search.Text);
-                //Add My home picture
-                AddImageAtLatAndLon(dLatDentination, dLonDentination);
-            }
-        }
-
         private void Mouse_Click(object sender, TappedRoutedEventArgs e)
         {
             NotifyUser(String.Empty, NotifyType.StatusMessage);
@@ -4636,38 +4620,6 @@ namespace SerialSample
             }
         }
 
-        /// <summary>
-        /// choose mode read Com or Read file
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Mode_Click(object sender, RoutedEventArgs e)
-        {
-            if("Read file" == btReadCOMorFile.Content.ToString())
-            {
-                old_Lat = 0;//remove old positiom when change mode
-                myMap.MapElements.Clear();
-                positions.Clear();
-                dLatGol = 0;//reset to no complex when change mode
-
-                btReadCOMorFile.Content = "Read Com";
-                ReadInfOfFile();
-
-                //comPortInput.IsEnabled = false;
-
-            }
-            else
-            {
-                old_Lat = 0;//remove old positiom when change mode
-                dLatGol = 0;//remove old positiom when change mode
-                positions.Clear();
-                myMap.MapElements.Clear();
-                btReadCOMorFile.Content = "Read file";
-
-                //comPortInput.IsEnabled = true;
-
-            }
-        }
 
         //enter position after press enter, system auto search this position
         private void tb_Position_KeyDown(object sender, KeyRoutedEventArgs e)

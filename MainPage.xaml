@@ -83,24 +83,14 @@
         <TextBlock x:Name="tblock_Position" HorizontalAlignment="Left" FontSize="20" Foreground="Red" Margin="80,10,0,0" TextWrapping="Wrap" Text="Position: " VerticalAlignment="Top" Height="30" Width="80"/>
         <!--Input Position-->
         <TextBox x:Name="tb_Position" HorizontalAlignment="Left" Margin="170,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="30" Width="280" Background="Aqua" KeyDown="tb_Position_KeyDown"/>
-        <!--Search button-->
-        <!--Input MapTapped-->
-        <!--Input Latitude-->
-        <TextBlock x:Name="tblock_Latitude" HorizontalAlignment="Left" FontSize="20" Foreground="Red" Margin="779,10,0,0" TextWrapping="Wrap" Text="Lat: " VerticalAlignment="Top" Height="30" Width="40"/>
 
-        <!--Input Latitude-->
-        <TextBox x:Name="tb_Lat_Search" HorizontalAlignment="Left" Margin="824,10,0,0" FontSize="16" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="30" Width="120" Background="White" Foreground="Red"/>
-        <!--Input Longtitude-->
+        <!--Input Latitude Longtitude-->
         <TextBlock x:Name="tblock_LatAndLon" HorizontalAlignment="Left" FontSize="16" Foreground="Red" Margin="959,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="30" Width="auto"/>
-        <!--Input Lontitude-->
-        <TextBox x:Name="tb_Lon_Search" HorizontalAlignment="Left" Margin= "1004,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="30" Width="120" Background="White" Foreground="Red"/>
 
         <!--Get Coordinates button-->
-        <Button x:Name="btGetCoordinate" Content="Get" HorizontalAlignment="Left" Height="30" Margin="1133,10,0,0" 
-                VerticalAlignment="Top" Width="45" Click="Get_Click" Foreground="Yellow" Background="Green"/>
+        
         <!-- Choose read com or read file button-->
-        <Button x:Name="btReadCOMorFile" Content="Read Com" FontSize="14" HorizontalAlignment="Left" Height="30" Margin="1195,10,0,0" 
-                VerticalAlignment="Top" Width="85" Click="Mode_Click" Foreground="Yellow" Background="Green"/>
+
         <!--Add menu bar-->
 
 
