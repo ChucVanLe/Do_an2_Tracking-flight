@@ -40,8 +40,6 @@
         <Button x:Name="btOneSceen" Content="1 Screen" HorizontalAlignment="Left" Margin="1200,223,0,0" VerticalAlignment="Top" Height="39" 
                 Width="80" Click="OneSceen_Click" Foreground="Red" Background="White"/>
 
-        <TextBox x:Name="tbShowDis" Background="Gold" HorizontalAlignment="Left" Margin="1200,560,0,0" FontSize="13" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="50" Width="80" 
-                 Foreground="{ThemeResource AppBarToggleButtonCheckedPressedBorderThemeBrush}" />
 
         <!--Send Data
         <TextBox x:Name="sendText" HorizontalAlignment="Left" Height="47" Margin="1000,513,0,0" TextWrapping="Wrap" Text="" Background="Blue" VerticalAlignment="Top" Width="180"/>

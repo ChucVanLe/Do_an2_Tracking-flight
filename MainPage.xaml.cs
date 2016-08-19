@@ -1763,7 +1763,7 @@ namespace SerialSample
                     //Ta hiện khoảng cách trên đường thẳng chứ không hiện textbox nên bỏ dòng sau
                     //tbShowDis.Text = "Distance to Dentination:  " + dDistanToTaget.ToString() + "\n";
                     //Tinh goc giua 2 diem từ vị trí máy bay đến đích
-                    tbShowDis.Text = "Vect Agl:  " + temp_angle.ToString();
+                    //tbShowDis.Text = "Vect Agl:  " + temp_angle.ToString();
 
                     //Ngay 21/1/2016 Show Data
                     //ShowDistance(0, temp_angle + 90, dDistanToTaget.ToString() + " Meter", 30 * myMap.ZoomLevel / 22, dLatGol, dLonGol, 1);//Purple
