@@ -37,28 +37,12 @@
         <!--Show time-->
         <TextBox x:Name="tb_ShowTime" HorizontalAlignment="Left" Margin="1198,114,0,0" TextWrapping="Wrap" Text="Now" VerticalAlignment="Top" Height="50" Width="80" Background="Wheat" Foreground="Red"/>
 
-        <Button x:Name="btZoomAll" Content="Zoom All" HorizontalAlignment="Left" Height="38" Margin="1200,174,0,0" 
-                VerticalAlignment="Top" Width="80" Click="ZoomAll_Click" Foreground="Green" Background="Orange"/>
-
         <Button x:Name="btOneSceen" Content="1 Screen" HorizontalAlignment="Left" Margin="1200,223,0,0" VerticalAlignment="Top" Height="39" 
                 Width="80" Click="OneSceen_Click" Foreground="Red" Background="White"/>
-
-        <Button x:Name="btAutoZoom" Click="FindFight_Click" Content="AutoZ: Off" HorizontalAlignment="Left" 
-                Height="39" Margin="1200,275,0,0" VerticalAlignment="Top" Width="80" FontSize="13" Foreground="Red" Background="BlueViolet"/>
 
         <!--Show map 3d-->
         <Button x:Name="BtMap3D" Content="3D_Mode" Click="Map3D_Click" FontSize="13" HorizontalAlignment="Left" Height="39" 
                 Margin="1200,328,0,0" VerticalAlignment="Top" Width="80" Background="Blue"/>
-
-        <!--UART-->
-        <ListBox x:Name="ConnectDevices12" HorizontalAlignment="Left" Height="64" Margin="1200,376,0,0" VerticalAlignment="Top" Width="80" RenderTransformOrigin="0.5,0.5"
-                  ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.HorizontalScrollBarVisibility="Visible" ItemsSource="{Binding Source={StaticResource DeviceListSource}}" Background="Pink">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Id}" />
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
 
         <Button x:Name="comPortInput" Content="Connect" Click="comPortInput_Click" IsEnabled="False" HorizontalAlignment="Left" Height="39" Margin="1200,450,0,0" VerticalAlignment="Top" Width="80" Background="Blue"/>
 
@@ -75,9 +59,8 @@
         <TextBox x:Name="rcvdText" HorizontalAlignment="Left" Height="81" Margin="1000,565,0,0" TextWrapping="Wrap" Text="Waiting Receive Data" VerticalAlignment="Top" Width="348"/>
 -->
         <!--Adjust-->
-        <Slider x:Name="sliderAdjSpeed" HorizontalAlignment="Left" Margin="547,63,0,0" VerticalAlignment="Top" Width="265" Minimum="1" ValueChanged="sliderAdjSpeed_ValueChanged" Value="10" Maximum="50"/>
+
         <Slider x:Name="slider_AdjTime" HorizontalAlignment="Left" Margin="865,72,0,0" VerticalAlignment="Top" Width="395" ValueChanged="adjTime_Click" Minimum="0" Maximum="100"/>
-        <TextBlock x:Name="tblock_Adj_Speed" HorizontalAlignment="Left" FontSize="18" Margin="489,71,0,0" Foreground="Red" TextWrapping="Wrap" Text="Speed" VerticalAlignment="Top" Height="30" Width="53"/>
         <TextBlock x:Name="tblock_Adj_Timer" HorizontalAlignment="Left" FontSize="18" Margin="820,79,0,0" Foreground="Red" TextWrapping="Wrap" Text="Time" VerticalAlignment="Top" Height="30" Width="41"/>
         <TextBlock x:Name="tblock_Start_Timer" HorizontalAlignment="Left" FontSize="16" Margin="820,45,0,0" Foreground="Red" Text="012345.6" VerticalAlignment="Top" Height="25" Width="75"/>
         <TextBlock x:Name="tblock_End_Timer" HorizontalAlignment="Left" FontSize="18" Margin="1185,45,0,0" Foreground="Red" Text="012345.6" VerticalAlignment="Top" Height="25" Width="75"/>
@@ -282,7 +265,7 @@
                          Name="ListBox_AutoZoom"
                          Background="Green"
                          Height="auto"
-                         SelectionChanged="ListBox_Com_SelectionChanged" >
+                         SelectionChanged="ListBox_AutoZoom_SelectionChanged" >
                         <ListBoxItem Name="ListBox_AutoZoom_On">
                             <StackPanel Orientation="Horizontal">
                                 <Image x:Name="im_On" Stretch="None" Source="Assets/AutoZoom_On.png" Margin="0,0,0,0" Height="36" Width="36" />
@@ -290,7 +273,7 @@
                             </StackPanel>
                         </ListBoxItem>
 
-                        <ListBoxItem Name="BoxItem_AutoZoom_Off">
+                        <ListBoxItem Name="ListBox_AutoZoom_Off">
                             <StackPanel Orientation="Horizontal">
                                 <Image x:Name="im_Off" Stretch="None" Source="Assets/AutoZoom_Off.png" Margin="0,0,0,0" Height="36" Width="36" />
                                 <TextBlock Text="Off" FontSize="24" Margin="20,0,0,0" />

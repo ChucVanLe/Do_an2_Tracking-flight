@@ -385,7 +385,7 @@ namespace SerialSample
 
             ///////////////////////////////////////////////////////////////////
             //Add needle
-            AddNeedle(1235 - dConvertToTabletX, 650 - dConvertToTabletY);
+            AddNeedle(screenWidth - 55, screenHeight - 50);//screenWidth
 
         }
         //*************End Of Class inside class set up****************************************
@@ -1805,6 +1805,7 @@ namespace SerialSample
         //**************Ngày 08/12/2015************************************
         //Vẽ hiển thị của cảm biến
         Image imgAuto = new Image();
+        double screenWidth, screenHeight;
         /// <summary>
         /// Chọn background cho các cảm biến
         /// Lấy một hình vẽ bất kỳ làm background
@@ -1815,9 +1816,9 @@ namespace SerialSample
         {
             
             //Convert to tablet 1366 x 768 --> 1280 x 800;
-            double screenWidth = Window.Current.Bounds.Width;
+            screenWidth = Window.Current.Bounds.Width;
 
-            double screenHeight = Window.Current.Bounds.Height;
+            screenHeight = Window.Current.Bounds.Height;
             //if (bDevTablet)
             {
 
@@ -1825,21 +1826,21 @@ namespace SerialSample
                 dConvertToTabletY = 696 - screenHeight;
 
 
-
-                myMap.Height = 762;
-                //MapBackground.Height = 762;
+                myMap.Width = screenWidth;
+                myMap.Height = screenHeight;
+                //MapBackground.Height = screenHeight;
             }
             //create background left
             FillRect_BackGround(new SolidColorBrush(Colors.DimGray), 0, 00, Width,
-            762, 0.7);
+            screenHeight, 0.7);
             //create border
             //FillRect_Border(new SolidColorBrush(Colors.WhiteSmoke), 300, -300, 30,
             //760, 0.7);
-            DrawLine(new SolidColorBrush(Colors.MidnightBlue), 12, 6, 0, 6, 762);//y axis: left
-            DrawLine(new SolidColorBrush(Colors.MidnightBlue), 16, Width, 0, Width, 762);//y axis mid
-            DrawLine(new SolidColorBrush(Colors.MidnightBlue), 16, 1272, 0, 1272, 762);//y axis right
-            DrawLine(new SolidColorBrush(Colors.MidnightBlue), 10, 0, 5, 1280, 5);//x axis top
-            DrawLine(new SolidColorBrush(Colors.MidnightBlue), 16, 0, 762, 1280, 762);//x axis bottom
+            DrawLine(new SolidColorBrush(Colors.MidnightBlue), 12, 6, 0, 6, screenHeight);//y axis: left
+            DrawLine(new SolidColorBrush(Colors.MidnightBlue), 16, Width, 0, Width, screenHeight);//y axis mid
+            DrawLine(new SolidColorBrush(Colors.MidnightBlue), 16, screenWidth - 8, 0, screenWidth - 8, screenHeight);//y axis right
+            DrawLine(new SolidColorBrush(Colors.MidnightBlue), 10, 0, 5, screenWidth, 5);//x axis top
+            DrawLine(new SolidColorBrush(Colors.MidnightBlue), 16, 0, screenHeight - 8, screenWidth, screenHeight - 8);//x axis bottom
             //create background 
             //FillRect_BackGround(new SolidColorBrush(Colors.White), 1236 - dConvertToTabletX, 0, 130,
             //768 - dConvertToTabletY, 0.7);
@@ -1855,7 +1856,7 @@ namespace SerialSample
             BackgroundDisplay.Children.Add(tblock_Latitude);
 
             //thu bản đồ lại
-            myMap.Width = 1260 - Width;
+            myMap.Width = screenWidth - Width;
             myMap.Margin = new Windows.UI.Xaml.Thickness(Width, 0, 00, 00);
         }
         //--------------------------------------------------------------------------
@@ -3399,15 +3400,6 @@ namespace SerialSample
             Draw_RollAndPitch_optimize(Roll, Pitch, CenterX, CenterY);
         }
 
-        /// <summary>
-        /// Xảy ra ngắt khi có sự thay đổi giá trị của sliderAdjSpeed
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void sliderAdjSpeed_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
-        {
-            limitSpeed = (UInt16)sliderAdjSpeed.Value;
-        }
 
         //**************************************************###################################################
         //************************************************************************************
@@ -3756,26 +3748,7 @@ namespace SerialSample
         }
 
         bool bAutoZoom = true;//zoom in trajectory of flight
-        bool bAutoZoomLocAndDen = false;//auto both locations of flight and dentination
-        //*******************************************************************
-        /// <summary>
-        /// Zoom map to flight's location, AutoZoom
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void FindFight_Click(object sender, RoutedEventArgs e)
-        {
-            bAutoZoom = !bAutoZoom;
-            if (bAutoZoom)
-            {
-                btAutoZoom.Content = "AutoZ: Off";             
-            }
-            else
-            {
-                btAutoZoom.Content = "AutoZ: On";
-            }
 
-        }
 
         /// <summary>
         /// save content to C:\Users\VANCHUC-PC\AppData\Local\Packages\
@@ -3840,7 +3813,7 @@ namespace SerialSample
 
 
                     index++;
-                    if ((index == (sliderAdjSpeed.Value)))
+                    if ((index == (5)))
                     {
                         await System.Threading.Tasks.Task.Delay(TimeSpan.FromMilliseconds(0.5));
                         index = 0;
@@ -5043,12 +5016,41 @@ namespace SerialSample
                 positions = new List<BasicGeoposition>();
                 ReadInfOfFile();
             }
+            //Zoom All is selected
+            //Zoom current position of flight and dentination
+            if (Zoom_All_ListBoxItem.IsSelected)
+            {
+                var posToZoomAll = new List<BasicGeoposition>();
+                //add current position and dentination
+                posToZoomAll.Add(new BasicGeoposition() { Latitude = dLatGol, Longitude = dLonGol });
+                posToZoomAll.Add(new BasicGeoposition() { Latitude = dLatDentination, Longitude = dLonDentination });
+                SetMapPolyline(posToZoomAll);
+            }
+        }
+        /// <summary>
+        /// when autozoom_listbox is selected
+        /// have 2 mode:
+        /// -On: zoom all of point which flight across, user can't move map
+        /// -Off: user can select other position
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ListBox_AutoZoom_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ListBox_AutoZoom_On.IsSelected)
+            {
+                bAutoZoom = true;
+            }
+            if (ListBox_AutoZoom_Off.IsSelected)
+            {
+                bAutoZoom = false;
+            }
         }
 
 
 
-    //*********************************************************************************************
-    //end of class
+        //*********************************************************************************************
+        //end of class
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////
