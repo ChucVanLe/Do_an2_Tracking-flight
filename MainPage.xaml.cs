@@ -304,7 +304,7 @@ namespace SerialSample
         /// </summary>
         public void Init_UART()
         {
-            comPortInput.IsEnabled = false;
+            //ListBox_Com.IsEnabled = false;
             //sendTextButton.IsEnabled = false;
             listOfDevices = new ObservableCollection<DeviceInformation>();
             ListAvailablePorts();
@@ -427,84 +427,76 @@ namespace SerialSample
             }
         }
 
+
         /// <summary>
-        /// chỉnh tốc độ baud
-        /// comPortInput_Click: Action to take when 'Connect' button is clicked
-        /// - Get the selected device index and use Id to create the SerialDevice object
-        /// - Configure default settings for the serial port
-        /// - Create the ReadCancellationTokenSource token
-        /// - Start listening on the serial port input
+        /// Connect with Com Serial port
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private async void comPortInput_Click(object sender, RoutedEventArgs e)
+        private async void Connect_To_Com()
         {
-            if("Connect" == comPortInput.Content.ToString())
+            var selection = ConnectDevices.SelectedItems;
+
+            if (selection.Count <= 0)
             {
-                var selection = ConnectDevices.SelectedItems;
-
-                if (selection.Count <= 0)
-                {
-                    //status.Text = "Select a device and connect";
-                    return;
-                }
-
-                DeviceInformation entry = (DeviceInformation)selection[0];
-
-                try
-                {
-                    serialPort = await SerialDevice.FromIdAsync(entry.Id);
-
-                    // Disable the 'Connect' button 
-                    //comPortInput.IsEnabled = false;
-
-                    // Configure serial settings
-                    serialPort.WriteTimeout = TimeSpan.FromMilliseconds(1);
-                    serialPort.ReadTimeout = TimeSpan.FromMilliseconds(1);
-                    serialPort.BaudRate = 115200;
-                    serialPort.Parity = SerialParity.None;
-                    serialPort.StopBits = SerialStopBitCount.One;
-                    serialPort.DataBits = 8;
-                    serialPort.Handshake = SerialHandshake.None;
-
-                    //Connect is successfull
-                    bConnectOk = true;
-                    // Create cancellation token object to close I/O operations when closing the device
-                    ReadCancellationTokenSource = new CancellationTokenSource();
-
-                    // Enable 'WRITE' button to allow sending data
-                    //sendTextButton.IsEnabled = true;
-
-                    comPortInput.Content = "DisConnect";
-                    btReadCOMorFile.IsEnabled = false;
-                    Listen();
-                }
-                catch
-                {
-                    //status.Text = ex.Message;
-                    comPortInput.IsEnabled = true;
-                }
-
-            }
-            else//comPortInput is DisConnect
-            {
-                try
-                {
-
-                    CancelReadTask();
-                    CloseDevice();
-                    ListAvailablePorts();
-
-                    comPortInput.Content = "Connect";
-                    btReadCOMorFile.IsEnabled = true;
-                    bConnectOk = false;
-                }
-                catch
-                {
-                }
-
+                //status.Text = "Select a device and connect";
+                return;
             }
 
+            DeviceInformation entry = (DeviceInformation)selection[0];
+
+            try
+            {
+                serialPort = await SerialDevice.FromIdAsync(entry.Id);
+
+                // Disable the 'Connect' button 
+                //comPortInput.IsEnabled = false;
+
+                // Configure serial settings
+                serialPort.WriteTimeout = TimeSpan.FromMilliseconds(1);
+                serialPort.ReadTimeout = TimeSpan.FromMilliseconds(1);
+                serialPort.BaudRate = 115200;
+                serialPort.Parity = SerialParity.None;
+                serialPort.StopBits = SerialStopBitCount.One;
+                serialPort.DataBits = 8;
+                serialPort.Handshake = SerialHandshake.None;
+
+                //Connect is successfull
+                bConnectOk = true;
+                // Create cancellation token object to close I/O operations when closing the device
+                ReadCancellationTokenSource = new CancellationTokenSource();
+
+                // Enable 'WRITE' button to allow sending data
+                //sendTextButton.IsEnabled = true;
+
+                //comPortInput.Content = "DisConnect";
+                btReadCOMorFile.IsEnabled = false;
+                Listen();
+            }
+            catch
+            {
+                //status.Text = ex.Message;
+                ListBox_Com.IsEnabled = true;
+            }
+        }
+
+        /// <summary>
+        /// DisConnect with Com Serial port
+        /// </summary>
+        private void DisConnect_To_Com()
+        {
+            try
+            {
+
+                CancelReadTask();
+                CloseDevice();
+                ListAvailablePorts();
+
+                //comPortInput.Content = "Connect";
+                btReadCOMorFile.IsEnabled = true;
+                bConnectOk = false;
+            }
+            catch
+            {
+            }
         }
         //**************************************************************************
         /// <summary>
@@ -724,7 +716,7 @@ namespace SerialSample
             }
             serialPort = null;
 
-            comPortInput.IsEnabled = true;
+            ListBox_Com.IsEnabled = true;
             //sendTextButton.IsEnabled = false;
             //rcvdText.Text = "";
             listOfDevices.Clear();
@@ -1322,12 +1314,12 @@ namespace SerialSample
             if (Map3D)
             {
                 Map3D = false;
-                BtMap3D.Content = "2D_Mode";
+                //BtMap3D.Content = "2D_Mode";
                 Donghieng = 60;
             }
             else
             {
-                BtMap3D.Content = "3D_Mode";
+                //BtMap3D.Content = "3D_Mode";
                 Map3D = true;
                 Donghieng = 0;
                 //myMap.Style = MapStyle.Road;
@@ -1833,6 +1825,8 @@ namespace SerialSample
             //create background left
             FillRect_BackGround(new SolidColorBrush(Colors.DimGray), 0, 00, Width,
             screenHeight, 0.7);
+            //create background in bottom to write latitude and longtitude, zoom level
+            DrawLine(new SolidColorBrush(Colors.White), 12, Width, screenHeight - 18, screenWidth - 16, screenHeight - 18);//y axis: left
             //create border
             //FillRect_Border(new SolidColorBrush(Colors.WhiteSmoke), 300, -300, 30,
             //760, 0.7);
@@ -4651,7 +4645,7 @@ namespace SerialSample
                 btReadCOMorFile.Content = "Read Com";
                 ReadInfOfFile();
 
-                comPortInput.IsEnabled = false;
+                //comPortInput.IsEnabled = false;
 
             }
             else
@@ -4662,7 +4656,7 @@ namespace SerialSample
                 myMap.MapElements.Clear();
                 btReadCOMorFile.Content = "Read file";
 
-                comPortInput.IsEnabled = true;
+                //comPortInput.IsEnabled = true;
 
             }
         }
@@ -4822,10 +4816,27 @@ namespace SerialSample
             BackgroundDisplay.Children.Add(Img_Needle);
 
         }
-
+        /// <summary>
+        /// chỉnh tốc độ baud
+        /// comPortInput_Click: Action to take when 'Connect' button is clicked
+        /// - Get the selected device index and use Id to create the SerialDevice object
+        /// - Configure default settings for the serial port
+        /// - Create the ReadCancellationTokenSource token
+        /// - Start listening on the serial port input
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ListBox_Com_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (ListBox_Connect.IsSelected)
+            {
+                Connect_To_Com();
 
+            }
+            if (ListBox_DisConnect.IsSelected)
+            {
+                DisConnect_To_Com();
+            }
         }
 
         private void ListBox_Inc_Tapped(object sender, TappedRoutedEventArgs e)
@@ -5026,6 +5037,7 @@ namespace SerialSample
                 posToZoomAll.Add(new BasicGeoposition() { Latitude = dLatDentination, Longitude = dLonDentination });
                 SetMapPolyline(posToZoomAll);
             }
+
         }
         /// <summary>
         /// when autozoom_listbox is selected
