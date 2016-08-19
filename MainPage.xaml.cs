@@ -271,8 +271,8 @@ namespace SerialSample
             //string status = "MapTapped at \nLatitude:" + tappedGeoPosition.Latitude + "\nLongitude: " + tappedGeoPosition.Longitude;
 
             //Show  MapTap to textox
-            tb_Lat_Search.Text = Math.Round(tappedGeoPosition.Latitude, 8).ToString();//Lấy 8 chữ số thập phân
-            tb_Lon_Search.Text = Math.Round(tappedGeoPosition.Longitude, 8).ToString();//Lấy 8 chữ số thập phân
+            tblock_LatAndLon.Text = Math.Round(tappedGeoPosition.Latitude, 8).ToString()//Lấy 8 chữ số thập phân
+                                    + ", " + Math.Round(tappedGeoPosition.Longitude, 8).ToString();//Lấy 8 chữ số thập phân
             //NotifyUser(status, NotifyType.StatusMessage);
         }
         ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1826,7 +1826,7 @@ namespace SerialSample
             FillRect_BackGround(new SolidColorBrush(Colors.DimGray), 0, 00, Width,
             screenHeight, 0.7);
             //create background in bottom to write latitude and longtitude, zoom level
-            DrawLine(new SolidColorBrush(Colors.White), 12, Width, screenHeight - 18, screenWidth - 16, screenHeight - 18);//y axis: left
+            DrawLine(new SolidColorBrush(Colors.White), 12, Width, screenHeight - 22, screenWidth - 16, screenHeight - 22);//y axis: left
             //create border
             //FillRect_Border(new SolidColorBrush(Colors.WhiteSmoke), 300, -300, 30,
             //760, 0.7);
@@ -1852,12 +1852,18 @@ namespace SerialSample
             //thu bản đồ lại
             myMap.Width = screenWidth - Width;
             myMap.Margin = new Windows.UI.Xaml.Thickness(Width, 0, 00, 00);
+            //move tblock_LatAndLon to bottom
+            //show latitude and lontitude in bottom on screen
+            tblock_LatAndLon.Margin = new Windows.UI.Xaml.Thickness(screenWidth - 260, screenHeight- 38, 00, 00);
+            BackgroundDisplay.Children.Remove(tblock_LatAndLon);
+            BackgroundDisplay.Children.Add(tblock_LatAndLon);
+
         }
         //--------------------------------------------------------------------------
         //--------------------------------------------------------------------------
         //ngay 9/8/2016
         //Add border
-        
+
         public void FillRect_Border(SolidColorBrush Blush, double StartX, double StartY, double width, double height, double Opacity)
         {
             Rectangle TestRet_Border = new Rectangle();
@@ -4549,9 +4555,11 @@ namespace SerialSample
             try {
                 result_position = await MapLocationFinder.FindLocationsAsync(StrDentination, myMap.Center);
                 dentination_pos = result_position.Locations.First();
-                //show result
-                tb_Lat_Search.Text = dentination_pos.Point.Position.Latitude.ToString();
-                tb_Lon_Search.Text = dentination_pos.Point.Position.Longitude.ToString();
+                ////show result
+                //tb_Lat_Search.Text = dentination_pos.Point.Position.Latitude.ToString();
+                //tb_Lon_Search.Text = dentination_pos.Point.Position.Longitude.ToString();
+                tblock_LatAndLon.Text = dentination_pos.Point.Position.Latitude.ToString() + ", "
+                                        + dentination_pos.Point.Position.Longitude.ToString();
                 //Update Lat and Lon
                 dLatDentination = dentination_pos.Point.Position.Latitude;
                 dLonDentination = dentination_pos.Point.Position.Longitude;
