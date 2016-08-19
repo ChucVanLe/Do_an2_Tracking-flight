@@ -3622,9 +3622,6 @@ namespace SerialSample
                 //myMap.MapElements.Remove(mapPolyline);
                 myMap.MapElements.Add(lineToRmove);
 
-                //test remove poly line
-                if(imPlay.IsTapEnabled)//only for read file
-                polyLineToRemove.Add(lineToRmove);
 
                 //auto zoom
                 if (bAutoZoom)
@@ -4623,108 +4620,15 @@ namespace SerialSample
         UInt16 limitSpeed = 2;
 
         /// <summary>
-        /// play .txt file
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private async void play_Click(object sender, TappedRoutedEventArgs e)
-        {
-            if ("Read Com" == btReadCOMorFile.Content.ToString())
-            {
-                streamReader.BaseStream.Seek(0, SeekOrigin.Begin);
-                Data.Time = tblock_Start_Timer.Text;
-                UInt16 index = 0;
-                bPlay = true;
-                //when time sample = 0.2s, we add Convert.ToDouble( Data.Time) != (Convert.ToDouble(tblock_Current_Timer.Text) - 0.1)
-                while (Convert.ToDouble(Data.Time) > (Convert.ToDouble(tblock_Current_Timer.Text))
-                    || Convert.ToDouble(Data.Time) < (Math.Round(Convert.ToDouble(tblock_Current_Timer.Text), 1) - 0.1))//find time to start
-                {
-                    strDataFromSerialPort = streamReader.ReadLine();
-                    //processDataToGetInf();
-                    processToDrawTrajactory();//both process and collect point
-
-                    if (streamReader.Peek() <= 0)
-                    {
-                        positions.Clear();
-                        positions = new List<BasicGeoposition>();
-                        streamReader.BaseStream.Seek(0, SeekOrigin.Begin);
-                        while (Convert.ToDouble(Data.Time) > (Convert.ToDouble(tblock_Current_Timer.Text))
-                            || Convert.ToDouble(Data.Time) < (Math.Round(Convert.ToDouble(tblock_Current_Timer.Text), 1) - 0.1))//find time to start
-                        {
-                            strDataFromSerialPort = streamReader.ReadLine();
-                            //processDataToGetInf();
-                            processToDrawTrajactory();//both process and collect point
-                        }
-                        //dang chon thoi gian nho hon hien tai
-                        break;
-                    }
-
-                }
-                //reset index;
-                index = 0;
-                //update old_lat and old_lon because program will draw 1 line connect before point and current point
-                old_Lat = dLatGol;
-                old_Lon = dLonGol;
-
-                //lat = 0.0;
-                {
-                    imPlay.Source = new BitmapImage(new Uri("ms-appx:///Assets/Pause.png"));
-                    while (streamReader.Peek() >= 0)
-                    {
-                        strDataFromSerialPort = streamReader.ReadLine();
-
-                        processDataToDrawTrajactory();
-
-                        tblock_Current_Timer.Text = Data.Time;
-                        slider_AdjTime.Value = 100 * (Convert.ToDouble(tblock_Current_Timer.Text) - Convert.ToDouble(tblock_Start_Timer.Text)) /
-                            (Convert.ToDouble(tblock_End_Timer.Text) - Convert.ToDouble(tblock_Start_Timer.Text));
-
-                        index++;
-                        if (index == limitSpeed)
-                        {
-                            //ProcessData();
-                            await System.Threading.Tasks.Task.Delay(TimeSpan.FromMilliseconds(0.5));
-                            index = 0;
-
-                        }
-                        if (!bPlay) break;
-
-                    }
-
-                }
-                imPlay.Source = new BitmapImage(new Uri("ms-appx:///Assets/Play_Beautiful.png"));
-            }
-
-        }
-
-        /// <summary>
-        /// stop read and show
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void stop_Click(object sender, TappedRoutedEventArgs e)
-        {
-            imPlay.Source = new BitmapImage(new Uri("ms-appx:///Assets/Play_Beautiful.png"));
-            bPlay = false;
-            myMap.MapElements.Clear();
-            foreach (MapPolyline polyLines in polyLineToRemove)
-            {
-                myMap.Children.Remove(polyLines);
-                myMap.MapElements.Remove(polyLines);
-            }
-            positions.Clear();
-            streamReader.BaseStream.Seek(0, SeekOrigin.Current);
-
-        }
-
-        /// <summary>
         /// adjust time start draw sénor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void adjTime_Click(object sender, RangeBaseValueChangedEventArgs e)
         {
+            //bPlay = false;
             editTimeWhenChangeslider();
+            //Play_When_ReadFile();
         }
 
         /// <summary>
@@ -4758,79 +4662,6 @@ namespace SerialSample
         }
 
         /// <summary>
-        /// inc speed
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void fastForword_Click(object sender, TappedRoutedEventArgs e)
-        {
-            limitSpeed += 5;
-            if (limitSpeed <= 50) sliderAdjSpeed.Value = limitSpeed;
-        }
-
-        /// <summary>
-        /// dec speed
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void imrewind_Click(object sender, TappedRoutedEventArgs e)
-        {
-            limitSpeed -= 5;
-            if (limitSpeed <= 50) sliderAdjSpeed.Value = limitSpeed;
-        }
-
-        int iColor = 0;
-        /// <summary>
-        /// reload .txt file
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void imReloadClick(object sender, TappedRoutedEventArgs e)
-        {
-            myMap.Children.Clear();
-            myMap.MapElements.Clear();
-            positions.Clear();
-            positions = new List<BasicGeoposition>();
-            //maximum 5 color
-            if (iColor < 5) iColor++; else iColor = 0;
-            switch (iColor)
-            {
-                case 0:
-                    {
-                        mapPolyline.StrokeColor = Colors.Red;
-                        break;
-                    }
-                case 1:
-                    {
-                        mapPolyline.StrokeColor = Colors.Green;
-                        break;
-                    }
-                case 2:
-                    {
-                        mapPolyline.StrokeColor = Colors.Violet;
-                        break;
-                    }
-                case 3:
-                    {
-                        mapPolyline.StrokeColor = Colors.Yellow;
-                        break;
-                    }
-                case 4:
-                    {
-                        mapPolyline.StrokeColor = Colors.Aqua;
-                        break;
-                    }
-                case 5:
-                    {
-                        mapPolyline.StrokeColor = Colors.Blue;
-                        break;
-                    }
-            }
-
-            ReadInfOfFile();
-        }
-
-        /// <summary>
         /// choose mode read Com or Read file
         /// </summary>
         /// <param name="sender"></param>
@@ -4846,11 +4677,7 @@ namespace SerialSample
 
                 btReadCOMorFile.Content = "Read Com";
                 ReadInfOfFile();
-                imPlay.IsTapEnabled = true;
-                imStop.IsTapEnabled = true;
-                imrewind.IsTapEnabled = true;
-                ImReload.IsTapEnabled = true;
-                imFastForword.IsTapEnabled = true;
+
                 comPortInput.IsEnabled = false;
 
             }
@@ -4861,11 +4688,7 @@ namespace SerialSample
                 positions.Clear();
                 myMap.MapElements.Clear();
                 btReadCOMorFile.Content = "Read file";
-                imPlay.IsTapEnabled = false;
-                imStop.IsTapEnabled = false;
-                imrewind.IsTapEnabled = false;
-                ImReload.IsTapEnabled = false;
-                imFastForword.IsTapEnabled = false;
+
                 comPortInput.IsEnabled = true;
 
             }
@@ -5032,6 +4855,17 @@ namespace SerialSample
 
         }
 
+        private void ListBox_Inc_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            limitSpeed += 5;
+        }
+
+        private void BoxItem_Dec_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            if(limitSpeed > 5)
+                limitSpeed -= 5;
+        }
+
         //////////////////////////////////////////////////////////////////////////////
         /// <summary>
         /// dHeading: góc quay của bản đồ
@@ -5055,8 +4889,90 @@ namespace SerialSample
 
 
         }
+
+        /// <summary>
+        /// when user press play button, this function is called
+        /// It will continues simulate process
+        /// </summary>
+        private async void Play_When_ReadFile()
+        {
+            streamReader.BaseStream.Seek(0, SeekOrigin.Begin);
+            Data.Time = tblock_Start_Timer.Text;
+            UInt16 index = 0;
+            bPlay = true;
+            //when time sample = 0.2s, we add Convert.ToDouble( Data.Time) != (Convert.ToDouble(tblock_Current_Timer.Text) - 0.1)
+            while (Convert.ToDouble(Data.Time) > (Convert.ToDouble(tblock_Current_Timer.Text))
+                || Convert.ToDouble(Data.Time) < (Math.Round(Convert.ToDouble(tblock_Current_Timer.Text), 1) - 0.1))//find time to start
+            {
+                strDataFromSerialPort = streamReader.ReadLine();
+                //processDataToGetInf();
+                processToDrawTrajactory();//both process and collect point
+
+                if (streamReader.Peek() <= 0)
+                {
+                    positions.Clear();
+                    positions = new List<BasicGeoposition>();
+                    streamReader.BaseStream.Seek(0, SeekOrigin.Begin);
+                    while (Convert.ToDouble(Data.Time) > (Convert.ToDouble(tblock_Current_Timer.Text))
+                        || Convert.ToDouble(Data.Time) < (Math.Round(Convert.ToDouble(tblock_Current_Timer.Text), 1) - 0.1))//find time to start
+                    {
+                        strDataFromSerialPort = streamReader.ReadLine();
+                        //processDataToGetInf();
+                        processToDrawTrajactory();//both process and collect point
+                    }
+                    //dang chon thoi gian nho hon hien tai
+                    break;
+                }
+
+            }
+            //reset index;
+            index = 0;
+            //update old_lat and old_lon because program will draw 1 line connect before point and current point
+            old_Lat = dLatGol;
+            old_Lon = dLonGol;
+
+            while (streamReader.Peek() >= 0)
+            {
+                strDataFromSerialPort = streamReader.ReadLine();
+
+                processDataToDrawTrajactory();
+
+                tblock_Current_Timer.Text = Data.Time;
+                slider_AdjTime.Value = 100 * (Convert.ToDouble(tblock_Current_Timer.Text) - Convert.ToDouble(tblock_Start_Timer.Text)) /
+                    (Convert.ToDouble(tblock_End_Timer.Text) - Convert.ToDouble(tblock_Start_Timer.Text));
+
+                index++;
+                if (index == limitSpeed)
+                {
+                    //ProcessData();
+                    await System.Threading.Tasks.Task.Delay(TimeSpan.FromMilliseconds(0.5));
+                    index = 0;
+
+                }
+                if (!bPlay) break;
+
+            }
+
+        }
+
+        /// <summary>
+        /// when user press pause button, this function is called
+        /// It will pause simulate process
+        /// </summary>
+        private void Pause_When_ReadFile()
+        {
+            bPlay = false;
+            myMap.MapElements.Clear();
+            foreach (MapPolyline polyLines in polyLineToRemove)
+            {
+                myMap.Children.Remove(polyLines);
+                myMap.MapElements.Remove(polyLines);
+            }
+            positions.Clear();
+            streamReader.BaseStream.Seek(0, SeekOrigin.Current);
+        }
         //-----------------------------------------------------------------------------
-        //---thesis-------------------------------------
+        //---thesis-------------------------------------------------------------------
         //add menu to control map
         private void bt_menu_Click(object sender, RoutedEventArgs e)
         {
@@ -5105,10 +5021,36 @@ namespace SerialSample
                 Split_AutoZoom.IsPaneOpen = true;
             }
             else Split_AutoZoom.IsPaneOpen = false;
+            //Play button is selected
+            if (Play_ListBoxItem.IsSelected)
+            {
+                Play_When_ReadFile();
+                //test remove poly line
+                //if (imPlay.IsTapEnabled)//only for read file
+                //    polyLineToRemove.Add(lineToRmove);
+            }
+            //Pause button is selected
+            if (Pause_ListBoxItem.IsSelected)
+            {
+                Pause_When_ReadFile();
+            }
+            //Pause button is selected
+            if (Open_File_ListBoxItem.IsSelected)
+            {
+                myMap.Children.Clear();
+                myMap.MapElements.Clear();
+                positions.Clear();
+                positions = new List<BasicGeoposition>();
+                ReadInfOfFile();
+            }
         }
 
 
+
+    //*********************************************************************************************
+    //end of class
     }
+
     //////////////////////////////////////////////////////////////////////////////////////////
     public enum NotifyType//for show mesage while not find when press search button
     {

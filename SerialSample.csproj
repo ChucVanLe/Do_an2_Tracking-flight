@@ -133,7 +133,6 @@
     <Content Include="Assets\Connect.png" />
     <Content Include="Assets\decrease_36x36.png" />
     <Content Include="Assets\Disconnect.png" />
-    <Content Include="Assets\Fast Forward-48.png" />
     <Content Include="Assets\horizon.bmp" />
     <Content Include="Assets\increase_36x36.png" />
     <Content Include="Assets\Logo150x150.png" />
@@ -145,14 +144,9 @@
     <Content Include="Assets\MyHome.png" />
     <Content Include="Assets\Needle.png" />
     <Content Include="Assets\On Nghia.txt" />
-    <Content Include="Assets\Pause.png" />
-    <Content Include="Assets\Play_Beautiful.png" />
     <Content Include="Assets\play.png" />
-    <Content Include="Assets\reLoad.png" />
-    <Content Include="Assets\Rewind-48.png" />
     <Content Include="Assets\Speed_full.PNG" />
     <Content Include="Assets\Speed_Full_v2.png" />
-    <Content Include="Assets\StopSquare.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-20.png" />
   </ItemGroup>
