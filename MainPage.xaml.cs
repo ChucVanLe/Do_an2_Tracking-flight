@@ -691,7 +691,7 @@ namespace SerialSample
                 {
 
                     errorFrame += 1;
-                    tblock_CurentTime.Text = "frame error: " + strDataFromSerialPort + "Error: " + ex.Message + "No Error: " + errorFrame.ToString();
+                    tblock_Current_Timer.Text = "frame error: " + strDataFromSerialPort + "Error: " + ex.Message + "No Error: " + errorFrame.ToString();
 
                 }
                 //
@@ -1484,16 +1484,22 @@ namespace SerialSample
                     ////tbOutputText.Text += "DataSauCut: " + Data.Temp + '\n';
                     //tách lấy giờ, thời gian GPS chậm hơn thời gian thực 7h nên phải cộng 7
                     //Nếu time >= 240000.00 thì phải trừ đi 240000.00
-                    double dTemp_Time = 0;
+                    double dTemp_Time_hour = 0, dTemp_Time;
                     string temp_time = Data.Temp.Substring(0, Data.Temp.IndexOf(','));
                     if (temp_time != "")
                     {
-                        dTemp_Time = (Convert.ToDouble(temp_time) + 70000.00);
-                        if (dTemp_Time >= 240000.00) dTemp_Time -= 240000.00;
+                        dTemp_Time_hour = Convert.ToDouble(temp_time.Substring(0, 2)) + 7;
+                        if (dTemp_Time_hour >= 24) dTemp_Time_hour -= 24;
+                        dTemp_Time = Convert.ToDouble(temp_time) + 70000.00;
+                        if (dTemp_Time >= 240000.00) dTemp_Time_hour -= 240000.00;
                         Data.Time = dTemp_Time.ToString();
                     }
                     //show now time
-                    tblock_CurentTime.Text = "Now: " + Data.Time;
+                    //format hour:min:sec
+                    if(bConnectOk)//connect to Com
+                    tblock_Current_Timer.Text = dTemp_Time_hour.ToString() + ':'+ temp_time.Substring(2, 2)
+                        + ':' + temp_time.Substring(4, 5);
+                    //tblock_CurentTime.Text = "Now: " + Data.Time;
                     //Ngày 17/12/2015 17h36 ok
                     //tbOutputText.Text += "Time: " + Data.Time + '\n';
                     //cut bỏ Data đến dấu phẩy đầu tiên lấy sau dấu phẩy đầu tiên
@@ -1870,9 +1876,9 @@ namespace SerialSample
             BackgroundDisplay.Children.Remove(tblock_ZoomLevel);
             BackgroundDisplay.Children.Add(tblock_ZoomLevel);
             //move TimeNow to bottom on screen
-            tblock_CurentTime.Margin = new Windows.UI.Xaml.Thickness(screenWidth - 360, screenHeight - 38, 00, 00);
-            BackgroundDisplay.Children.Remove(tblock_CurentTime);
-            BackgroundDisplay.Children.Add(tblock_CurentTime);
+            //tblock_CurentTime.Margin = new Windows.UI.Xaml.Thickness(screenWidth - 360, screenHeight - 38, 00, 00);
+            //BackgroundDisplay.Children.Remove(tblock_CurentTime);
+            //BackgroundDisplay.Children.Add(tblock_CurentTime);
 
             //move tblock_Start_Timer to bottom on screen
             tblock_Start_Timer.Margin = new Windows.UI.Xaml.Thickness(488, screenHeight - 38, 00, 00);

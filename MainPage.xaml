@@ -80,7 +80,6 @@
         <!--Show Zoom level-->
         <TextBlock x:Name="tblock_ZoomLevel" HorizontalAlignment="Left" FontSize="16" Foreground="Red" Margin="840,10,0,0" TextWrapping="Wrap" Text="12.345" VerticalAlignment="Top" Height="30" Width="auto"/>
         <!--Show time from GPS-->
-        <TextBlock x:Name="tblock_CurentTime" HorizontalAlignment="Left" FontSize="16" Foreground="Red" Margin="760,10,0,0" TextWrapping="Wrap" Text="12:34:56.6" VerticalAlignment="Top" Height="30" Width="auto"/>
 
         <!--Get Coordinates button-->
 
