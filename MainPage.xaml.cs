@@ -1866,10 +1866,30 @@ namespace SerialSample
             BackgroundDisplay.Children.Remove(tblock_LatAndLon);
             BackgroundDisplay.Children.Add(tblock_LatAndLon);
             //move zoom level to bottom on screen
-            tblock_ZoomLevel.Margin = new Windows.UI.Xaml.Thickness(screenWidth - 290, screenHeight - 38, 00, 00);
+            tblock_ZoomLevel.Margin = new Windows.UI.Xaml.Thickness(screenWidth - 280, screenHeight - 38, 00, 00);
             BackgroundDisplay.Children.Remove(tblock_ZoomLevel);
             BackgroundDisplay.Children.Add(tblock_ZoomLevel);
+            //move TimeNow to bottom on screen
+            tblock_CurentTime.Margin = new Windows.UI.Xaml.Thickness(screenWidth - 360, screenHeight - 38, 00, 00);
+            BackgroundDisplay.Children.Remove(tblock_CurentTime);
+            BackgroundDisplay.Children.Add(tblock_CurentTime);
 
+            //move tblock_Start_Timer to bottom on screen
+            tblock_Start_Timer.Margin = new Windows.UI.Xaml.Thickness(488, screenHeight - 38, 00, 00);
+            BackgroundDisplay.Children.Remove(tblock_Start_Timer);
+            BackgroundDisplay.Children.Add(tblock_Start_Timer);
+            //move tblock_End_Timer to bottom on screen
+            tblock_End_Timer.Margin = new Windows.UI.Xaml.Thickness(853, screenHeight - 38, 00, 00);
+            BackgroundDisplay.Children.Remove(tblock_End_Timer);
+            BackgroundDisplay.Children.Add(tblock_End_Timer);
+            //move tblock_Current_Timer to bottom on screen
+            tblock_Current_Timer.Margin = new Windows.UI.Xaml.Thickness(679, screenHeight - 38, 00, 00);
+            BackgroundDisplay.Children.Remove(tblock_Current_Timer);
+            BackgroundDisplay.Children.Add(tblock_Current_Timer);
+            //move slider_AdjTime to bottom on screen
+            slider_AdjTime.Margin = new Windows.UI.Xaml.Thickness(488, screenHeight - 58, 00, 00);
+            BackgroundDisplay.Children.Remove(slider_AdjTime);
+            BackgroundDisplay.Children.Add(slider_AdjTime);
         }
         //--------------------------------------------------------------------------
         //--------------------------------------------------------------------------

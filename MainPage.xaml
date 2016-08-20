@@ -10,7 +10,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:WinRTXamlToolkit.Controls"  
     mc:Ignorable="d">
-    
+
     <Page.Resources>
         <CollectionViewSource x:Name="DeviceListSource"/>
     </Page.Resources>
@@ -34,7 +34,7 @@
         -->
         <!--Hiện khoảng cách-->
         <!--Ta hiện khoảng cách trên đường thẳng-->
- 
+
 
 
         <!--Send Data
@@ -46,11 +46,10 @@
 -->
         <!--Adjust-->
 
-        <Slider x:Name="slider_AdjTime" HorizontalAlignment="Left" Margin="865,72,0,0" VerticalAlignment="Top" Width="395" ValueChanged="adjTime_Click" Minimum="0" Maximum="100"/>
-        <TextBlock x:Name="tblock_Adj_Timer" HorizontalAlignment="Left" FontSize="18" Margin="820,79,0,0" Foreground="Red" TextWrapping="Wrap" Text="Time" VerticalAlignment="Top" Height="30" Width="41"/>
-        <TextBlock x:Name="tblock_Start_Timer" HorizontalAlignment="Left" FontSize="16" Margin="820,45,0,0" Foreground="Red" Text="012345.6" VerticalAlignment="Top" Height="25" Width="75"/>
-        <TextBlock x:Name="tblock_End_Timer" HorizontalAlignment="Left" FontSize="18" Margin="1185,45,0,0" Foreground="Red" Text="012345.6" VerticalAlignment="Top" Height="25" Width="75"/>
-        <TextBlock x:Name="tblock_Current_Timer" HorizontalAlignment="Left" FontSize="18" Margin="1011,45,0,0" Foreground="Red" Text="012345.6" VerticalAlignment="Top" Height="25" Width="75"/>
+        <Slider x:Name="slider_AdjTime" HorizontalAlignment="Left" Margin="488,682,0,0" VerticalAlignment="Top" Width="437" ValueChanged="adjTime_Click" Minimum="0" Maximum="100"/>
+        <TextBlock x:Name="tblock_Start_Timer" HorizontalAlignment="Left" FontSize="16" Margin="488,655,0,0" Foreground="Red" Text="012345.6" VerticalAlignment="Top" Height="25" Width="auto"/>
+        <TextBlock x:Name="tblock_End_Timer" HorizontalAlignment="Left" FontSize="18" Margin="853,655,0,0" Foreground="Red" Text="012345.6" VerticalAlignment="Top" Height="25" Width="auto"/>
+        <TextBlock x:Name="tblock_Current_Timer" HorizontalAlignment="Left" FontSize="18" Margin="679,655,0,0" Foreground="Red" Text="012345.6" VerticalAlignment="Top" Height="25" Width="auto"/>
 
 
         <!--
@@ -77,14 +76,14 @@
         <TextBox x:Name="tb_Position" HorizontalAlignment="Left" Margin="170,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="30" Width="280" Background="Aqua" KeyDown="tb_Position_KeyDown"/>
 
         <!--Show Latitude Longtitude-->
-        <TextBlock x:Name="tblock_LatAndLon" HorizontalAlignment="Left" FontSize="16" Foreground="Red" Margin="959,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="30" Width="auto"/>
+        <TextBlock x:Name="tblock_LatAndLon" HorizontalAlignment="Left" FontSize="16" Foreground="Red" Margin="900,10,0,0" TextWrapping="Wrap" Text="10.896534" VerticalAlignment="Top" Height="30" Width="auto"/>
         <!--Show Zoom level-->
-        <TextBlock x:Name="tblock_ZoomLevel" HorizontalAlignment="Left" FontSize="16" Foreground="Red" Margin="900,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="30" Width="auto"/>
+        <TextBlock x:Name="tblock_ZoomLevel" HorizontalAlignment="Left" FontSize="16" Foreground="Red" Margin="840,10,0,0" TextWrapping="Wrap" Text="12.345" VerticalAlignment="Top" Height="30" Width="auto"/>
         <!--Show time from GPS-->
-        <TextBlock x:Name="tblock_CurentTime" HorizontalAlignment="Left" FontSize="16" Foreground="Red" Margin="800,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="30" Width="auto"/>
+        <TextBlock x:Name="tblock_CurentTime" HorizontalAlignment="Left" FontSize="16" Foreground="Red" Margin="760,10,0,0" TextWrapping="Wrap" Text="12:34:56.6" VerticalAlignment="Top" Height="30" Width="auto"/>
 
         <!--Get Coordinates button-->
-        
+
         <!-- Choose read com or read file button-->
 
         <!--Add menu bar-->
@@ -184,27 +183,27 @@
         <SplitView x:Name="Split_Speed" Margin="488,124,0,0" IsPaneOpen="False">
             <SplitView.Pane>
                 <RelativePanel Margin="0,0,0,0" >
-                <ListBox SelectionMode="Single" 
+                    <ListBox SelectionMode="Single" 
                          Name="ListBox_Speed" 
                          Background="Green"
                          SelectionChanged="ListBox_Speed_SelectionChanged" >
-                    
-                    <ListBoxItem Name="ListBox_Inc" Tapped="ListBox_Inc_Tapped">
-                        <StackPanel Orientation="Horizontal">
-                            <Image x:Name="im_Inc" Stretch="None" Source="Assets/increase_36x36.png" Margin="0,0,0,0" Height="36" Width="36" />
-                            <TextBlock Text="Increase" FontSize="24" Margin="20,0,0,0" />
-                            <!--<Button Content="Increase" Margin="20,0,0,0"/>-->
-                        </StackPanel>
-                    </ListBoxItem>
 
-                    <ListBoxItem Name="BoxItem_Dec" Tapped="BoxItem_Dec_Tapped">
-                        <StackPanel Orientation="Horizontal">
-                            <Image x:Name="im_Dec" Stretch="None" Source="Assets/decrease_36x36.png" Margin="0,0,0,0" Height="36" Width="36" />
-                            <TextBlock Text="Decrease" FontSize="24" Margin="20,0,0,0" />
-                        </StackPanel>
-                    </ListBoxItem>
+                        <ListBoxItem Name="ListBox_Inc" Tapped="ListBox_Inc_Tapped">
+                            <StackPanel Orientation="Horizontal">
+                                <Image x:Name="im_Inc" Stretch="None" Source="Assets/increase_36x36.png" Margin="0,0,0,0" Height="36" Width="36" />
+                                <TextBlock Text="Increase" FontSize="24" Margin="20,0,0,0" />
+                                <!--<Button Content="Increase" Margin="20,0,0,0"/>-->
+                            </StackPanel>
+                        </ListBoxItem>
 
-                </ListBox>
+                        <ListBoxItem Name="BoxItem_Dec" Tapped="BoxItem_Dec_Tapped">
+                            <StackPanel Orientation="Horizontal">
+                                <Image x:Name="im_Dec" Stretch="None" Source="Assets/decrease_36x36.png" Margin="0,0,0,0" Height="36" Width="36" />
+                                <TextBlock Text="Decrease" FontSize="24" Margin="20,0,0,0" />
+                            </StackPanel>
+                        </ListBoxItem>
+
+                    </ListBox>
                 </RelativePanel>
             </SplitView.Pane>
         </SplitView>
@@ -241,26 +240,26 @@
         <SplitView x:Name="Split_COM" Margin="488,421,0,0" Height="auto" IsPaneOpen="False">
             <SplitView.Pane>
                 <RelativePanel Margin="0,0,0,0" >
-                <ListBox SelectionMode="Single" 
+                    <ListBox SelectionMode="Single" 
                          Name="ListBox_Com"
                          Background="Green"
                          Height="auto"
                          SelectionChanged="ListBox_Com_SelectionChanged" >
-                    <ListBoxItem Name="ListBox_Connect">
-                        <StackPanel Orientation="Horizontal">
-                            <Image x:Name="im_Connect" Stretch="None" Source="Assets/Connect.png" Margin="0,0,0,0" Height="36" Width="36" />
-                            <TextBlock Text="Connect" FontSize="24" Margin="20,0,0,0" />
-                        </StackPanel>
-                    </ListBoxItem>
+                        <ListBoxItem Name="ListBox_Connect">
+                            <StackPanel Orientation="Horizontal">
+                                <Image x:Name="im_Connect" Stretch="None" Source="Assets/Connect.png" Margin="0,0,0,0" Height="36" Width="36" />
+                                <TextBlock Text="Connect" FontSize="24" Margin="20,0,0,0" />
+                            </StackPanel>
+                        </ListBoxItem>
 
                         <ListBoxItem Name="ListBox_DisConnect">
-                        <StackPanel Orientation="Horizontal">
-                            <Image x:Name="im_Disconnect" Stretch="None" Source="Assets/Disconnect.png" Margin="0,0,0,0" Height="36" Width="36" />
-                            <TextBlock Text="Disconnect" FontSize="24" Margin="20,0,0,0" />
-                        </StackPanel>
-                    </ListBoxItem>
+                            <StackPanel Orientation="Horizontal">
+                                <Image x:Name="im_Disconnect" Stretch="None" Source="Assets/Disconnect.png" Margin="0,0,0,0" Height="36" Width="36" />
+                                <TextBlock Text="Disconnect" FontSize="24" Margin="20,0,0,0" />
+                            </StackPanel>
+                        </ListBoxItem>
 
-                </ListBox>
+                    </ListBox>
                 </RelativePanel>
             </SplitView.Pane>
         </SplitView>
@@ -298,14 +297,14 @@
             <SplitView.Pane>
                 <RelativePanel Margin="0,0,0,0" >
                     <!--UART-->
-                <ListBox x:Name="ConnectDevices" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5"
+                    <ListBox x:Name="ConnectDevices" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5"
                   ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.HorizontalScrollBarVisibility="Visible" ItemsSource="{Binding Source={StaticResource DeviceListSource}}" Background="Green" Margin="0,0,-4,0">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Id}" />
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Id}" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
                 </RelativePanel>
             </SplitView.Pane>
         </SplitView>
