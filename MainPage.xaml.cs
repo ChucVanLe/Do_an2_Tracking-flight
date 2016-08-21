@@ -1906,6 +1906,10 @@ namespace SerialSample
             slider_AdjTime.Margin = new Windows.UI.Xaml.Thickness(488, screenHeight - 58, 00, 00);
             BackgroundDisplay.Children.Remove(slider_AdjTime);
             //BackgroundDisplay.Children.Add(slider_AdjTime);
+            //Disable play, Pause, Speed Lisbox when Open_File isn't selected
+            Play_ListBoxItem.IsEnabled = false;
+            Pause_ListBoxItem.IsEnabled = false;
+            Speed_Change_ListBoxItem.IsEnabled = false;
         }
         //--------------------------------------------------------------------------
         //--------------------------------------------------------------------------
@@ -4870,6 +4874,10 @@ namespace SerialSample
                 BackgroundDisplay.Children.Remove(tblock_Start_Timer);
                 BackgroundDisplay.Children.Remove(tblock_End_Timer);
                 BackgroundDisplay.Children.Remove(slider_AdjTime);
+                //Disable play, Pause, Speed Lisbox when Open_File isn't selected
+                Play_ListBoxItem.IsEnabled = false;
+                Pause_ListBoxItem.IsEnabled = false;
+                Speed_Change_ListBoxItem.IsEnabled = false;
 
             }
             if (ListBox_DisConnect.IsSelected)
@@ -5085,6 +5093,10 @@ namespace SerialSample
                 BackgroundDisplay.Children.Add(tblock_Start_Timer);
                 BackgroundDisplay.Children.Add(tblock_End_Timer);
                 BackgroundDisplay.Children.Add(slider_AdjTime);
+                //Enable play, Pause, Speed Lisbox when Open_File is selected
+                Play_ListBoxItem.IsEnabled = true;
+                Pause_ListBoxItem.IsEnabled = true;
+                Speed_Change_ListBoxItem.IsEnabled = true;
             }
             //Zoom All is selected
             //Zoom current position of flight and dentination
