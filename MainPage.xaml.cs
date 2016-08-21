@@ -1496,9 +1496,19 @@ namespace SerialSample
                     }
                     //show now time
                     //format hour:min:sec
-                    if(bConnectOk)//connect to Com
-                    tblock_Current_Timer.Text = dTemp_Time_hour.ToString() + ':'+ temp_time.Substring(2, 2)
-                        + ':' + temp_time.Substring(4, 5);
+
+                    //tblock_Current_Timer.Text = dTemp_Time_hour.ToString() + ':'+ temp_time.Substring(2, 2)
+                    //    + ':' + temp_time.Substring(4, 5);
+                    if (bConnectOk)//connect to Com
+                    {
+                        if (-1 != Data.Time.IndexOf('.'))//have '.' in Data.Time 82754.7
+                            tblock_Current_Timer.Text = Data.Time.Substring(0, Data.Time.Length - 6) + ':'
+                                    + Data.Time.Substring(Data.Time.Length - 6, 2) + ':' + Data.Time.Substring(Data.Time.Length - 4, 4);
+                        else
+                            tblock_Current_Timer.Text = Data.Time.Substring(0, Data.Time.Length - 4) + ':'
+                                    + Data.Time.Substring(Data.Time.Length - 4, 2) + ':' + Data.Time.Substring(Data.Time.Length - 2, 2);
+                    }
+
                     //tblock_CurentTime.Text = "Now: " + Data.Time;
                     //Ngày 17/12/2015 17h36 ok
                     //tbOutputText.Text += "Time: " + Data.Time + '\n';
@@ -3892,7 +3902,15 @@ namespace SerialSample
                     processDataToGetInf();
 
                 }
-                tblock_Start_Timer.Text = Data.Time;
+                sStartTime = Data.Time;
+                //format hour:min:sec
+                if (-1 != Data.Time.IndexOf('.'))//have '.' in Data.Time 82754.7
+                    tblock_Start_Timer.Text = Data.Time.Substring(0, Data.Time.Length - 6) + ':'
+                            + Data.Time.Substring(Data.Time.Length - 6, 2) + ':' + Data.Time.Substring(Data.Time.Length - 4, 4);
+                else
+                    tblock_Start_Timer.Text = Data.Time.Substring(0, Data.Time.Length - 4) + ':'
+                            + Data.Time.Substring(Data.Time.Length - 4, 2) + ':' + Data.Time.Substring(Data.Time.Length - 2, 2);
+
                 streamReader.BaseStream.Seek(-1, SeekOrigin.End);   //đưa con trỏ về cuối của file
                                                                     //double _position = streamReader.BaseStream.Position;//lấy số ký tự của file txt
                 streamReader.BaseStream.Seek(-2000, SeekOrigin.Current);//dịch con trỏ từ cuối file về lui khoảng 2000 ký tự
@@ -3904,8 +3922,15 @@ namespace SerialSample
                     processDataToGetInf();
 
                 }
-                tblock_End_Timer.Text = Data.Time;
-                Data.Time = tblock_Start_Timer.Text;
+                sStopTime = Data.Time;
+                //format hour:min:sec
+                if (-1 != Data.Time.IndexOf('.'))//have '.' in Data.Time 82754.7
+                    tblock_End_Timer.Text = Data.Time.Substring(0, Data.Time.Length - 6) + ':'
+                            + Data.Time.Substring(Data.Time.Length - 6, 2) + ':' + Data.Time.Substring(Data.Time.Length - 4, 4);
+                else
+                    tblock_End_Timer.Text = Data.Time.Substring(0, Data.Time.Length - 4) + ':'
+                            + Data.Time.Substring(Data.Time.Length - 4, 2) + ':' + Data.Time.Substring(Data.Time.Length - 2, 2);
+                Data.Time = sStartTime;
                 streamReader.BaseStream.Seek(0, SeekOrigin.Begin);
                 streamReader = new StreamReader(stream);
                 editTimeWhenChangeslider();
@@ -3932,7 +3957,7 @@ namespace SerialSample
 
                 processDataToDrawTrajactory();
             }
-            tblock_Start_Timer.Text = Data.Time;
+            sStartTime = Data.Time;
             streamReader.BaseStream.Seek(-1, SeekOrigin.End);   //đưa con trỏ về cuối của file
             //double _position = streamReader.BaseStream.Position;//lấy số ký tự của file txt
             streamReader.BaseStream.Seek(-2000, SeekOrigin.Current);//dịch con trỏ từ cuối file về lui khoảng 2000 ký tự
@@ -3944,7 +3969,14 @@ namespace SerialSample
                 processDataToDrawTrajactory();
 
             }
-            tblock_End_Timer.Text = Data.Time;
+            sStopTime = Data.Time;
+            //format hour:min:sec
+            if (-1 != Data.Time.IndexOf('.'))//have '.' in Data.Time 82754.7
+                tblock_End_Timer.Text = Data.Time.Substring(0, Data.Time.Length - 6) + ':'
+                        + Data.Time.Substring(Data.Time.Length - 6, 2) + ':' + Data.Time.Substring(Data.Time.Length - 4, 4);
+            else
+                tblock_End_Timer.Text = Data.Time.Substring(0, Data.Time.Length - 4) + ':'
+                        + Data.Time.Substring(Data.Time.Length - 4, 2) + ':' + Data.Time.Substring(Data.Time.Length - 2, 2);
         }
 
         //*************************************************************
@@ -4640,11 +4672,11 @@ namespace SerialSample
         {
             try
             {
-                tblock_Current_Timer.Text = Math.Round((slider_AdjTime.Value *
-                    (Convert.ToDouble(tblock_End_Timer.Text) - Convert.ToDouble(tblock_Start_Timer.Text)) / 100 +
-                    Convert.ToDouble(tblock_Start_Timer.Text)), 1).ToString();
+                sDisplayTimeNotFormat = Math.Round((slider_AdjTime.Value *
+                    (Convert.ToDouble(sStopTime) - Convert.ToDouble(sStartTime)) / 100 +
+                    Convert.ToDouble(sStartTime)), 1).ToString();
                 //edit 83994.2 --> 84034.2
-                double temp_edit_number = Convert.ToDouble(tblock_Current_Timer.Text);
+                double temp_edit_number = Convert.ToDouble(sDisplayTimeNotFormat);
                 if ((Int32)temp_edit_number % 100 > 59)
                 {
                     temp_edit_number = ((Int32)temp_edit_number / 100 + 1) * 100 + (temp_edit_number -
@@ -4655,7 +4687,7 @@ namespace SerialSample
                     temp_edit_number = ((Int32)temp_edit_number / 10000 + 1) * 10000 + (temp_edit_number -
                         (((Int32)temp_edit_number / 10000) * 10000 + 6000));
                 }
-                tblock_Current_Timer.Text = temp_edit_number.ToString();
+                sDisplayTimeNotFormat = temp_edit_number.ToString();
             }
             catch
             {
@@ -4877,6 +4909,7 @@ namespace SerialSample
 
         }
 
+        string sDisplayTimeNotFormat, sStartTime, sStopTime;//save value of time don't format
         /// <summary>
         /// when user press play button, this function is called
         /// It will continues simulate process
@@ -4884,12 +4917,12 @@ namespace SerialSample
         private async void Play_When_ReadFile()
         {
             streamReader.BaseStream.Seek(0, SeekOrigin.Begin);
-            Data.Time = tblock_Start_Timer.Text;
+            Data.Time = sStartTime;
             UInt16 index = 0;
             bPlay = true;
             //when time sample = 0.2s, we add Convert.ToDouble( Data.Time) != (Convert.ToDouble(tblock_Current_Timer.Text) - 0.1)
-            while (Convert.ToDouble(Data.Time) > (Convert.ToDouble(tblock_Current_Timer.Text))
-                || Convert.ToDouble(Data.Time) < (Math.Round(Convert.ToDouble(tblock_Current_Timer.Text), 1) - 0.1))//find time to start
+            while (Convert.ToDouble(Data.Time) > (Convert.ToDouble(sDisplayTimeNotFormat))
+                || Convert.ToDouble(Data.Time) < (Math.Round(Convert.ToDouble(sDisplayTimeNotFormat), 1) - 0.1))//find time to start
             {
                 strDataFromSerialPort = streamReader.ReadLine();
                 //processDataToGetInf();
@@ -4900,8 +4933,8 @@ namespace SerialSample
                     positions.Clear();
                     positions = new List<BasicGeoposition>();
                     streamReader.BaseStream.Seek(0, SeekOrigin.Begin);
-                    while (Convert.ToDouble(Data.Time) > (Convert.ToDouble(tblock_Current_Timer.Text))
-                        || Convert.ToDouble(Data.Time) < (Math.Round(Convert.ToDouble(tblock_Current_Timer.Text), 1) - 0.1))//find time to start
+                    while (Convert.ToDouble(Data.Time) > (Convert.ToDouble(sDisplayTimeNotFormat))
+                        || Convert.ToDouble(Data.Time) < (Math.Round(Convert.ToDouble(sDisplayTimeNotFormat), 1) - 0.1))//find time to start
                     {
                         strDataFromSerialPort = streamReader.ReadLine();
                         //processDataToGetInf();
@@ -4924,9 +4957,18 @@ namespace SerialSample
 
                 processDataToDrawTrajactory();
 
-                tblock_Current_Timer.Text = Data.Time;
-                slider_AdjTime.Value = 100 * (Convert.ToDouble(tblock_Current_Timer.Text) - Convert.ToDouble(tblock_Start_Timer.Text)) /
-                    (Convert.ToDouble(tblock_End_Timer.Text) - Convert.ToDouble(tblock_Start_Timer.Text));
+                //tblock_Current_Timer.Text = Data.Time;
+                sDisplayTimeNotFormat = Data.Time;
+                //format hour:min:sec
+                if (-1 != Data.Time.IndexOf('.'))//have '.' in Data.Time 82754.7
+                    tblock_Current_Timer.Text = Data.Time.Substring(0, Data.Time.Length - 6) + ':'
+                            + Data.Time.Substring(Data.Time.Length - 6, 2) + ':' + Data.Time.Substring(Data.Time.Length - 4, 4);
+                else
+                    tblock_Current_Timer.Text = Data.Time.Substring(0, Data.Time.Length - 4) + ':'
+                            + Data.Time.Substring(Data.Time.Length - 4, 2) + ':' + Data.Time.Substring(Data.Time.Length - 2, 2);
+
+                slider_AdjTime.Value = 100 * (Convert.ToDouble(sDisplayTimeNotFormat) - Convert.ToDouble(sStartTime)) /
+                    (Convert.ToDouble(sStopTime) - Convert.ToDouble(sStartTime));
 
                 index++;
                 if (index == limitSpeed)

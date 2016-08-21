@@ -76,7 +76,7 @@
         <TextBox x:Name="tb_Position" HorizontalAlignment="Left" Margin="170,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="30" Width="280" Background="Aqua" KeyDown="tb_Position_KeyDown"/>
 
         <!--Show Latitude Longtitude-->
-        <TextBlock x:Name="tblock_LatAndLon" HorizontalAlignment="Left" FontSize="16" Foreground="Red" Margin="900,10,0,0" TextWrapping="Wrap" Text="10.896534" VerticalAlignment="Top" Height="30" Width="auto"/>
+        <TextBlock x:Name="tblock_LatAndLon" HorizontalAlignment="Left" FontSize="16" Foreground="Red" Margin="900,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="30" Width="auto"/>
         <!--Show Zoom level-->
         <TextBlock x:Name="tblock_ZoomLevel" HorizontalAlignment="Left" FontSize="16" Foreground="Red" Margin="840,10,0,0" TextWrapping="Wrap" Text="12.345" VerticalAlignment="Top" Height="30" Width="auto"/>
         <!--Show time from GPS-->
