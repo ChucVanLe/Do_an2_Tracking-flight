@@ -47,9 +47,9 @@
         <!--Adjust-->
 
         <Slider x:Name="slider_AdjTime" HorizontalAlignment="Left" Margin="488,682,0,0" VerticalAlignment="Top" Width="437" ValueChanged="adjTime_Click" Minimum="0" Maximum="100"/>
-        <TextBlock x:Name="tblock_Start_Timer" HorizontalAlignment="Left" FontSize="16" Margin="488,655,0,0" Foreground="Red" Text="012345.6" VerticalAlignment="Top" Height="25" Width="auto"/>
-        <TextBlock x:Name="tblock_End_Timer" HorizontalAlignment="Left" FontSize="18" Margin="853,655,0,0" Foreground="Red" Text="012345.6" VerticalAlignment="Top" Height="25" Width="auto"/>
-        <TextBlock x:Name="tblock_Current_Timer" HorizontalAlignment="Left" FontSize="18" Margin="679,655,0,0" Foreground="Red" Text="012345.6" VerticalAlignment="Top" Height="25" Width="auto"/>
+        <TextBlock x:Name="tblock_Start_Timer" HorizontalAlignment="Left" FontSize="16" Margin="488,655,0,0" Foreground="Red" Text="" VerticalAlignment="Top" Height="25" Width="auto"/>
+        <TextBlock x:Name="tblock_End_Timer" HorizontalAlignment="Left" FontSize="18" Margin="853,655,0,0" Foreground="Red" Text="" VerticalAlignment="Top" Height="25" Width="auto"/>
+        <TextBlock x:Name="tblock_Current_Timer" HorizontalAlignment="Left" FontSize="18" Margin="679,655,0,0" Foreground="Red" Text="" VerticalAlignment="Top" Height="25" Width="auto"/>
 
 
         <!--
