@@ -13,6 +13,7 @@
 
     <Page.Resources>
         <CollectionViewSource x:Name="DeviceListSource"/>
+
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" x:Name="BackgroundDisplay" Margin="0,0,-991,-100" >
@@ -88,7 +89,8 @@
         <!--Add menu bar-->
 
 
-        <SplitView x:Name="Splitter" Margin="488,50,0,0" IsPaneOpen="True">
+        <SplitView x:Name="Splitter" Margin="488,50,0,0" IsPaneOpen="False">
+            
             <SplitView.Pane>
                 <RelativePanel Margin="0,0,0,0" >
 
@@ -108,8 +110,9 @@
                                 <TextBlock Text="Pause" FontSize="24" Margin="20,0,0,0" />
                             </StackPanel>
                         </ListBoxItem>
+                        
 
-                        <ListBoxItem Name="Speed_Change_ListBoxItem">
+                        <ListBoxItem Name="Speed_Change_ListBoxItem" >
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="36" Text="&#xE8AB;" />
                                 <TextBlock Text="Speed" FontSize="24" Margin="20,0,0,0" />
@@ -129,7 +132,59 @@
                                 <TextBlock Text="Screen" FontSize="24" Margin="20,0,0,0" />
                             </StackPanel>
                         </ListBoxItem>
+                        <!--<MenuFlyout x:Key="FlyoutBaseDemo"/>--><!--
+                        <MenuFlyout Placement="Right">
+                            <MenuFlyoutItem Text="Save" />
+                            <MenuFlyoutItem Text="Clear" />
+                            <MenuFlyoutSeparator />
+                            <MenuFlyoutSubItem Text="Share to">
+                                <MenuFlyoutItem Text="Facebook" />
+                                <MenuFlyoutItem Text="Twitter" />
+                                <MenuFlyoutItem Text="LinkedIn" />
+                                <MenuFlyoutSubItem Text="Other">
+                                    <MenuFlyoutItem Text="Reddit" />
+                                    <MenuFlyoutItem Text="Pinterest" />
+                                </MenuFlyoutSubItem>
+                            </MenuFlyoutSubItem>
+                        </MenuFlyout>-->
+                        <!--<Button Content="Show" x:Name="ShowButton">
+                            <Button.Flyout>
+                                <MenuFlyout Placement="Right">
+                                    <MenuFlyoutItem Text = "Open Explorer" />
+                                        <MenuFlyoutItem Text="Second command">
+                                        <MenuFlyoutItem.Template>
+                                            <ControlTemplate TargetType="MenuFlyoutItem">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="24" Text="&#xE786;" />
+                                                    <TextBlock Text="Screen" FontSize="16" Margin="20,0,0,0" />
+                                                </StackPanel>
+                                            </ControlTemplate>
+                                        </MenuFlyoutItem.Template>
+                                    </MenuFlyoutItem>
+                                    <MenuFlyoutSeparator />
+                                    <ToggleMenuFlyoutItem Text="Last option" />
+                                    <MenuFlyoutSubItem  Name="Demo1">
 
+                                        <MenuFlyoutItem Text="Second command">
+                                            <MenuFlyoutItem.Template>
+                                                <ControlTemplate TargetType="MenuFlyoutItem">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="24" Text="&#xE786;" />
+                                                        <TextBlock Text="Screen" FontSize="16" Margin="20,0,0,0" />
+                                                    </StackPanel>
+                                                </ControlTemplate>
+                                            </MenuFlyoutItem.Template>
+                                        </MenuFlyoutItem>
+                                        <MenuFlyoutItem Text="Twitter" />
+                                        <MenuFlyoutItem Text="LinkedIn" />
+                                        <MenuFlyoutSubItem Text="Other">
+                                            <MenuFlyoutItem Text="Reddit" />
+                                            <MenuFlyoutItem Text="Pinterest" />
+                                        </MenuFlyoutSubItem>
+                                    </MenuFlyoutSubItem>
+                                </MenuFlyout>
+                            </Button.Flyout>
+                        </Button>-->
                         <ListBoxItem Name="Get_Pos_ListBoxItem">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="36" Text="&#xE80F;" />
@@ -140,7 +195,7 @@
                         <ListBoxItem Name="Zoom_All_ListBoxItem">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="36" Text="&#xE71E;" />
-                                <TextBlock Text="Zoom All" FontSize="24" Margin="20,0,0,0" />
+                                <TextBlock Text="Zoom Normal" FontSize="24" Margin="20,0,0,0" />
                             </StackPanel>
                         </ListBoxItem>
 
@@ -179,7 +234,7 @@
         </SplitView>
 
         <!--when press speed-->
-        <SplitView x:Name="Split_Speed" Margin="488,124,0,0" IsPaneOpen="False">
+        <SplitView x:Name="Split_Speed" Margin="710,124,0,0" IsPaneOpen="False">
             <SplitView.Pane>
                 <RelativePanel Margin="0,0,0,0" >
                     <ListBox SelectionMode="Single" 
@@ -205,9 +260,10 @@
                     </ListBox>
                 </RelativePanel>
             </SplitView.Pane>
+            
         </SplitView>
         <!--when press screen-->
-        <SplitView x:Name="Split_Screen" Margin="488,264,0,0" IsPaneOpen="False">
+        <SplitView x:Name="Split_Screen" Margin="710,264,0,0" IsPaneOpen="False">
             <SplitView.Pane>
                 <RelativePanel Margin="0,0,0,0" >
                     <ListBox SelectionMode="Single" 
@@ -236,7 +292,7 @@
         </SplitView>
         <!--************************************************************************-->
         <!--when press Com-->
-        <SplitView x:Name="Split_COM" Margin="488,421,0,0" Height="auto" IsPaneOpen="False">
+        <SplitView x:Name="Split_COM" Margin="710,421,0,0" Height="auto" IsPaneOpen="False">
             <SplitView.Pane>
                 <RelativePanel Margin="0,0,0,0" >
                     <ListBox SelectionMode="Single" 
@@ -264,7 +320,7 @@
         </SplitView>
         <!--************************************************************************-->
         <!--when press Auto zoom-->
-        <SplitView x:Name="Split_AutoZoom" Margin="488,491,0,0" Height="auto" IsPaneOpen="False">
+        <SplitView x:Name="Split_AutoZoom" Margin="710,491,0,0" Height="auto" IsPaneOpen="False">
             <SplitView.Pane>
                 <RelativePanel Margin="0,0,0,0" >
                     <ListBox SelectionMode="Single" 
@@ -292,7 +348,7 @@
         </SplitView>
 
         <!--list of com-->
-        <SplitView x:Name="Split_ListCom" Margin="488,580,0,0" Height="auto" IsPaneOpen="False">
+        <SplitView x:Name="Split_ListCom" Margin="710,580,0,0" Height="auto" IsPaneOpen="False">
             <SplitView.Pane>
                 <RelativePanel Margin="0,0,0,0" >
                     <!--UART-->
@@ -309,12 +365,14 @@
         </SplitView>
 
         <!--*******************************************************************************-->
-        <Border >
-            <ToggleButton Click="bt_menu_Click" VerticalAlignment="Top" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" Margin="486,10,0,0">
+        <Border x:Name="bd_menu" >
+            <ToggleButton x:Name="bt_menu" Click="bt_menu_Click" ToolTipService.ToolTip="Menu" VerticalAlignment="Top" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" Margin="486,10,0,0">
                 <ToggleButton.Content>
                     <FontIcon x:Name="Hamburger" FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;" Margin="0,10,0,0"/>
                 </ToggleButton.Content>
             </ToggleButton>
+            
         </Border>
+        
     </Grid>
 </Page>

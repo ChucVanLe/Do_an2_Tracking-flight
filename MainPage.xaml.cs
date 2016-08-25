@@ -4922,6 +4922,8 @@ namespace SerialSample
         }
 
         string sDisplayTimeNotFormat, sStartTime, sStopTime;//save value of time don't format
+
+
         /// <summary>
         /// when user press play button, this function is called
         /// It will continues simulate process
@@ -5038,6 +5040,7 @@ namespace SerialSample
         /// <param name="e"></param>
         private void IconsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //Speed_Change_ListBoxItem.
             //Speed
             if (Speed_Change_ListBoxItem.IsSelected)
             {
@@ -5081,6 +5084,7 @@ namespace SerialSample
             {
                 Pause_When_ReadFile();
             }
+            
             //Pause button is selected
             if (Open_File_ListBoxItem.IsSelected)
             {
@@ -5151,7 +5155,11 @@ namespace SerialSample
         {
             if (ListBox_1_Screen.IsSelected)
             {
+                //BackgroundDisplay.ClearValue.;
+                //Background.ClearValue(BackgroundDisplay);
+                //BackgroundDisplay.Children.Clear();//clear all item
                 Background_Sensor(00, -80);
+
             }
             if (ListBox_2_Screen.IsSelected)
             {
