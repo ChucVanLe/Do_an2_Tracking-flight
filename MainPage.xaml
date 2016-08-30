@@ -37,14 +37,6 @@
         <!--Ta hiện khoảng cách trên đường thẳng-->
 
 
-
-        <!--Send Data
-        <TextBox x:Name="sendText" HorizontalAlignment="Left" Height="47" Margin="1000,513,0,0" TextWrapping="Wrap" Text="" Background="Blue" VerticalAlignment="Top" Width="180"/>
-        <Button x:Name="sendTextButton" Content="Write" Click="sendTextButton_Click" HorizontalAlignment="Left" Height="47" Margin="1213,513,0,0" VerticalAlignment="Top" Width="133" Background="Orange"/>
-        <TextBox x:Name="status" HorizontalAlignment="Left" IsReadOnly="True" Height="60" Margin="1000,650,0,0" TextWrapping="Wrap" Text="Status" VerticalAlignment="Top" Width="347"
-                 ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" BorderBrush="White"/>
-        <TextBox x:Name="rcvdText" HorizontalAlignment="Left" Height="81" Margin="1000,565,0,0" TextWrapping="Wrap" Text="Waiting Receive Data" VerticalAlignment="Top" Width="348"/>
--->
         <!--Adjust-->
 
         <Slider x:Name="slider_AdjTime" HorizontalAlignment="Left" Margin="488,682,0,0" VerticalAlignment="Top" Width="437" ValueChanged="adjTime_Click" Minimum="0" Maximum="100"/>
@@ -90,7 +82,7 @@
 
 
         <SplitView x:Name="Splitter" Margin="488,50,0,0" IsPaneOpen="False">
-            
+
             <SplitView.Pane>
                 <RelativePanel Margin="0,0,0,0" >
 
@@ -110,7 +102,7 @@
                                 <TextBlock Text="Pause" FontSize="24" Margin="20,0,0,0" />
                             </StackPanel>
                         </ListBoxItem>
-                        
+
 
                         <ListBoxItem Name="Speed_Change_ListBoxItem" >
                             <StackPanel Orientation="Horizontal">
@@ -208,7 +200,7 @@
                     </ListBox>
                 </RelativePanel>
             </SplitView.Pane>
-            
+
         </SplitView>
         <!--when press screen-->
         <SplitView x:Name="Split_Screen" Margin="710,264,0,0" IsPaneOpen="False">

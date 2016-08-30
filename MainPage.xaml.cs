@@ -366,15 +366,15 @@ namespace SerialSample
         /// </summary>
         void DisplaySensor_Setup()
         {
-            
+
             Background_Sensor(480, -80);//da can chinh 1/3 full screen
 
             //Image full
             //Da can chinh 1/3
             AirSpeed_Image_full_Setup(100.1, 150 - 32 + i16EditPosition, 80 + 125);//ok
             Draw_Airspeed_full_optimize(0, 150 - 32 + i16EditPosition, 205);//ok500, 120
-                                                                                  //Speed_Image_Setup(100, 150, 100);
-                                                                                  //Da can chinh 1/3
+                                                                            //Speed_Image_Setup(100, 150, 100);
+                                                                            //Da can chinh 1/3
             PitchAndRoll_Setup(0, 0, 350 + i16EditPosition * 11 / 6, 210, 140, 50);//ok
             PitchAndRoll_Draw(0, 0, 350 + i16EditPosition * 11 / 6, 210, 140, 50);//ok
 
@@ -680,14 +680,14 @@ namespace SerialSample
                 //bufferSavedata += rcvdText.Text;
 
                 strDataFromSerialPort += sTemp;
-                
+
                 try
                 {
                     //if ((strDataFromSerialPort != " ") && (strDataFromSerialPort != ""))
                     //ProcessData();
                     processDataToDrawTrajactory();
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
 
                     errorFrame += 1;
@@ -822,16 +822,16 @@ namespace SerialSample
          * el2 End altitude in meters
          * @returns Distance in Meters
          */
-         /// <summary>
-         /// caculator between 2 point
-         /// </summary>
-         /// <param name="lat1"></param>
-         /// <param name="lon1"></param>
-         /// <param name="el1"></param>
-         /// <param name="lat2"></param>
-         /// <param name="lon2"></param>
-         /// <param name="el2"></param>
-         /// <returns></returns>
+        /// <summary>
+        /// caculator between 2 point
+        /// </summary>
+        /// <param name="lat1"></param>
+        /// <param name="lon1"></param>
+        /// <param name="el1"></param>
+        /// <param name="lat2"></param>
+        /// <param name="lon2"></param>
+        /// <param name="el2"></param>
+        /// <returns></returns>
         public static Int32 distance(double lat1, double lon1, double el1,
         double lat2, double lon2, double el2)
         {
@@ -1583,32 +1583,32 @@ namespace SerialSample
             if (setupReadfile)//xu ly voi com
             {
 
-                    Data.Temp = strDataFromSerialPort;
-                    if (Data.Temp.IndexOf('$') != -1)
-                        //cắt bỏ ký tự '$'
-                        Data.Temp = Data.Temp.Substring(Data.Temp.IndexOf('$') + 1, Data.Temp.Length - (Data.Temp.IndexOf('$') + 1));
-                    else
-                        return;
+                Data.Temp = strDataFromSerialPort;
+                if (Data.Temp.IndexOf('$') != -1)
+                    //cắt bỏ ký tự '$'
+                    Data.Temp = Data.Temp.Substring(Data.Temp.IndexOf('$') + 1, Data.Temp.Length - (Data.Temp.IndexOf('$') + 1));
+                else
+                    return;
 
-                    if (Data.Temp.IndexOf("GPG") != -1)
+                if (Data.Temp.IndexOf("GPG") != -1)
+                {
+
+                    //cut bỏ Data đến dấu phẩy đầu tiên lấy sau dấu phẩy đầu tiên
+                    Data.Temp = Data.Temp.Substring(Data.Temp.IndexOf(',') + 1, Data.Temp.Length - (Data.Temp.IndexOf(',') + 1));
+                    //Data.Temp = "024004.900,1043.4006,N,10641.3309,E,1,4,2.67,7.8,M,2.5,M,,*67 ";
+                    ////tbOutputText.Text += "DataSauCut: " + Data.Temp + '\n';
+                    //tách lấy giờ, thời gian GPS chậm hơn thời gian thực 7h nên phải cộng 7
+                    //Nếu time >= 240000.00 thì phải trừ đi 240000.00
+                    double dTemp_Time = 0;
+                    string temp_time = Data.Temp.Substring(0, Data.Temp.IndexOf(','));
+                    if (temp_time != "")
                     {
-
-                        //cut bỏ Data đến dấu phẩy đầu tiên lấy sau dấu phẩy đầu tiên
-                        Data.Temp = Data.Temp.Substring(Data.Temp.IndexOf(',') + 1, Data.Temp.Length - (Data.Temp.IndexOf(',') + 1));
-                        //Data.Temp = "024004.900,1043.4006,N,10641.3309,E,1,4,2.67,7.8,M,2.5,M,,*67 ";
-                        ////tbOutputText.Text += "DataSauCut: " + Data.Temp + '\n';
-                        //tách lấy giờ, thời gian GPS chậm hơn thời gian thực 7h nên phải cộng 7
-                        //Nếu time >= 240000.00 thì phải trừ đi 240000.00
-                        double dTemp_Time = 0;
-                        string temp_time = Data.Temp.Substring(0, Data.Temp.IndexOf(','));
-                        if (temp_time != "")
-                        {
-                            dTemp_Time = (Convert.ToDouble(temp_time) + 70000.00);
-                            if (dTemp_Time >= 240000.00) dTemp_Time -= 240000.00;
-                            Data.Time = dTemp_Time.ToString();
-                        }
-
+                        dTemp_Time = (Convert.ToDouble(temp_time) + 70000.00);
+                        if (dTemp_Time >= 240000.00) dTemp_Time -= 240000.00;
+                        Data.Time = dTemp_Time.ToString();
                     }
+
+                }
             }
         }
         //******************************************************************************
@@ -1685,7 +1685,7 @@ namespace SerialSample
 
                     }
                 }
-                }
+            }
             catch { }
 
         }
@@ -1835,7 +1835,7 @@ namespace SerialSample
         /// </summary>
         public void Background_Sensor(double Width, double top)
         {
-            
+
             //Convert to tablet 1366 x 768 --> 1280 x 800;
             screenWidth = Window.Current.Bounds.Width;
 
@@ -1878,7 +1878,7 @@ namespace SerialSample
             myMap.Margin = new Windows.UI.Xaml.Thickness(Width, 0, 00, 00);
             //move tblock_LatAndLon to bottom
             //show latitude and lontitude in bottom on screen
-            tblock_LatAndLon.Margin = new Windows.UI.Xaml.Thickness(screenWidth - 220, screenHeight- 38, 00, 00);
+            tblock_LatAndLon.Margin = new Windows.UI.Xaml.Thickness(screenWidth - 220, screenHeight - 38, 00, 00);
             BackgroundDisplay.Children.Remove(tblock_LatAndLon);
             BackgroundDisplay.Children.Add(tblock_LatAndLon);
             //move zoom level to bottom on screen
@@ -2100,7 +2100,7 @@ namespace SerialSample
             TestLine.X2 = x2;
             TestLine.Y2 = y2;
             TestLine.StrokeThickness = SizeOfLine;
-            
+
             //Xac định tọa độ
             //TestLine.Margin = new Windows.UI.Xaml.Thickness(-1500, -200, 0, 0);
             BackgroundDisplay.Children.Add(TestLine);
@@ -2968,7 +2968,7 @@ namespace SerialSample
             BackgroundDisplay.Children.Add(img_FliCom_Out);
 
         }
- 
+
         //**************Ngày 08/12/2015************************************
         //Hiện ảnh ở tọa độ trung tâm x, y
         //Ngày 19/12/2015 test ok
@@ -3156,7 +3156,7 @@ namespace SerialSample
         //************************************************************************************
         //**************************************************************************
         //Ngày 20/12/2015 Vẽ góc Pitch
- 
+
         /// <summary>
         /// Vẽ Line Auto Remove cho Pitch
         /// </summary>
@@ -3584,8 +3584,8 @@ namespace SerialSample
         /// <param name="dHeading"></param>
         void Draw_Trajectory_optimize(double lat, double lon, double alt, double dHeading)
         {
-            if(0 != lat)
-            positions.Add(new BasicGeoposition() { Latitude = lat, Longitude = lon });   //<== this
+            if (0 != lat)
+                positions.Add(new BasicGeoposition() { Latitude = lat, Longitude = lon });   //<== this
 
         }
         //*****************************************
@@ -3652,7 +3652,7 @@ namespace SerialSample
 
                 //Vẽ quỹ đạo
                 MapPolyline lineToRmove = new Windows.UI.Xaml.Controls.Maps.MapPolyline();
-                
+
                 lineToRmove.Path = new Geopath(new List<BasicGeoposition>() {
                 new BasicGeoposition() {Latitude = old_Lat, Longitude = old_Lon},
                 //San Bay Tan Son Nhat
@@ -3717,11 +3717,11 @@ namespace SerialSample
         {
             //Luôn cho vận tốc >= 0, độ cao >= 0
             if (dSpeed < 0) dSpeed = 0;
-            if (dAlt < 0)   dAlt = 0;
+            if (dAlt < 0) dAlt = 0;
             Draw_Airspeed_full_optimize(dSpeed, 150 - 32 + i16EditPosition, 205);//ok
 
             //Altitude_Draw_Alt(dAlt, 550, 100);
-            Draw_Alttitude_full_optimize(dAlt, 550 + 88 / 2 + i16EditPosition  * 17 / 6, 80);//ok
+            Draw_Alttitude_full_optimize(dAlt, 550 + 88 / 2 + i16EditPosition * 17 / 6, 80);//ok
 
         }
 
@@ -3843,7 +3843,7 @@ namespace SerialSample
 
             //inputStream = await file.OpenReadAsync();
             //using (var classicStream = inputStream.AsStreamForRead())
-                Stream stream = (await file.OpenReadAsync()).AsStreamForRead();
+            Stream stream = (await file.OpenReadAsync()).AsStreamForRead();
 
             streamReader = new StreamReader(stream);
             setupReadfile = true;
@@ -3855,7 +3855,7 @@ namespace SerialSample
             //chúng ta sẽ đọc được thời điểm bay cuối cùng
             while (streamReader.Peek() >= 0)
 
-                {
+            {
 
                 strDataFromSerialPort = streamReader.ReadLine().ToString();
 
@@ -3871,7 +3871,7 @@ namespace SerialSample
                         index = 0;
                     }
                 }
-                
+
             }
 
         }
@@ -4394,7 +4394,7 @@ namespace SerialSample
         /// <param name="e"></param>
         private void Search_Click(object sender, RoutedEventArgs e)
         {
-            if(tb_Position.Text != "")
+            if (tb_Position.Text != "")
             {
                 Search_Offline(tb_Position.Text);
             }
@@ -4544,7 +4544,8 @@ namespace SerialSample
 
                 if (dAlttitude < 957.21139) top = -(-1980.45) - dAlttitude * 0.416;
                 //else top = -(-1980.45) - dAlttitude * 0.415;
-                else {
+                else
+                {
                     top = -(-1980.3) - 957.21139 * 0.416 - (dAlttitude - 957.21139) * 0.4167 / 2;
                     t_cut = -(-1980.3) - dAlttitude * 0.4167;
                 }
@@ -4615,7 +4616,8 @@ namespace SerialSample
 
             //position: string
 
-            try {
+            try
+            {
                 result_position = await MapLocationFinder.FindLocationsAsync(StrDentination, myMap.Center);
                 dentination_pos = result_position.Locations.First();
                 ////show result
@@ -4630,10 +4632,10 @@ namespace SerialSample
                 myMap.Center =
                    new Geopoint(new BasicGeoposition()
                    {
-                   //Geopoint for Seattle San Bay Tan Son Nhat:   dLatDentination, dLonDentination
+                       //Geopoint for Seattle San Bay Tan Son Nhat:   dLatDentination, dLonDentination
 
-                   Latitude = dentination_pos.Point.Position.Latitude,
-                   Longitude = dentination_pos.Point.Position.Longitude
+                       Latitude = dentination_pos.Point.Position.Latitude,
+                       Longitude = dentination_pos.Point.Position.Longitude
                    });
                 myMap.ZoomLevel = 18;
                 //Add My home picture
@@ -4893,7 +4895,7 @@ namespace SerialSample
 
         private void BoxItem_Dec_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            if(limitSpeed > 5)
+            if (limitSpeed > 5)
                 limitSpeed -= 5;
         }
 
@@ -5196,7 +5198,7 @@ namespace SerialSample
             {
                 Pause_When_ReadFile();
             }
-            
+
             //Pause button is selected
             if (Open_File_ListBoxItem.IsSelected)
             {
