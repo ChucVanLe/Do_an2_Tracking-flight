@@ -321,44 +321,36 @@
             </ToggleButton>
 
         </Border>
-        <!--<Button Content="Show" x:Name="ShowButton">
-                            <Button.Flyout>
-                                <MenuFlyout Placement="Right">
-                                    <MenuFlyoutItem Text = "Open Explorer" />
-                                        <MenuFlyoutItem Text="Second command">
-                                        <MenuFlyoutItem.Template>
-                                            <ControlTemplate TargetType="MenuFlyoutItem">
-                                                <StackPanel Orientation="Horizontal">
-                                                    <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="24" Text="&#xE786;" />
-                                                    <TextBlock Text="Screen" FontSize="16" Margin="20,0,0,0" />
-                                                </StackPanel>
-                                            </ControlTemplate>
-                                        </MenuFlyoutItem.Template>
-                                    </MenuFlyoutItem>
-                                    <MenuFlyoutSeparator />
-                                    <ToggleMenuFlyoutItem Text="Last option" />
-                                    <MenuFlyoutSubItem  Name="Demo1">
-
-                                        <MenuFlyoutItem Text="Second command">
-                                            <MenuFlyoutItem.Template>
-                                                <ControlTemplate TargetType="MenuFlyoutItem">
-                                                    <StackPanel Orientation="Horizontal">
-                                                        <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="24" Text="&#xE786;" />
-                                                        <TextBlock Text="Screen" FontSize="16" Margin="20,0,0,0" />
-                                                    </StackPanel>
-                                                </ControlTemplate>
-                                            </MenuFlyoutItem.Template>
-                                        </MenuFlyoutItem>
-                                        <MenuFlyoutItem Text="Twitter" />
-                                        <MenuFlyoutItem Text="LinkedIn" />
-                                        <MenuFlyoutSubItem Text="Other">
-                                            <MenuFlyoutItem Text="Reddit" />
-                                            <MenuFlyoutItem Text="Pinterest" />
-                                        </MenuFlyoutSubItem>
-                                    </MenuFlyoutSubItem>
-                                </MenuFlyout>
-                            </Button.Flyout>
-                        </Button>-->
-
+        <Button x:Name="ShowButton" ToolTipService.ToolTip="Menu" VerticalAlignment="Top" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" Margin="586,10,0,0">
+            <Button.Content>
+                <FontIcon x:Name="icon_menu" FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;" Margin="0,5,0,0"/>
+            </Button.Content>
+            <Button.Flyout>
+                <MenuFlyout Placement= "Right">
+                    <MenuFlyoutItem Text = "Play" Click="bt_play_Click"/>
+                    <MenuFlyoutItem Text = "Pause" Click="bt_pause_click"/>
+                    <MenuFlyoutSubItem Text="Speed">
+                        <MenuFlyoutItem Text="Increase" Click="bt_speed_inc_click"/>
+                        <MenuFlyoutItem Text="Decrease" Click="bt_speed_dec_click"/>
+                    </MenuFlyoutSubItem>
+                    <MenuFlyoutItem Text="Open .txt file" Click="bt_open_file_click"/>
+                    <MenuFlyoutSubItem Text="Screen">
+                        <MenuFlyoutItem Text="One Screen" Click="bt_one_sceen_click"/>
+                        <MenuFlyoutItem Text="Two Screen" Click="bt_two_sceen_click"/>
+                    </MenuFlyoutSubItem>
+                    <MenuFlyoutItem Text="Get Position" Click="bt_get_position_click"/>
+                    <MenuFlyoutItem Text="Zoom Nomal" Click="bt_zoom_nomal_click"/>
+                    <MenuFlyoutSubItem Text="AutoZoom">
+                        <MenuFlyoutItem Text="On" Click="bt_autoZoom_on_click"/>
+                        <MenuFlyoutItem Text="Off" Click="bt_autoZoom_off_click"/>
+                    </MenuFlyoutSubItem>
+                    <MenuFlyoutItem Text="List COM"/>
+                    <MenuFlyoutSubItem Text="Device">
+                        <MenuFlyoutItem Text="Connect" Click="bt_device_connect_click"/>
+                        <MenuFlyoutItem Text="DisConnect" Click="bt_device_disconnect_click"/>
+                    </MenuFlyoutSubItem>
+                </MenuFlyout>
+            </Button.Flyout>
+        </Button>
     </Grid>
 </Page>

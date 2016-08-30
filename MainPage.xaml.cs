@@ -4921,9 +4921,6 @@ namespace SerialSample
 
         }
 
-        string sDisplayTimeNotFormat, sStartTime, sStopTime;//save value of time don't format
-
-
         /// <summary>
         /// when user press play button, this function is called
         /// It will continues simulate process
@@ -5016,6 +5013,121 @@ namespace SerialSample
         }
         //-----------------------------------------------------------------------------
         //---thesis-------------------------------------------------------------------
+        string sDisplayTimeNotFormat, sStartTime, sStopTime;//save value of time don't format
+
+        private void bt_speed_inc_click(object sender, RoutedEventArgs e)
+        {
+            limitSpeed += 5;
+        }
+
+        /// <summary>
+        /// decrease speed of simulation
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void bt_speed_dec_click(object sender, RoutedEventArgs e)
+        {
+            if (limitSpeed > 5)
+                limitSpeed -= 5;
+        }
+
+        private void bt_open_file_click(object sender, RoutedEventArgs e)
+        {
+            myMap.Children.Clear();
+            myMap.MapElements.Clear();
+            positions.Clear();
+            positions = new List<BasicGeoposition>();
+            ReadInfOfFile();
+            //add tblock_Start_Timer, tblock_End_Timer, slider_AdjTime
+            BackgroundDisplay.Children.Add(tblock_Start_Timer);
+            BackgroundDisplay.Children.Add(tblock_End_Timer);
+            BackgroundDisplay.Children.Add(slider_AdjTime);
+            //Enable play, Pause, Speed Lisbox when Open_File is selected
+            Play_ListBoxItem.IsEnabled = true;
+            Pause_ListBoxItem.IsEnabled = true;
+            Speed_Change_ListBoxItem.IsEnabled = true;
+        }
+
+        private void bt_one_sceen_click(object sender, RoutedEventArgs e)
+        {
+            Background_Sensor(00, -80);
+        }
+
+        private void bt_two_sceen_click(object sender, RoutedEventArgs e)
+        {
+            myMap.MapElements.Remove(polylineHereToDentination);//delete polyline old before reload
+            DisplaySensor_Setup();
+        }
+
+        private void bt_get_position_click(object sender, RoutedEventArgs e)
+        {
+            if (tblock_LatAndLon.Text != "")
+            {
+                //cut string in tblock_LatAndLon because it include lat and lon
+                dLatDentination = Convert.ToDouble(tblock_LatAndLon.Text.Substring(0, tblock_LatAndLon.Text.IndexOf(',')));
+                dLonDentination = Convert.ToDouble(tblock_LatAndLon.Text.Substring(tblock_LatAndLon.Text.IndexOf(',') + 2, tblock_LatAndLon.Text.Length - 2 - tblock_LatAndLon.Text.IndexOf(',')));
+                //Add My home picture
+                AddImageAtLatAndLon(dLatDentination, dLonDentination);
+            }
+        }
+
+        private void bt_zoom_nomal_click(object sender, RoutedEventArgs e)
+        {
+            var posToZoomAll = new List<BasicGeoposition>();
+            //add current position and dentination
+            posToZoomAll.Add(new BasicGeoposition() { Latitude = dLatGol, Longitude = dLonGol });
+            posToZoomAll.Add(new BasicGeoposition() { Latitude = dLatDentination, Longitude = dLonDentination });
+            SetMapPolyline(posToZoomAll);
+        }
+
+        private void bt_autoZoom_on_click(object sender, RoutedEventArgs e)
+        {
+            bAutoZoom = true;
+        }
+
+        private void bt_autoZoom_off_click(object sender, RoutedEventArgs e)
+        {
+            bAutoZoom = false;
+        }
+
+        private void bt_device_connect_click(object sender, RoutedEventArgs e)
+        {
+            Connect_To_Com();
+            //remove tblock_Start_Timer, tblock_End_Timer, slider_AdjTime when connect Com
+            BackgroundDisplay.Children.Remove(tblock_Start_Timer);
+            BackgroundDisplay.Children.Remove(tblock_End_Timer);
+            BackgroundDisplay.Children.Remove(slider_AdjTime);
+            //Disable play, Pause, Speed Lisbox when Open_File isn't selected
+            Play_ListBoxItem.IsEnabled = false;
+            Pause_ListBoxItem.IsEnabled = false;
+            Speed_Change_ListBoxItem.IsEnabled = false;
+        }
+
+        private void bt_device_disconnect_click(object sender, RoutedEventArgs e)
+        {
+            DisConnect_To_Com();
+        }
+
+        /// <summary>
+        /// pause simulation when offline mode
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void bt_pause_click(object sender, RoutedEventArgs e)
+        {
+            Pause_When_ReadFile();
+        }
+
+        /// <summary>
+        /// play simulation when offline mode
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void bt_play_Click(object sender, RoutedEventArgs e)
+        {
+            Play_When_ReadFile();
+        }
+
         //add menu to control map
         private void bt_menu_Click(object sender, RoutedEventArgs e)
         {
