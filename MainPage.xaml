@@ -20,7 +20,8 @@
         <Maps:MapControl x:Name="myMap" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Height="730" Width="1260"  >
         </Maps:MapControl>
 
-
+        <Slider x:Name="slider" Margin="679,159,1072,561" Height="100" SmallChange="1" ValueChanged="slider_ValueChanged" Maximum="360" />
+        <Slider x:Name="slider_test" Margin="679,316,1072,404" Height="100" SmallChange="1" ValueChanged="slider_ValueChanged" Maximum="360" />
         <!--
         <Button x:Name="Map3D" Click="Map3D_Click" HorizontalAlignment="Left" Content="Map3D"
                 Height="40" Margin="600,-1,0,0" VerticalAlignment="Top" Width="100">
@@ -81,212 +82,6 @@
         <!--Add menu bar-->
 
 
-        <SplitView x:Name="Splitter" Margin="488,50,0,0" IsPaneOpen="False">
-
-            <SplitView.Pane>
-                <RelativePanel Margin="0,0,0,0" >
-
-                    <ListBox SelectionMode="Single" 
-                         Name="IconsListBox" 
-                         SelectionChanged="IconsListBox_SelectionChanged" Margin="0,0,0,0">
-                        <ListBoxItem Name="Play_ListBoxItem">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="36" Text="&#xE768;" />
-                                <TextBlock Text="Play" FontSize="24" Margin="20,0,0,0" />
-                            </StackPanel>
-                        </ListBoxItem>
-
-                        <ListBoxItem Name="Pause_ListBoxItem">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="36" Text="&#xE769;" />
-                                <TextBlock Text="Pause" FontSize="24" Margin="20,0,0,0" />
-                            </StackPanel>
-                        </ListBoxItem>
-
-
-                        <ListBoxItem Name="Speed_Change_ListBoxItem" >
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="36" Text="&#xE8AB;" />
-                                <TextBlock Text="Speed" FontSize="24" Margin="20,0,0,0" />
-                            </StackPanel>
-                        </ListBoxItem>
-
-                        <ListBoxItem Name="Open_File_ListBoxItem">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="36" Text="&#xE8E5;" />
-                                <TextBlock Text="Open File" FontSize="24" Margin="20,0,0,0" />
-                            </StackPanel>
-                        </ListBoxItem>
-
-                        <ListBoxItem Name="Screen_ListBoxItem">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="36" Text="&#xE786;" />
-                                <TextBlock Text="Screen" FontSize="24" Margin="20,0,0,0" />
-                            </StackPanel>
-                        </ListBoxItem>
-
-                        <ListBoxItem Name="Get_Pos_ListBoxItem">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="36" Text="&#xE80F;" />
-                                <TextBlock Text="Get Position" FontSize="24" Margin="20,0,0,0" />
-                            </StackPanel>
-                        </ListBoxItem>
-
-                        <ListBoxItem Name="Zoom_All_ListBoxItem">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="36" Text="&#xE71E;" />
-                                <TextBlock Text="Zoom Normal" FontSize="24" Margin="20,0,0,0" />
-                            </StackPanel>
-                        </ListBoxItem>
-
-                        <ListBoxItem Name="Connect_Com_ListBoxItem">
-                            <StackPanel Orientation="Horizontal">
-                                <Image x:Name="im_Com" Stretch="None" Source="Assets/Com.png" Margin="0,0,0,0" Height="36" Width="36" />
-                                <TextBlock Text="COM" FontSize="24" Margin="20,0,0,0" />
-                            </StackPanel>
-                        </ListBoxItem>
-
-                        <ListBoxItem Name="Auto_Zoom_ListBoxItem">
-                            <StackPanel Orientation="Horizontal">
-                                <Image x:Name="im_AutoZoom" Stretch="None" Source="Assets/auto_zoom.png" Margin="0,0,0,0" Height="36" Width="36" />
-                                <TextBlock Text="Auto Zoom" FontSize="24" Margin="20,0,0,0" />
-                            </StackPanel>
-                        </ListBoxItem>
-
-                        <ListBoxItem Name="List_Com_ListBoxItem">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="36" Text="&#xE8FD;" />
-                                <TextBlock Text="List Com" FontSize="24" Margin="20,0,0,0" />
-                            </StackPanel>
-                        </ListBoxItem>
-
-                        <ListBoxItem Name="Map3D_ListBoxItem">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="36" Text="&#xE707;" />
-                                <TextBlock Text="Map 3D" FontSize="24" Margin="20,0,0,0" />
-                            </StackPanel>
-                        </ListBoxItem>
-
-                    </ListBox>
-
-                </RelativePanel>
-            </SplitView.Pane>
-        </SplitView>
-
-        <!--when press speed-->
-        <SplitView x:Name="Split_Speed" Margin="710,124,0,0" IsPaneOpen="False">
-            <SplitView.Pane>
-                <RelativePanel Margin="0,0,0,0" >
-                    <ListBox SelectionMode="Single" 
-                         Name="ListBox_Speed" 
-                         Background="Green"
-                         SelectionChanged="ListBox_Speed_SelectionChanged" >
-
-                        <ListBoxItem Name="ListBox_Inc" Tapped="ListBox_Inc_Tapped">
-                            <StackPanel Orientation="Horizontal">
-                                <Image x:Name="im_Inc" Stretch="None" Source="Assets/increase_36x36.png" Margin="0,0,0,0" Height="36" Width="36" />
-                                <TextBlock Text="Increase" FontSize="24" Margin="20,0,0,0" />
-                                <!--<Button Content="Increase" Margin="20,0,0,0"/>-->
-                            </StackPanel>
-                        </ListBoxItem>
-
-                        <ListBoxItem Name="BoxItem_Dec" Tapped="BoxItem_Dec_Tapped">
-                            <StackPanel Orientation="Horizontal">
-                                <Image x:Name="im_Dec" Stretch="None" Source="Assets/decrease_36x36.png" Margin="0,0,0,0" Height="36" Width="36" />
-                                <TextBlock Text="Decrease" FontSize="24" Margin="20,0,0,0" />
-                            </StackPanel>
-                        </ListBoxItem>
-
-                    </ListBox>
-                </RelativePanel>
-            </SplitView.Pane>
-
-        </SplitView>
-        <!--when press screen-->
-        <SplitView x:Name="Split_Screen" Margin="710,264,0,0" IsPaneOpen="False">
-            <SplitView.Pane>
-                <RelativePanel Margin="0,0,0,0" >
-                    <ListBox SelectionMode="Single" 
-                         Name="ListBox_Screen" 
-                         Background="Green"
-                         SelectionChanged="ListBox_Screen_SelectionChanged" >
-
-                        <ListBoxItem Name="ListBox_2_Screen" Tapped="ListBox_Inc_Tapped">
-                            <StackPanel Orientation="Horizontal">
-                                <Image x:Name="im_2_Screen" Stretch="None" Source="Assets/TwoScreen.png" Margin="0,0,0,0" Height="36" Width="36" />
-                                <TextBlock Text="Two Screen" FontSize="24" Margin="20,0,0,0" />
-                                <!--<Button Content="Increase" Margin="20,0,0,0"/>-->
-                            </StackPanel>
-                        </ListBoxItem>
-
-                        <ListBoxItem Name="ListBox_1_Screen" Tapped="BoxItem_Dec_Tapped">
-                            <StackPanel Orientation="Horizontal">
-                                <Image x:Name="im_1_Screen" Stretch="None" Source="Assets/arrows_extend_full_screen_full.png" Margin="0,0,0,0" Height="36" Width="36" />
-                                <TextBlock Text="One Screen" FontSize="24" Margin="20,0,0,0" />
-                            </StackPanel>
-                        </ListBoxItem>
-
-                    </ListBox>
-                </RelativePanel>
-            </SplitView.Pane>
-        </SplitView>
-        <!--************************************************************************-->
-        <!--when press Com-->
-        <SplitView x:Name="Split_COM" Margin="710,421,0,0" Height="auto" IsPaneOpen="False">
-            <SplitView.Pane>
-                <RelativePanel Margin="0,0,0,0" >
-                    <ListBox SelectionMode="Single" 
-                         Name="ListBox_Com"
-                         Background="Green"
-                         Height="auto"
-                         SelectionChanged="ListBox_Com_SelectionChanged" >
-                        <ListBoxItem Name="ListBox_Connect">
-                            <StackPanel Orientation="Horizontal">
-                                <Image x:Name="im_Connect" Stretch="None" Source="Assets/Connect.png" Margin="0,0,0,0" Height="36" Width="36" />
-                                <TextBlock Text="Connect" FontSize="24" Margin="20,0,0,0" />
-                            </StackPanel>
-                        </ListBoxItem>
-
-                        <ListBoxItem Name="ListBox_DisConnect">
-                            <StackPanel Orientation="Horizontal">
-                                <Image x:Name="im_Disconnect" Stretch="None" Source="Assets/Disconnect.png" Margin="0,0,0,0" Height="36" Width="36" />
-                                <TextBlock Text="Disconnect" FontSize="24" Margin="20,0,0,0" />
-                            </StackPanel>
-                        </ListBoxItem>
-
-                    </ListBox>
-                </RelativePanel>
-            </SplitView.Pane>
-        </SplitView>
-        <!--************************************************************************-->
-        <!--when press Auto zoom-->
-        <SplitView x:Name="Split_AutoZoom" Margin="710,491,0,0" Height="auto" IsPaneOpen="False">
-            <SplitView.Pane>
-                <RelativePanel Margin="0,0,0,0" >
-                    <ListBox SelectionMode="Single" 
-                         Name="ListBox_AutoZoom"
-                         Background="Green"
-                         Height="auto"
-                         SelectionChanged="ListBox_AutoZoom_SelectionChanged" >
-                        <ListBoxItem Name="ListBox_AutoZoom_On">
-                            <StackPanel Orientation="Horizontal">
-                                <Image x:Name="im_On" Stretch="None" Source="Assets/AutoZoom_On.png" Margin="0,0,0,0" Height="36" Width="36" />
-                                <TextBlock Text="On" FontSize="24" Margin="20,0,0,0" />
-                            </StackPanel>
-                        </ListBoxItem>
-
-                        <ListBoxItem Name="ListBox_AutoZoom_Off">
-                            <StackPanel Orientation="Horizontal">
-                                <Image x:Name="im_Off" Stretch="None" Source="Assets/AutoZoom_Off.png" Margin="0,0,0,0" Height="36" Width="36" />
-                                <TextBlock Text="Off" FontSize="24" Margin="20,0,0,0" />
-                            </StackPanel>
-                        </ListBoxItem>
-
-                    </ListBox>
-                </RelativePanel>
-            </SplitView.Pane>
-        </SplitView>
-
         <!--list of com-->
         <SplitView x:Name="Split_ListCom" Margin="710,580,0,0" Height="auto" IsPaneOpen="False">
             <SplitView.Pane>
@@ -305,23 +100,15 @@
         </SplitView>
 
         <!--*******************************************************************************-->
-        <Border x:Name="bd_menu" >
-            <ToggleButton x:Name="bt_menu" Click="bt_menu_Click" ToolTipService.ToolTip="Menu" VerticalAlignment="Top" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" Margin="486,10,0,0">
-                <ToggleButton.Content>
-                    <FontIcon x:Name="Hamburger" FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;" Margin="0,10,0,0"/>
-                </ToggleButton.Content>
-            </ToggleButton>
-
-        </Border>
         <Button x:Name="ShowButton" ToolTipService.ToolTip="Menu" VerticalAlignment="Top" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" Margin="586,10,0,0">
             <Button.Content>
                 <FontIcon x:Name="icon_menu" FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;" Margin="0,5,0,0"/>
             </Button.Content>
             <Button.Flyout>
                 <MenuFlyout Placement= "Right">
-                    <MenuFlyoutItem Text = "Play" Click="bt_play_Click"/>
-                    <MenuFlyoutItem Text = "Pause" Click="bt_pause_click"/>
-                    <MenuFlyoutSubItem Text="Speed">
+                    <MenuFlyoutItem x:Name="bt_Play" Text = "Play" Click="bt_play_Click"/>
+                    <MenuFlyoutItem x:Name="bt_Pause" Text = "Pause" Click="bt_pause_click"/>
+                    <MenuFlyoutSubItem x:Name="bt_Speed" Text="Speed">
                         <MenuFlyoutItem Text="Increase" Click="bt_speed_inc_click"/>
                         <MenuFlyoutItem Text="Decrease" Click="bt_speed_dec_click"/>
                     </MenuFlyoutSubItem>
@@ -336,7 +123,7 @@
                         <MenuFlyoutItem Text="On" Click="bt_autoZoom_on_click"/>
                         <MenuFlyoutItem Text="Off" Click="bt_autoZoom_off_click"/>
                     </MenuFlyoutSubItem>
-                    <MenuFlyoutItem Text="List COM"/>
+                    <MenuFlyoutItem x:Name="bt_List_Com" Text="List COM"/>
                     <MenuFlyoutSubItem Text="Device">
                         <MenuFlyoutItem Text="Connect" Click="bt_device_connect_click"/>
                         <MenuFlyoutItem Text="DisConnect" Click="bt_device_disconnect_click"/>

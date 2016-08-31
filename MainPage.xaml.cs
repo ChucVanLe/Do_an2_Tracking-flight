@@ -393,6 +393,7 @@ namespace SerialSample
             Draw_Trajectory_And_Flight(dLatGol, dLonGol,
                         Convert.ToDouble(Data.Altitude), Convert.ToDouble("0"));//ok
 
+
             //Set up Show distan
             ShowDistance(0, 0, dDistanToTaget.ToString() + " Meter", 30 * myMap.ZoomLevel / 22, dLatGol, dLonGol, 1);//Purple
 
@@ -487,7 +488,7 @@ namespace SerialSample
             catch
             {
                 //status.Text = ex.Message;
-                ListBox_Com.IsEnabled = true;
+                bt_List_Com.IsEnabled = true;
             }
         }
 
@@ -729,7 +730,7 @@ namespace SerialSample
             }
             serialPort = null;
 
-            ListBox_Com.IsEnabled = true;
+            bt_List_Com.IsEnabled = true;
             //sendTextButton.IsEnabled = false;
             //rcvdText.Text = "";
             listOfDevices.Clear();
@@ -1848,7 +1849,7 @@ namespace SerialSample
 
 
                 myMap.Width = screenWidth;
-                myMap.Height = screenHeight;
+                myMap.Height = screenHeight + 2;
                 //MapBackground.Height = screenHeight;
             }
             //create background left
@@ -1875,7 +1876,7 @@ namespace SerialSample
 
             //thu bản đồ lại
             myMap.Width = screenWidth - Width;
-            myMap.Margin = new Windows.UI.Xaml.Thickness(Width, 0, 00, 00);
+            myMap.Margin = new Windows.UI.Xaml.Thickness(Width, 0, 0, 0);
             //move tblock_LatAndLon to bottom
             //show latitude and lontitude in bottom on screen
             tblock_LatAndLon.Margin = new Windows.UI.Xaml.Thickness(screenWidth - 220, screenHeight - 38, 00, 00);
@@ -1907,9 +1908,10 @@ namespace SerialSample
             BackgroundDisplay.Children.Remove(slider_AdjTime);
             //BackgroundDisplay.Children.Add(slider_AdjTime);
             //Disable play, Pause, Speed Lisbox when Open_File isn't selected
-            Play_ListBoxItem.IsEnabled = false;
-            Pause_ListBoxItem.IsEnabled = false;
-            Speed_Change_ListBoxItem.IsEnabled = false;
+            //Disable play, Pause, Speed Lisbox when Open_File isn't selected
+            bt_Play.IsEnabled = false;
+            bt_Pause.IsEnabled = false;
+            bt_Speed.IsEnabled = false;
         }
         //--------------------------------------------------------------------------
         //--------------------------------------------------------------------------
@@ -3481,11 +3483,13 @@ namespace SerialSample
 
             //************************Vẽ Máy bay***********************************
             //myMap.Children.Remove(img);
-
+            //myMap.ZoomLevel = 12;
 
             //Edit size of image
-            imageOfFlight.Height = 5 * myMap.ZoomLevel;
-            imageOfFlight.Width = 5 * myMap.ZoomLevel;
+            //imageOfFlight.Height = 10 * myMap.ZoomLevel;
+            //imageOfFlight.Width = 10 * myMap.ZoomLevel;
+            imageOfFlight.Height = 10 * 10;
+            imageOfFlight.Width = 10 * 10;
 
             //img.RenderTransform
             imageOfFlight.Opacity = 0.7;
@@ -3504,19 +3508,23 @@ namespace SerialSample
             {
 
                 Angle = dHeading,
-                CenterX = 5 * myMap.ZoomLevel / 2,
+                //CenterX = 10 * myMap.ZoomLevel / 2,
+                ////CenterX = 62, //The prop name maybe mistyped 
+                //CenterY = 10 * myMap.ZoomLevel / 2 //The prop name maybe mistyped 
+                CenterX = 10 * 10 / 2,
                 //CenterX = 62, //The prop name maybe mistyped 
-                CenterY = 5 * myMap.ZoomLevel / 2 //The prop name maybe mistyped 
+                CenterY = 10 * 10 / 2 //The prop name maybe mistyped 
             };
+            
             //mặc định ảnh có chiều dài và chiều rộng là vô cùng
             //bitmapImage.PixelHeight
             //img.sca
             imageOfFlight.Stretch = Stretch.Uniform;
             imageOfFlight.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center;
-            imageOfFlight.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center;
+            imageOfFlight.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Top;
 
-            imageOfFlight.Margin = new Windows.UI.Xaml.Thickness(-5 * myMap.ZoomLevel / 2, -5 * myMap.ZoomLevel / 2, 0, 0);
-
+            //imageOfFlight.Margin = new Windows.UI.Xaml.Thickness(-10 * myMap.ZoomLevel / 2, -10 * myMap.ZoomLevel / 2, 0, 0);
+            imageOfFlight.Margin = new Windows.UI.Xaml.Thickness(-10 * 10 / 2, -10 * 10 / 2, 0, 0);
 
 
 
@@ -3615,21 +3623,22 @@ namespace SerialSample
 
 
             //Edit size of image
-            imageOfFlight.Height = 5 * myMap.ZoomLevel;
-            imageOfFlight.Width = 5 * myMap.ZoomLevel;
+            imageOfFlight.Height = 4 * myMap.ZoomLevel;
+            imageOfFlight.Width = 4 * myMap.ZoomLevel;
 
             imageOfFlight.RenderTransform = new RotateTransform()
             {
 
                 Angle = dHeading,
-                CenterX = 5 * myMap.ZoomLevel / 2,
+                //Angle = 0,
+                CenterX = 4 * myMap.ZoomLevel / 2,
                 //CenterX = 62, //The prop name maybe mistyped 
-                CenterY = 5 * myMap.ZoomLevel / 2 //The prop name maybe mistyped 
+                CenterY = 4 * myMap.ZoomLevel / 2 //The prop name maybe mistyped 
             };
             //mặc định ảnh có chiều dài và chiều rộng là vô cùng
 
 
-            imageOfFlight.Margin = new Windows.UI.Xaml.Thickness(-5 * myMap.ZoomLevel / 2, -5 * myMap.ZoomLevel / 2, 0, 0);
+            imageOfFlight.Margin = new Windows.UI.Xaml.Thickness(-4 * myMap.ZoomLevel / 2, -4 * myMap.ZoomLevel / 2, 0, 0);
 
 
             Geopoint Position = new Geopoint(new BasicGeoposition()
@@ -4867,37 +4876,6 @@ namespace SerialSample
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ListBox_Com_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (ListBox_Connect.IsSelected)
-            {
-                Connect_To_Com();
-                //remove tblock_Start_Timer, tblock_End_Timer, slider_AdjTime when connect Com
-                BackgroundDisplay.Children.Remove(tblock_Start_Timer);
-                BackgroundDisplay.Children.Remove(tblock_End_Timer);
-                BackgroundDisplay.Children.Remove(slider_AdjTime);
-                //Disable play, Pause, Speed Lisbox when Open_File isn't selected
-                Play_ListBoxItem.IsEnabled = false;
-                Pause_ListBoxItem.IsEnabled = false;
-                Speed_Change_ListBoxItem.IsEnabled = false;
-
-            }
-            if (ListBox_DisConnect.IsSelected)
-            {
-                DisConnect_To_Com();
-            }
-        }
-
-        private void ListBox_Inc_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            limitSpeed += 5;
-        }
-
-        private void BoxItem_Dec_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            if (limitSpeed > 5)
-                limitSpeed -= 5;
-        }
 
         //////////////////////////////////////////////////////////////////////////////
         /// <summary>
@@ -5045,9 +5023,9 @@ namespace SerialSample
             BackgroundDisplay.Children.Add(tblock_End_Timer);
             BackgroundDisplay.Children.Add(slider_AdjTime);
             //Enable play, Pause, Speed Lisbox when Open_File is selected
-            Play_ListBoxItem.IsEnabled = true;
-            Pause_ListBoxItem.IsEnabled = true;
-            Speed_Change_ListBoxItem.IsEnabled = true;
+            bt_Play.IsEnabled = true;
+            bt_Pause.IsEnabled = true;
+            bt_Speed.IsEnabled = true;
         }
 
         private void bt_one_sceen_click(object sender, RoutedEventArgs e)
@@ -5100,14 +5078,22 @@ namespace SerialSample
             BackgroundDisplay.Children.Remove(tblock_End_Timer);
             BackgroundDisplay.Children.Remove(slider_AdjTime);
             //Disable play, Pause, Speed Lisbox when Open_File isn't selected
-            Play_ListBoxItem.IsEnabled = false;
-            Pause_ListBoxItem.IsEnabled = false;
-            Speed_Change_ListBoxItem.IsEnabled = false;
+            bt_Play.IsEnabled = false;
+            bt_Pause.IsEnabled = false;
+            bt_Speed.IsEnabled = false;
         }
 
         private void bt_device_disconnect_click(object sender, RoutedEventArgs e)
         {
             DisConnect_To_Com();
+        }
+
+        private void slider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        {
+            //myMap.Height = screenHeight + slider.Value;
+            //10.818442, 106.658824
+            Draw_Trajectory_And_Flight(10.818442, 106.658824,
+                        Convert.ToDouble(Data.Altitude), slider.Value);//ok
         }
 
         /// <summary>
@@ -5129,160 +5115,6 @@ namespace SerialSample
         {
             Play_When_ReadFile();
         }
-
-        //add menu to control map
-        private void bt_menu_Click(object sender, RoutedEventArgs e)
-        {
-            Splitter.IsPaneOpen = (Splitter.IsPaneOpen == true) ? false : true;
-
-        }
-
-        private void ListBox_Speed_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void Footer_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        /// <summary>
-        /// when user select item inside listbox of menu
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void IconsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //Speed_Change_ListBoxItem.
-            //Speed
-            if (Speed_Change_ListBoxItem.IsSelected)
-            {
-                Split_Speed.IsPaneOpen = true;
-            }
-            else Split_Speed.IsPaneOpen = false;
-            //Com
-            if (Connect_Com_ListBoxItem.IsSelected)
-            {
-                Split_COM.IsPaneOpen = true;
-            }
-            else Split_COM.IsPaneOpen = false;
-            //Screen
-            if (Screen_ListBoxItem.IsSelected)
-            {
-                Split_Screen.IsPaneOpen = true;
-            }
-            else Split_Screen.IsPaneOpen = false;
-            //List Com
-            if (List_Com_ListBoxItem.IsSelected)
-            {
-                Split_ListCom.IsPaneOpen = true;
-            }
-            else Split_ListCom.IsPaneOpen = false;
-            //AutoZoom
-            if (Auto_Zoom_ListBoxItem.IsSelected)
-            {
-                Split_AutoZoom.IsPaneOpen = true;
-            }
-            else Split_AutoZoom.IsPaneOpen = false;
-            //Play button is selected
-            if (Play_ListBoxItem.IsSelected)
-            {
-                Play_When_ReadFile();
-                //test remove poly line
-                //if (imPlay.IsTapEnabled)//only for read file
-                //    polyLineToRemove.Add(lineToRmove);
-            }
-            //Pause button is selected
-            if (Pause_ListBoxItem.IsSelected)
-            {
-                Pause_When_ReadFile();
-            }
-
-            //Pause button is selected
-            if (Open_File_ListBoxItem.IsSelected)
-            {
-                myMap.Children.Clear();
-                myMap.MapElements.Clear();
-                positions.Clear();
-                positions = new List<BasicGeoposition>();
-                ReadInfOfFile();
-                //add tblock_Start_Timer, tblock_End_Timer, slider_AdjTime
-                BackgroundDisplay.Children.Add(tblock_Start_Timer);
-                BackgroundDisplay.Children.Add(tblock_End_Timer);
-                BackgroundDisplay.Children.Add(slider_AdjTime);
-                //Enable play, Pause, Speed Lisbox when Open_File is selected
-                Play_ListBoxItem.IsEnabled = true;
-                Pause_ListBoxItem.IsEnabled = true;
-                Speed_Change_ListBoxItem.IsEnabled = true;
-            }
-            //Zoom All is selected
-            //Zoom current position of flight and dentination
-            if (Zoom_All_ListBoxItem.IsSelected)
-            {
-                var posToZoomAll = new List<BasicGeoposition>();
-                //add current position and dentination
-                posToZoomAll.Add(new BasicGeoposition() { Latitude = dLatGol, Longitude = dLonGol });
-                posToZoomAll.Add(new BasicGeoposition() { Latitude = dLatDentination, Longitude = dLonDentination });
-                SetMapPolyline(posToZoomAll);
-            }
-            //Get Position Listbox is selected
-            if (Get_Pos_ListBoxItem.IsSelected)
-            {
-                if (tblock_LatAndLon.Text != "")
-                {
-                    //cut string in tblock_LatAndLon because it include lat and lon
-                    dLatDentination = Convert.ToDouble(tblock_LatAndLon.Text.Substring(0, tblock_LatAndLon.Text.IndexOf(',')));
-                    dLonDentination = Convert.ToDouble(tblock_LatAndLon.Text.Substring(tblock_LatAndLon.Text.IndexOf(',') + 2, tblock_LatAndLon.Text.Length - 2 - tblock_LatAndLon.Text.IndexOf(',')));
-                    //Add My home picture
-                    AddImageAtLatAndLon(dLatDentination, dLonDentination);
-                }
-            }
-
-        }
-        /// <summary>
-        /// when autozoom_listbox is selected
-        /// have 2 mode:
-        /// -On: zoom all of point which flight across, user can't move map
-        /// -Off: user can select other position
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ListBox_AutoZoom_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (ListBox_AutoZoom_On.IsSelected)
-            {
-                bAutoZoom = true;
-            }
-            if (ListBox_AutoZoom_Off.IsSelected)
-            {
-                bAutoZoom = false;
-            }
-        }
-
-        /// <summary>
-        /// Change between 1 screen and 2 screen
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ListBox_Screen_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (ListBox_1_Screen.IsSelected)
-            {
-                //BackgroundDisplay.ClearValue.;
-                //Background.ClearValue(BackgroundDisplay);
-                //BackgroundDisplay.Children.Clear();//clear all item
-                Background_Sensor(00, -80);
-
-            }
-            if (ListBox_2_Screen.IsSelected)
-            {
-                myMap.MapElements.Remove(polylineHereToDentination);//delete polyline old before reload
-                DisplaySensor_Setup();
-            }
-
-        }
-
 
         //*********************************************************************************************
         //end of class
