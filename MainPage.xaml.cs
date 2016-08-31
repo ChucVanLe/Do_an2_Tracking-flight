@@ -1907,6 +1907,8 @@ namespace SerialSample
             slider_AdjTime.Margin = new Windows.UI.Xaml.Thickness(488, screenHeight - 58, 00, 00);
             BackgroundDisplay.Children.Remove(slider_AdjTime);
             //BackgroundDisplay.Children.Add(slider_AdjTime);
+            BackgroundDisplay.Children.Remove(ShowButton);
+            BackgroundDisplay.Children.Add(ShowButton);
             //Disable play, Pause, Speed Lisbox when Open_File isn't selected
             //Disable play, Pause, Speed Lisbox when Open_File isn't selected
             bt_Play.IsEnabled = false;
@@ -2988,7 +2990,6 @@ namespace SerialSample
 
                 Angle = 360 - angle_Yaw,
                 CenterX = 125,
-                //CenterX = 62, //The prop name maybe mistyped 
                 CenterY = 125
             };
 
@@ -3486,10 +3487,10 @@ namespace SerialSample
             //myMap.ZoomLevel = 12;
 
             //Edit size of image
-            //imageOfFlight.Height = 10 * myMap.ZoomLevel;
-            //imageOfFlight.Width = 10 * myMap.ZoomLevel;
-            imageOfFlight.Height = 10 * 10;
-            imageOfFlight.Width = 10 * 10;
+            imageOfFlight.Height = 10 * myMap.ZoomLevel;
+            imageOfFlight.Width = 10 * myMap.ZoomLevel;
+            //imageOfFlight.Height = 10 * 10;
+            //imageOfFlight.Width = 10 * 10;
 
             //img.RenderTransform
             imageOfFlight.Opacity = 0.7;
@@ -3504,27 +3505,27 @@ namespace SerialSample
             //Nên để chỉnh tâm ảnh trùng vj trí lat0, long0 thì phỉ dùng margin
             //dời ảnh lên trên 1 nửa chiều dài,
             //dời ảnh sang trái 1 nửa chiều rộng
-            imageOfFlight.RenderTransform = new RotateTransform()
-            {
 
-                Angle = dHeading,
-                //CenterX = 10 * myMap.ZoomLevel / 2,
-                ////CenterX = 62, //The prop name maybe mistyped 
-                //CenterY = 10 * myMap.ZoomLevel / 2 //The prop name maybe mistyped 
-                CenterX = 10 * 10 / 2,
-                //CenterX = 62, //The prop name maybe mistyped 
-                CenterY = 10 * 10 / 2 //The prop name maybe mistyped 
-            };
             
             //mặc định ảnh có chiều dài và chiều rộng là vô cùng
             //bitmapImage.PixelHeight
             //img.sca
             imageOfFlight.Stretch = Stretch.Uniform;
             imageOfFlight.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center;
-            imageOfFlight.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Top;
+            imageOfFlight.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center;
 
-            //imageOfFlight.Margin = new Windows.UI.Xaml.Thickness(-10 * myMap.ZoomLevel / 2, -10 * myMap.ZoomLevel / 2, 0, 0);
-            imageOfFlight.Margin = new Windows.UI.Xaml.Thickness(-10 * 10 / 2, -10 * 10 / 2, 0, 0);
+            imageOfFlight.RenderTransform = new RotateTransform()
+            {
+
+                Angle = dHeading,
+                CenterX = 10 * myMap.ZoomLevel / 2,
+                CenterY = 10 * myMap.ZoomLevel / 2 //The prop name maybe mistyped 
+                //CenterX = slider_test.Value * 10 / 2,
+                //CenterY = slider_test.Value * 10 / 2 //The prop name maybe mistyped 
+            };
+
+            imageOfFlight.Margin = new Windows.UI.Xaml.Thickness(-10 * myMap.ZoomLevel / 2, -10 * myMap.ZoomLevel / 2, 0, 0);
+            //imageOfFlight.Margin = new Windows.UI.Xaml.Thickness(-0, 0, 0, 0);
 
 
 
@@ -3532,7 +3533,7 @@ namespace SerialSample
             {
                 Latitude = lat,
                 Longitude = lon,
-                //Altitude = 200.0
+                Altitude = 00.0
             });
             //myMap.Children.Add(bitmapImage);
             //Dặ Ảnh đúng vị trí
@@ -3540,11 +3541,12 @@ namespace SerialSample
 
             //myMap.TrySetViewBoundsAsync()
             //Độ dài tương đối của hình so với vị trí mong muốn new Point(0.5, 0.5) không dời
-            //Windows.UI.Xaml.Controls.Maps.MapControl.SetNormalizedAnchorPoint(img, new Point(0.5, 0.5));
+            Windows.UI.Xaml.Controls.Maps.MapControl.SetNormalizedAnchorPoint(imageOfFlight, new Point(0.5, 0.5));
             try
             {
                 if (old_Lat != 0.0)//Vì lúc đầu chưa có dữ liệu nên k hiện máy bay
                     myMap.Children.Add(imageOfFlight);
+                    //BackgroundDisplay.Children.Add(imageOfFlight);
             }
             catch { }
 
@@ -3623,22 +3625,22 @@ namespace SerialSample
 
 
             //Edit size of image
-            imageOfFlight.Height = 4 * myMap.ZoomLevel;
-            imageOfFlight.Width = 4 * myMap.ZoomLevel;
-
+            //imageOfFlight.Height = 10 * myMap.ZoomLevel;
+            //imageOfFlight.Width = 10 * myMap.ZoomLevel;
+            //imageOfFlight.
             imageOfFlight.RenderTransform = new RotateTransform()
             {
 
                 Angle = dHeading,
                 //Angle = 0,
-                CenterX = 4 * myMap.ZoomLevel / 2,
+                //CenterX = 10 * myMap.ZoomLevel / 2,
                 //CenterX = 62, //The prop name maybe mistyped 
-                CenterY = 4 * myMap.ZoomLevel / 2 //The prop name maybe mistyped 
+                //CenterY = 10 * myMap.ZoomLevel / 2 //The prop name maybe mistyped 
             };
             //mặc định ảnh có chiều dài và chiều rộng là vô cùng
 
 
-            imageOfFlight.Margin = new Windows.UI.Xaml.Thickness(-4 * myMap.ZoomLevel / 2, -4 * myMap.ZoomLevel / 2, 0, 0);
+            //imageOfFlight.Margin = new Windows.UI.Xaml.Thickness(-10 * myMap.ZoomLevel / 2, -10 * myMap.ZoomLevel / 2, 0, 0);
 
 
             Geopoint Position = new Geopoint(new BasicGeoposition()
@@ -3808,7 +3810,7 @@ namespace SerialSample
             return Math.Round(brng, 2);
         }
 
-        bool bAutoZoom = true;//zoom in trajectory of flight
+        bool bAutoZoom = false;//zoom in trajectory of flight
 
 
         /// <summary>
@@ -4758,6 +4760,7 @@ namespace SerialSample
             img_AtLatAndLon.RenderTransform = new RotateTransform()
             {
 
+
             };
             //mặc định ảnh có chiều dài và chiều rộng là vô cùng
             //bitmapImage.PixelHeight
@@ -5092,8 +5095,10 @@ namespace SerialSample
         {
             //myMap.Height = screenHeight + slider.Value;
             //10.818442, 106.658824
-            Draw_Trajectory_And_Flight(10.818442, 106.658824,
-                        Convert.ToDouble(Data.Altitude), slider.Value);//ok
+            //Draw_Trajectory_And_Flight(10.818442, 106.658824,
+            //            Convert.ToDouble(Data.Altitude), slider.Value);//ok
+            //Draw_Trajectory_And_Flight_optimize(10.818442, 106.658824,
+            //            Convert.ToDouble(0), slider.Value);//ok
         }
 
         /// <summary>
